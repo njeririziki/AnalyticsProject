@@ -1,0 +1,51 @@
+import React, {createContext,ReactNode,useEffect,useState} from 'react'
+import { User } from '../types/types'
+
+type AuthContextType = {
+    currentUser: User | null
+   // token: string
+    isAuthenticated: boolean
+    authenticateUser: (res: { token: string; user: User }) => void
+    unauthenticateUser: () => void
+  }
+
+  export const AuthContext = createContext<AuthContextType>({} as AuthContextType)
+
+  export const AuthProvider = ({ children }: { children: ReactNode }) => {
+    const [isAuthenticated, setIsAuthenticated] = useState(false)
+    const [currentUser, setCurrentUser] = useState<User | null>(null)
+    const [token, setToken] = useState (null);
+   
+     useEffect(() => {
+
+      const tk=sessionStorage.getItem('token')
+      console.log(tk)
+      if(tk){
+        setIsAuthenticated(true)
+        setToken(token)
+      }
+    
+     }, []);
+
+       const authenticateUser = () => {
+
+        setIsAuthenticated(true)
+       // setCurrentUser(user)
+       // setToken( token)
+      }
+    
+      const unauthenticateUser = () => {
+        setIsAuthenticated(false)
+        setCurrentUser(null)
+      
+      }
+    
+    return (
+        <AuthContext.Provider
+          value={{ currentUser, isAuthenticated, authenticateUser, unauthenticateUser }}
+        >
+          {children}
+        </AuthContext.Provider>
+      )
+  }  
+
