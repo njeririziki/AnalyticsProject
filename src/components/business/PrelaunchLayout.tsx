@@ -1,5 +1,6 @@
 import { ArrowDownRightIcon, ArrowRightIcon } from "@heroicons/react/24/solid";
 import { Button } from "antd";
+import CountDownTimer from "../reusable/CountdownTimer";
 
 
 
@@ -40,8 +41,8 @@ const PrelaunchLayout = () => {
           <h5 className="text-xl mb-8  font-medium italic  ">
             Lisa goes live in ...
           </h5>
-             <h1 className="text-6xl tracking-wider font-extrabold  "> 12.12.38</h1>
-             </div> 
+          <CountDownTimer targetDate="05/12/2023"/>
+            </div> 
              <button  className=" bg-gray-400 py-4 px-8 rounded-none
               text-lg font-medium  text-primary " >
               Take me to Lisa
