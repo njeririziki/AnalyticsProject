@@ -134,6 +134,8 @@ const AddBusinessForm = () => {
       >
         <Select>
           <Select.Option value="restaurant">restaurant </Select.Option>
+          <Select.Option value="services">Services </Select.Option>
+          <Select.Option value="goods">Goods </Select.Option>
         </Select>
       </Form.Item>
       <Form.Item
