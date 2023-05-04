@@ -9,9 +9,9 @@ const PrelaunchLayout = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 g w-screen h-screen">
 
           <div className="bg-white  h-screen flex flex-col justify-center ">
-          <div  className="w-2/3 h-2/3 self-center flex flex-col justify-between ">
-          <h5 className="text-3xl text-black font-medium">
-           <span className="font-bold ">Congratulations!</span> You are now signed up for lisa beta!
+          <div  className="w-3/4 h-2/3 self-center flex flex-col justify-between ">
+          <h5 className="text-3xl text-black font-medium leading-relaxed">
+           <span className="font-bold  ">Congratulations!</span> You are now signed up for lisa beta!
           </h5>
           {/* <div className="gap-y-8">
           <p className="text-primary mt-8 italic">
