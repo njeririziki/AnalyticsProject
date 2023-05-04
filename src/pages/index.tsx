@@ -1,11 +1,9 @@
 import Head from 'next/head'
-import { Poppins } from 'next/font/google'
 import LogIn from '@/components/auth/LogIn'
 import MainLayout from '@/components/layouts/default'
 import { AuthProvider } from '@/context/AuthContext'
 
 
-const poppins = Poppins({ subsets: ['latin'],weight:['400'] })
 
 export default function Home() {
   return (

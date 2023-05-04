@@ -132,11 +132,15 @@ const AddBusinessForm = () => {
         label='sub category'
         rules={[{ required: true, message: 'Please input your sub category!' }]}
       >
-        <Select>
-          <Select.Option value="restaurant">restaurant </Select.Option>
-          <Select.Option value="services">Services </Select.Option>
-          <Select.Option value="goods">Goods </Select.Option>
-        </Select>
+        <Select
+         
+          options={[
+            { value: 'restaurant', label: 'restaurant' },
+            { value: 'services', label: 'services' },
+            { value: 'goods', label: 'goods' },
+            
+          ]}
+          />
       </Form.Item>
       <Form.Item
         name="operation_location"

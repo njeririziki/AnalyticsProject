@@ -15,9 +15,9 @@ module.exports = {
           'line-color':'#E0E0E0'
    
          },
-        //  fontFamily:{
-        //   sans:['var(--font-poppins)']
-        //  }
+         fontFamily:{
+          sans:['var(--font-poppins)']
+         }
        },
   },
   plugins: [],

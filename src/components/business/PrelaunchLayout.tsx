@@ -1,22 +1,22 @@
-import { ArrowDownRightIcon, ArrowRightIcon } from "@heroicons/react/24/solid";
 import { Button } from "antd";
 import CountDownTimer from "../reusable/CountdownTimer";
-
-
+import HeaderLayout from "../layouts/Header";
 
 const PrelaunchLayout = () => {
     return ( 
+      <>
+       
         <div className="grid grid-cols-1 md:grid-cols-2 g w-screen h-screen">
 
           <div className="bg-white  h-screen flex flex-col justify-center ">
-          <div  className="w-3/4 h-2/3 self-center flex flex-col justify-between ">
-          <div className="gap-y-8">
+          <div  className="w-2/3 h-2/3 self-center flex flex-col justify-between ">
           <h5 className="text-3xl text-black font-medium">
            <span className="font-bold ">Congratulations!</span> You are now signed up for lisa beta!
           </h5>
+          {/* <div className="gap-y-8">
           <p className="text-primary mt-8 italic">
             Check your email for further instructions
-          </p></div>
+          </p></div> */}
           <div className="gap-y-8">
           <p className="text-orange-500 mb-4 italic ">Here is your offer, expires 12th May 2023</p>
            <div className="  bg-background text-black w-full p-4 px-8 flex justify-between items-center">
@@ -50,6 +50,7 @@ const PrelaunchLayout = () => {
           </div>
           </div>
         </div>
+        </>
      );
 }
  
