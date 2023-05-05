@@ -1,12 +1,12 @@
-import PrelaunchLayout from "@/components/business/PrelaunchLayout";
 import MainHeaderLayout from "@/components/layouts/MainHeaderLayout";
+import AddBusinessForm from "@/components/business/AddBusiness";
 
-const Prelaunch = () => {
+const AddBusiness = () => {
     return ( 
         <MainHeaderLayout>
-        <PrelaunchLayout/>
+            <AddBusinessForm/>
         </MainHeaderLayout>
      );
 }
  
-export default Prelaunch;
+export default AddBusiness;

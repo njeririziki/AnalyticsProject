@@ -49,8 +49,7 @@ const LogIn:React.FC= ()=> {
       onFinish={onFinish}
     >
       <Form.Item className="self-center">
-        {/* <Image src="/images/logo192.png" alt='lisa-logo' 
-        width={50} height={50}/> */}
+      
         <h1 className="text-primary text-xl font-bold">lisa</h1>
       </Form.Item>
       <Form.Item

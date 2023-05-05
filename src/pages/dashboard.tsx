@@ -1,13 +1,5 @@
-import AddBusinessForm from "@/components/business/AddBusiness";
 import HeaderSiderLayout from "@/components/layouts/HeaderSiderLayout";
 
-const NewUserDash = () => {
-  return (    
- <div className='h-screen bg-background flex flex-col justify-center items-center'>
-  <AddBusinessForm/>
- </div>
-);
-}
 
 const HomePage = () => {
   return ( 
@@ -19,6 +11,5 @@ const HomePage = () => {
 
    );
 }
- 
-export default NewUserDash;
-//export default HomePage;
+
+export default HomePage;

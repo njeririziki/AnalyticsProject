@@ -36,7 +36,7 @@ const Verify:FC= ()=> {
             type: 'success',
             content: res.message,
           });
-          return router.push('/dashboard')
+          return router.push('/setup/addbusiness')
          }).catch(err=> {
           messageApi.open({
             type: 'error',
