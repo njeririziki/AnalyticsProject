@@ -1,22 +1,22 @@
-import { Modal, Typography } from "antd";
-import { type } from "os";
+import { Modal, Button, Upload } from "antd";
 import { useState } from "react";
 
+const { Dragger } = Upload; 
+
 type ModalProps={
-    message:string,
+    title:string,
     open:boolean,
     onClose:() => void;
     children?: React.ReactNode;
 }
 
-const ModalContainer = ({message,open,onClose,children}:ModalProps) => {
+const ModalContainer = ({title,open,onClose,children}:ModalProps) => {
   
     const [confirmLoading, setConfirmLoading] = useState(false);
-    const [modalText, setModalText] = useState('Content of the modal');
+   
 
 
     const handleOk = () => {
-        setModalText('The modal will be closed after two seconds');
         setConfirmLoading(true);
         setTimeout(() => {
           onClose();
@@ -24,17 +24,25 @@ const ModalContainer = ({message,open,onClose,children}:ModalProps) => {
         }, 2000);
       };
 
-    return ( 
+    return (  
         <Modal 
-        title={message}
+        title={title}
         open={open}
         onOk={handleOk}
         onCancel={onClose}
-        className="bg-white p-8"
+        footer={[
+          <Button
+            key="link"
+            href="https://google.com"
+            type="primary"
+           // loading={loading}
+            onClick={handleOk}
+          >
+           Upload files to Lisa
+          </Button>,
+        ]}
         >
-             <p>{modalText}</p>
-            
-            {children}
+        {children}
         </Modal>
      );
 }

@@ -8,7 +8,7 @@ const HeaderSiderLayout= ({children}:{children:React.ReactNode}) => {
  
   return (
     <Layout className='bg-background'>
-        <HeaderLayout/>
+      
         <Layout>
       <Sider
         breakpoint="lg"
