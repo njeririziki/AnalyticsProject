@@ -20,6 +20,7 @@ const MainHeaderLayout = ({children}:{children:React.ReactNode}) => {
       const url=user?.image? user?.image:'/images/Ellipse 99.png'
       setUrl(url);
     }
+    
     // this part should not be here only authenticated users should see this
     const url='/images/Ellipse 99.png'
     setUrl(url);

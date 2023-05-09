@@ -2,7 +2,7 @@ import { ChangeEventHandler, useState } from "react";
 import { useRouter } from 'next/router'
 import { EnvelopeIcon,LockClosedIcon,PhoneIcon,UserIcon } from '@heroicons/react/24/solid'
 import Image from 'next/image'
-import { validateConfirmPassword } from "@/utils/validators";
+import { validateConfirmPassword} from "@/utils/validators";
 import { Button, Spin, Form, Input,message } from 'antd';
 import Link from "next/link";
 import useAuth from "@/hooks/useAuth";
@@ -104,13 +104,14 @@ const SignUp:React.FC= ()=> {
       </Form.Item>
       <Form.Item
         name="phone"
-        rules={[ { required: true, message: 'Please input your email!' }]}
+        rules={[ { required: true, message: 'Please input your phone number!' },
+        { type: 'number', min: 12, message:'Phone number should start with 254' }]}
       >
         <Input 
           prefix={
             <PhoneIcon className="h-4 w-4" />
           } 
-        placeholder="phone number" />
+        placeholder="254712345678" />
       </Form.Item>
       <Form.Item
         name="password"

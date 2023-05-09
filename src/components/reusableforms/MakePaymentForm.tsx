@@ -64,19 +64,17 @@ const MakePaymentForm = () => {
            <Typography.Title level={5}>Pay KES1299 via M-pesa</Typography.Title>
         
           </Form.Item>
-         
           <Form.Item
-            name="phone"
-            label='Enter your m-pesa number'
-            rules={[{ required: true, message: 'Please input your phone!' }]}
-          >
+             name="phone"
+            rules={[ { required: true, message: 'Please input your mpesa number!' },
+            { type: 'number', min: 12, message:'Phone number should start with 254' }]}
+               >
             <Input 
-            prefix={
-                <PhoneIcon className="h-4 w-4" />
-              } 
-              type='phone'
-            placeholder="phone" />
-          </Form.Item> 
+          prefix={
+            <PhoneIcon className="h-4 w-4" />
+          } 
+        placeholder="254712345678" />
+      </Form.Item>
          <Form.Item>
 
          </Form.Item>

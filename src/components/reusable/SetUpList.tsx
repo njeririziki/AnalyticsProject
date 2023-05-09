@@ -2,7 +2,8 @@ import { Button, Typography, Upload } from "antd";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import ModalContainer from "./ModalContainer";
-
+import CloudUploadIcon from '../customicons/CloudUploadIcon'
+import { CloudArrowUpIcon } from "@heroicons/react/24/solid";
 const { Title,Text, Link } = Typography;
 const { Dragger } = Upload; 
  
@@ -50,15 +51,25 @@ const SetUpList = () => {
             </Text>
         
         </div>
-       <Button  className="bg-primary text-white" disabled
+       <Button  className="bg-primary text-white" disabled={disableButton}
         onClick={()=>router.push('/dashboard/')}>
         Proceed to Dashboard
        </Button>
        <ModalContainer title={modalText} open={openModal} onClose={()=>setOpenModal(false)}>
-         <Dragger >
-
-          <p >Drag and drop filed here or </p>Browse
-          </Dragger>
+        
+         <Dragger  >
+          <div className="my-8 flex flex-col justify-center items-center">
+          
+          <CloudUploadIcon/>
+          <div className="flex items-center space-x-2">
+          <p >
+          Drag and drop filed here or </p>
+          <Upload>
+            <Text className="text-primary">Browse</Text> 
+          </Upload>
+          </div>
+          </div> 
+          </Dragger>        
          </ModalContainer>  
         </div>
      );

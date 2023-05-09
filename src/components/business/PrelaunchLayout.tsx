@@ -7,7 +7,6 @@ const PrelaunchLayout = () => {
 
     return ( 
       <>
-       
         <div className="grid grid-cols-1 md:grid-cols-2 g w-screen h-screen">
        
           <div className="bg-white  h-screen flex flex-col justify-center ">
@@ -15,10 +14,7 @@ const PrelaunchLayout = () => {
           <h5 className="text-3xl text-black font-medium leading-relaxed">
            <span className="font-bold  ">Congratulations!</span> You are now signed up for lisa beta!
           </h5>
-          {/* <div className="gap-y-8">
-          <p className="text-primary mt-8 italic">
-            Check your email for further instructions
-          </p></div> */}
+         
           <div className="gap-y-8">
           <p className="text-orange-500 mb-4 italic ">Here is your offer, expires 12th May 2023</p>
            <div className="  bg-background text-black w-full p-4 px-8 flex justify-between items-center">
@@ -29,7 +25,8 @@ const PrelaunchLayout = () => {
              </div>
              <Button type="primary" size="large" 
               className="bg-primary font-medium flex items-center " 
-              onClick={() => router.push('/prelaunch/prepay')}>
+              onClick={() => router.push('/prelaunch/prepay')}
+              >
               PAY NOW
              </Button>
            </div>
@@ -38,13 +35,13 @@ const PrelaunchLayout = () => {
           </div>
           </div>
           <div className="bg-primary text-white h-screen flex flex-col justify-center items-center ">
-          <div  className="w-1/3 h-1/2  text-white flex flex-col gap-y-8
+          <div  className="h-1/2  text-white flex flex-col gap-y-8
            items-center justify-between">
             <div>
           <h5 className="text-xl mb-8  font-medium italic  ">
             Lisa goes live in ...
           </h5>
-          <CountDownTimer targetDate="05/12/2023"/>
+          <CountDownTimer targetDate="08/12/2023"/>
             </div> 
              <button  className=" bg-gray-400 py-4 px-8 rounded-none
               text-lg font-medium  text-primary " 
@@ -60,3 +57,8 @@ const PrelaunchLayout = () => {
 }
  
 export default PrelaunchLayout;
+
+ {/* <div className="gap-y-8">
+          <p className="text-primary mt-8 italic">
+            Check your email for further instructions
+          </p></div> */}

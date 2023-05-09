@@ -1,9 +1,7 @@
 import MainHeaderLayout from "@/components/layouts/MainHeaderLayout";
 import SetUpList from "@/components/reusable/SetUpList";
-import { Button, Typography } from "antd";
 import Image from "next/image";
 
-const { Title,Text, Link } = Typography;
 
 const NewUserSetUP = () => {
 
