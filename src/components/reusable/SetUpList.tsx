@@ -2,10 +2,9 @@ import { Button, Typography, Upload } from "antd";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import ModalContainer from "./ModalContainer";
-import CloudUploadIcon from '../customicons/CloudUploadIcon'
-import { CloudArrowUpIcon } from "@heroicons/react/24/solid";
-const { Title,Text, Link } = Typography;
-const { Dragger } = Upload; 
+import DraggerUpload from "./DraggerUpload";
+
+const { Title,Text, Link } = Typography; 
  
 
 
@@ -24,18 +23,23 @@ const SetUpList = () => {
     setOpenModal(true)
     setModalText( list[index].text)
      list[index]={...list[index],delete:true,disabled:true, active:false }
-     list[index+1].active=true
+     
      if(index===2){
         setDisableButton(false)
      }
+     list[index+1].active=true
    }
 
     return ( 
         <div className="  justify-self-center flex flex-col  justify-between">
-        <Title level={3}> Let's help you get started</Title>
+        <Title level={3}
+        > 
+        Let's help you get started
+        </Title>
         <div className="flex flex-col space-y-6 cursor-pointer ">
        { list.map((item,i)=> 
-       <Text  className={item.active?'text-primary':'text-black'} 
+       <Text  key={i}
+          className={item.active?'text-primary':'text-black'} 
           delete={item.delete} 
           onClick={()=>onClickLink(i)}
           disabled={item.disabled}>
@@ -56,20 +60,7 @@ const SetUpList = () => {
         Proceed to Dashboard
        </Button>
        <ModalContainer title={modalText} open={openModal} onClose={()=>setOpenModal(false)}>
-        
-         <Dragger  >
-          <div className="my-8 flex flex-col justify-center items-center">
-          
-          <CloudUploadIcon/>
-          <div className="flex items-center space-x-2">
-          <p >
-          Drag and drop filed here or </p>
-          <Upload>
-            <Text className="text-primary">Browse</Text> 
-          </Upload>
-          </div>
-          </div> 
-          </Dragger>        
+         <DraggerUpload/>
          </ModalContainer>  
         </div>
      );
