@@ -3,13 +3,13 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import ModalContainer from "./ModalContainer";
 import DraggerUpload from "./DraggerUpload";
-
+import { contactTemplateHeaders } from "@/utils/templateHeaders";
 const { Title,Text, Link } = Typography; 
  
 
 
 const list=[
-   { text:'Upload your Contacts',delete:false, disabled:false, active:true } ,
+   { text:'Upload your Contacts',delete:false, disabled:false, active:true,} ,
    { text: 'Upload your catalogue',delete:false, disabled:false, active:false} ,
    { text: 'Upload your Sales data/transactions',delete:false, disabled:false, active:false} ,   
 ]
@@ -60,7 +60,7 @@ const SetUpList = () => {
         Proceed to Dashboard
        </Button>
        <ModalContainer title={modalText} open={openModal} onClose={()=>setOpenModal(false)}>
-         <DraggerUpload/>
+         <DraggerUpload templateHeader={contactTemplateHeaders} />
          </ModalContainer>  
         </div>
      );

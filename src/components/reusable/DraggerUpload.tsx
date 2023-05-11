@@ -7,13 +7,13 @@ const { Text} = Typography;
 
 const {Dragger}=Upload
 
-const DraggerUpload:FC = () => {
+const DraggerUpload = ({templateHeader}:{templateHeader:string[]}) => {
   const [status, setStatus] = useState('');
 
   const props: UploadProps = {
     accept:'.xlsx',
     beforeUpload(file) {
-        validateExcelData(file)
+        validateExcelData(file,templateHeader)
         .then((res)=> console.log(res))
         .catch((err)=> console.log(err))
     },
@@ -39,7 +39,7 @@ const DraggerUpload:FC = () => {
 
         <div className="my-8 flex flex-col justify-center items-center">
         <CloudUploadIcon/>
-        <div className="flex items-center space-x-2">
+        <div className="mt-8 flex items-center space-x-2">
         <p >
         Drag and drop filed here or </p>
       
