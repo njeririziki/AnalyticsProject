@@ -4,6 +4,7 @@ import HeaderLayout from './Header';
 import { AuthContext } from '@/context/AuthContext';
 import { User } from '@/types/types';
 import { useRouter } from 'next/router';
+import CustomMenu from './Menu';
 
 const { Header, Content, Sider } = Layout;
 
@@ -36,32 +37,17 @@ const HeaderSiderLayout= ({children}:{children:React.ReactNode}) => {
        <HeaderLayout url={url}/>
         <Layout>
       <Sider
+      className='bg-background min-h-screen '
         breakpoint="lg"
         collapsedWidth="0"
         onBreakpoint={(broken) => {
           console.log(broken);
         }}
-        onCollapse={(collapsed, type) => {
-          console.log(collapsed, type);
-        }}
-      >
-     
-        <Menu
-         // theme="dark"
-         className='bg-background h-full min-h-screen'
-          mode="inline"
-          defaultSelectedKeys={['4']}
-          items={[' ','Dashboard','Marekting','Business Manager'].map(
-            (item, index) => ({
-              key: String(index + 1),
-             // icon: React.createElement(icon),
-              label: item,
-            }),
-          )}
-        />
+        onCollapse={(collapsed, type) => {console.log(collapsed, type); }}
+       >
+        <CustomMenu />
       </Sider>
       
-        {/* <Header className='bg-background p-0'  /> */}
         <Layout className='p-8'>
           <Breadcrumb >
             <Breadcrumb.Item>Integrations</Breadcrumb.Item>
