@@ -2,6 +2,7 @@ import Head from 'next/head'
 import LogIn from '@/components/auth/LogIn'
 import MainLayout from '@/components/layouts/default'
 import { AuthProvider } from '@/context/AuthContext'
+import Splashpage from './splashpage'
 
 
 
@@ -16,7 +17,7 @@ export default function Home() {
       </Head>
       <AuthProvider>
       <MainLayout >
-      <LogIn/>
+     <Splashpage/>
       </MainLayout>
       </AuthProvider>
      

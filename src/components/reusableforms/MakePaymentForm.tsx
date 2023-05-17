@@ -1,54 +1,123 @@
-import React,{FC, useState} from 'react'
+import React,{FC, useEffect, useState} from 'react'
 import { useRouter } from 'next/router'
 import { Button, message, Form, Input, Spin } from 'antd';
-import { PhoneIcon} from '@heroicons/react/24/solid'
+import { PhoneIcon,CheckCircleIcon,XCircleIcon} from '@heroicons/react/24/solid'
 import { Typography } from 'antd';
-import usePost from '@/hooks/usePost';
+import axiosInstance from '@/utils/AxiosInstance';
+
+
+
 
 const MakePaymentForm = () => {
     const [isLoading, setIsLoading] = useState(false);
+    const [stat, setStat] = useState<string>();
+    const [checkId, setCheckId] = useState<string>()
     const [messageApi, contextHolder] = message.useMessage();
+
     const router = useRouter()
+
+
+    const checkStatus=async()=>{
+     // console.log(payload)
+      try {
+        await axiosInstance.post('/check/mpesa/transaction/status',{
+          checkoutrequestid:checkId
+        })
+        .then(res=>{
+          console.log(res)
+           setStat('success')
+          // router.push('/prelaunch/')
+        })
+        .catch(err=>{
+          console.log(err)
+          setStat('error')
+        })
+       
+      } catch (error) {
+        console.log(error)
+      }
+    }
+
+    useEffect(() => {
+     let subscribe:any;
+      if(checkId){
+        subscribe= setInterval( ()=>{checkStatus()}, 1000);
+        setTimeout(() => {
+          clearInterval(subscribe);
+        }, 5000);
+      }
+    
+      return () => {
+        clearInterval(subscribe)
+      }
+    }, [checkId])
+    
 
     const onFinish=async(values:any)=>{
       setIsLoading(true)
-      // try {
-      //   await usePost('/',values)
-      //   .then((res)=>{
-      //       console.log(res);
-      //       messageApi.open({
-      //         type: 'success',
-      //         content: res.message,
-      //       });
-      //       router.push('/prelaunch/')
-      
-      //   return setIsLoading(false)
-      // }).catch(err=>{
+     // setStat('loading')
+      const payload={
+        ...values,
+        amount:1, 
+        email:"rizikinjeri@gmail.com"
+      }
+      console.log(payload)
+      try {
+        await axiosInstance.post('/prepay/lisa/package',payload)
+        .then((res)=>{
+          console.log(res)
+             console.log(res.data);
+             return setCheckId(res.data.mpesaWalletTopup.CheckoutRequestID)
+
+       // setIsLoading(false)
+      }).catch(err=>{
        
-      //  messageApi.open({
-      //    type: 'error',
-      //    content: err,
-      //  });
-      // })
+       messageApi.open({
+         type: 'error',
+         content: err,
+       });
+      })
        
-      //  } catch (error) {
+       } catch (error) {
         
-      //   return  messageApi.open({
-      //      type: 'error',
-      //      content: 'Transaction failed'+ error,
-      //    });
-      //  }
+        return  messageApi.open({
+           type: 'error',
+           content: 'Transaction failed'+ error,
+         });
+       }
     }
     if(isLoading){
-        return(
-          <div className="bg-white  space-y-8 shadow-xl py-4 px-12  ">
-             <Typography.Title level={5}>Waiting to verify ...</Typography.Title>
-           <div className='self-center h-40 flex justify-center items-center '>
-           <Spin/>
-           </div>
-          
-          </div>
-        )
+      switch (stat){
+        case 'success':
+          return(
+            <div className="bg-white  space-y-8 shadow-xl py-4 px-12  ">
+               <Typography.Title level={5}>Transaction Successfull</Typography.Title>
+             <div className='self-center h-40 flex justify-center items-center '>
+             <CheckCircleIcon className='text-green-600 w-12 h-12'/>
+             </div>
+            </div>
+          )
+          case 'error':
+            return(
+              <div className="bg-white  space-y-8 shadow-xl py-4 px-12  ">
+                 <Typography.Title level={5}>Transaction Failed</Typography.Title>
+               <div className='self-center h-40 flex justify-center items-center '>
+               <XCircleIcon className='text-red-600 w-12 h-12'/>
+               </div>
+              </div>
+            )
+           
+            default:
+            return(
+              <div className="bg-white  space-y-8 shadow-xl py-4 px-12  ">
+                 <Typography.Title level={5}>Waiting to verify ...</Typography.Title>
+               <div className='self-center h-40 flex justify-center items-center '>
+               <Spin/>
+               </div>
+              </div>
+            )
+      }
+       
     }
     return (  
         <div className="bg-white  shadow-xl py-4 px-12  ">
@@ -67,7 +136,8 @@ const MakePaymentForm = () => {
           <Form.Item
              name="phone"
             rules={[ { required: true, message: 'Please input your mpesa number!' },
-            { type: 'number', min: 12, message:'Phone number should start with 254' }]}
+            //{ type: 'number', min: 10, message:'Phone number should start with 254' }
+                ]}
                >
             <Input 
           prefix={
