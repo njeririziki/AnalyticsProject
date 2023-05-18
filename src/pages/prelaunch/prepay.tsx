@@ -12,7 +12,7 @@ const PrelaunchPay = () => {
   }
     return ( 
         <MainLayout>
-          <MakePaymentForm params={payload} />
+          <MakePaymentForm endpoint="/prepay/lisa/package" params={payload} />
         </MainLayout>
      );
 }

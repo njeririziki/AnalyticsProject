@@ -6,7 +6,7 @@ const MainLayout = ({children}:{children:React.ReactNode}) => {
  
   useEffect(() => {
     if(isAuthenticated){
-      console.log('authentication is right')
+    
     }
   
   }, [isAuthenticated]);

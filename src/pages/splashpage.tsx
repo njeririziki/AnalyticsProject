@@ -16,7 +16,7 @@ const Splashpage = () => {
 
                      <div className='self-center flex space-x-4'>
                         <Button size='large' className='bg-primary text-white'
-                        onClick={()=>push('/authentication/singup')}>
+                        onClick={()=>push('/authentication/signup')}>
                             Sign Up
                         </Button>
                         <Button 

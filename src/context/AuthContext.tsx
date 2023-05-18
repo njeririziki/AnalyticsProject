@@ -17,11 +17,11 @@ type AuthContextType = {
     const [token, setToken] = useState (null);
    
      useEffect(() => {
-       console.log('authenticating')
+     
       const tk=sessionStorage.getItem('token')
       const userJSON= sessionStorage.getItem('user')
       const user:User | null = userJSON? JSON.parse(userJSON):null;
-      console.log(user)
+      
       if(tk){
         setIsAuthenticated(true)
         setToken(token)

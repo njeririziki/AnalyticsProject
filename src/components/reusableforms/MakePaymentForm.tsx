@@ -7,7 +7,7 @@ import axiosInstance from '@/utils/AxiosInstance';
 import { setTimeout } from 'timers';
 
 
-const MakePaymentForm = ({params}:{params:any}) => {
+const MakePaymentForm = ({endpoint,params}:{endpoint:string,params:any}) => {
     const [isLoading, setIsLoading] = useState(false);
     const [stat, setStat] = useState<string>();
     const [checkId, setCheckId] = useState<string>()
@@ -23,7 +23,7 @@ const MakePaymentForm = ({params}:{params:any}) => {
           checkoutrequestid:checkId
         })
         .then(res=>{
-          console.log(res.data)
+        
           if(res.data?.ResultCode ){
             if(res.data?.ResultCode==='0'){
               messageApi.open({
@@ -31,15 +31,15 @@ const MakePaymentForm = ({params}:{params:any}) => {
                 content: 'Transaction successfull check your email  ',
               });
               setStat('success');
-             return setTimeout(() => { router.push('/prelaunch')})
+             return setTimeout(() => { router.back()}, 3000)
               
             }else  {
               messageApi.open({
                 type: 'error',
                 content: 'Transaction failed please try again',
               });
-            return  setStat('error')
-            //  setTimeout(() => { router.push('/prelaunch')})
+             setStat('error')
+             return setTimeout(() => { setIsLoading(false)}, 2000)
             }
           }
            
@@ -76,13 +76,11 @@ const MakePaymentForm = ({params}:{params:any}) => {
          ...values,
         ...params
       }
-    
-      console.log(payload)
+ 
       try {
-        await axiosInstance.post('/prepay/lisa/package',payload)
+        await axiosInstance.post(endpoint,payload)
         .then((res)=>{
-          console.log(res)
-             console.log(res.data);
+          
              const mpesa=res.data.mpesaWalletTopup;
 
                 if(mpesa?.CheckoutRequestID){
