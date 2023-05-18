@@ -42,7 +42,7 @@ const CountDownTimer:FC<CountDownProps> = ({targetDate}) => {
         <h1 className="text-7xl tracking-wider font-bold  ">
         {countdown?.difference <=0? '00.00.00'
         :
-       `${countdown?.months}.${countdown?.days}.${countdown?.hours}.${countdown?.minutes}`
+       `${countdown?.months}.${countdown?.days}.${countdown?.hours}`
         }
        </h1>         
     </div> );

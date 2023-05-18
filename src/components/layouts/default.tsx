@@ -8,7 +8,7 @@ const MainLayout = ({children}:{children:React.ReactNode}) => {
     if(isAuthenticated){
       console.log('authentication is right')
     }
-    console.log('no authentication authentication')
+  
   }, [isAuthenticated]);
     return ( 
      <div className='w-screen h-screen overflow-y-auto bg-background flex justify-center items-center  '>

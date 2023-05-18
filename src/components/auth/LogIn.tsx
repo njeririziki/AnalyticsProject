@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { useState,useContext } from "react";
 import { EnvelopeIcon,LockClosedIcon } from '@heroicons/react/24/solid'
-import Image from 'next/image'
 import { Button, Spin, Form, Input,message } from 'antd';
 import Link from "next/link";
 import { useRouter } from "next/router";
 import useAuth from "@/hooks/useAuth";
+
 
 
 const LogIn:React.FC= ()=> {
@@ -12,6 +12,7 @@ const LogIn:React.FC= ()=> {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter()
   const {login}=useAuth()
+  
 
   const onFinish = async (values: any) => {
     console.log('Received values of form: ', values);
@@ -24,6 +25,7 @@ const LogIn:React.FC= ()=> {
             type: 'success',
             content: res,
           });
+          
           return router.push('/prelaunch/')
    
       }).catch(err=> {
