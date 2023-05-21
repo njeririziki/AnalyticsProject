@@ -5,6 +5,7 @@ import axiosInstance from '@/utils/AxiosInstance'
 type PaidContextType = {
   
     isPaid: boolean
+    setIsPaid:(paid:boolean)=>void
     doCheck: (uid:string) => void
    
   }
@@ -16,7 +17,7 @@ type PaidContextType = {
   
    
      useEffect(() => {
-
+     
       const prereg=sessionStorage.getItem('prereg')
       
       if(prereg==='paid'){
@@ -50,7 +51,7 @@ type PaidContextType = {
     
     return (
         <PaidContext.Provider
-          value={{ isPaid,doCheck}}
+          value={{ isPaid,setIsPaid,doCheck}}
         >
           {children}
         </PaidContext.Provider>

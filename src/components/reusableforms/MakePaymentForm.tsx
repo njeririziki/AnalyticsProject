@@ -1,10 +1,12 @@
-import React,{FC, useEffect, useState} from 'react'
+import React,{FC, useContext, useEffect, useState} from 'react'
 import { useRouter } from 'next/router'
 import { Button, message, Form, Input, Spin } from 'antd';
 import { PhoneIcon,CheckCircleIcon,XCircleIcon} from '@heroicons/react/24/solid'
 import { Typography } from 'antd';
 import axiosInstance from '@/utils/AxiosInstance';
 import { setTimeout } from 'timers';
+import { PaidContext } from '@/context/PaidContext';
+import { set } from 'react-hook-form';
 
 
 const MakePaymentForm = ({endpoint,params}:{endpoint:string,params:any}) => {
@@ -12,6 +14,7 @@ const MakePaymentForm = ({endpoint,params}:{endpoint:string,params:any}) => {
     const [stat, setStat] = useState<string>();
     const [checkId, setCheckId] = useState<string>()
     const [messageApi, contextHolder] = message.useMessage();
+    const {setIsPaid} = useContext(PaidContext)
 
     const router = useRouter()
 
@@ -31,15 +34,18 @@ const MakePaymentForm = ({endpoint,params}:{endpoint:string,params:any}) => {
                 content: 'Transaction successfull check your email  ',
               });
               setStat('success');
-             return setTimeout(() => { router.back()}, 3000)
+              setIsPaid(true)
+              sessionStorage.setItem("prereg", 'paid');
+             return setTimeout(() => { router.back()},  1000)
               
             }else  {
               messageApi.open({
                 type: 'error',
                 content: 'Transaction failed please try again',
               });
+
              setStat('error')
-             return setTimeout(() => { setIsLoading(false)}, 2000)
+             return setTimeout(() => { setIsLoading(false)}, 1000)
             }
           }
            
