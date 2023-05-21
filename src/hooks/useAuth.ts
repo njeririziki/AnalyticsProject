@@ -1,9 +1,11 @@
 import React,{useState,createContext,useContext} from 'react'
 import axiosInstance from '@/utils/AxiosInstance';
 import { AuthContext } from '@/context/AuthContext';
+import  {PaidContext} from '@/context/PaidContext'
 
 function useAuth() { 
     const {authenticateUser}=useContext(AuthContext);
+    const {doCheck}=useContext(PaidContext)
     const [authed, setAuthed] = useState(false); 
    
     const register = (values: any) => {
@@ -37,16 +39,19 @@ function useAuth() {
         try {
          await axiosInstance.post(`/login`, values)
          .then(res=>{
-          console.log(res)
+       
              if(res.data.success){
-                console.log(res.data);
+               
                 resolve(res.data.message)
+                const uid=res.data.jsonData.id
+               
                 sessionStorage.setItem("token", res.data.token);
                 sessionStorage.setItem("username", res.data.jsonData.name);
                 sessionStorage.setItem("email", res.data.jsonData.email);
                 sessionStorage.setItem('user', JSON.stringify(res.data.jsonData));
                 sessionStorage.setItem("businesses",JSON.stringify(res.data.business));
-                authenticateUser()
+                authenticateUser();
+                doCheck(uid)
             }else{
               const {message} = res.data;
               return reject(message)

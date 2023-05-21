@@ -15,14 +15,14 @@ const LogIn:React.FC= ()=> {
   
 
   const onFinish = async (values: any) => {
-    console.log('Received values of form: ', values);
+  
     setIsLoading(true)
     try {
      await login( values)
       .then(res=>{
-        console.log(res)
+       
          messageApi.open({
-            type: 'success',
+            type:'success',
             content: res,
           });
           

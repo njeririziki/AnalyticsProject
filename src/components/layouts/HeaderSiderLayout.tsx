@@ -25,9 +25,7 @@ const HeaderSiderLayout= ({children}:{children:React.ReactNode}) => {
       push('/authentication/login')
      
     }
-     // this part should not be here only authenticated users should see this
-     
-     
+
    }, [isAuthenticated]);
    if(!isAuthenticated){
     return (

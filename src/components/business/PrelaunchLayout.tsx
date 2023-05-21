@@ -1,9 +1,12 @@
 import { Button } from "antd";
 import CountDownTimer from "../reusable/CountdownTimer";
 import { useRouter } from 'next/router';
+import { PaidContext } from "@/context/PaidContext";
+import { useContext } from "react";
 
 const PrelaunchLayout = () => {
   const router = useRouter();
+   const {isPaid} = useContext(PaidContext)
 
     return ( 
       <>
@@ -16,19 +19,28 @@ const PrelaunchLayout = () => {
           </h5>
          
           <div className="gap-y-8">
-          <p className="text-orange-500 mb-4 italic ">Here is your offer, expires 12th May 2023</p>
+          {isPaid?<p></p> :
+           <p className="text-orange-500 mb-4 italic ">Here is your offer, expires 12th May 2023</p>}
            <div className="  bg-background text-black w-full p-4 px-8 flex justify-between items-center">
              <div className="flex flex-col gap-y-4">
-             <p className="font-medium text-xs">Get 2 months free when you pay for one!!!</p>
-             <h3 className="text-xl font-semibold"> KES1299</h3>
+             <p className="font-medium text-sm"> 
+             {isPaid?  'You have 3 months subscription'
+             :`Get 2 months free when you pay for one!!!`
+           }</p>
+             <h3 className="text-xl font-semibold">
+              {isPaid?'Starts on 12th May 2023' :'KES1299' }</h3>
              <p className="text-xs font-thin text-gray-800"> Renews at KES1499 in the 4th month</p>
              </div>
-             <Button type="primary" size="large" 
+             {isPaid?
+              <></>
+               :
+              <Button type="primary" size="large" 
               className="bg-primary font-medium flex items-center " 
               onClick={() => router.push('/prelaunch/prepay')}
               >
               PAY NOW
-             </Button>
+             </Button>}
+            
            </div>
           </div>
           

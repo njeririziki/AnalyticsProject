@@ -1,6 +1,7 @@
 import '@/styles/globals.css';
 import localFont from 'next/font/local'
 import { AuthProvider } from '@/context/AuthContext'
+import { PaidProvider } from '@/context/PaidContext';
 import type { AppProps } from 'next/app'
 
 const poppins = localFont({ 
@@ -28,9 +29,11 @@ const poppins = localFont({
 export default function App({ Component, pageProps }: AppProps) {
 
   return <AuthProvider>
+           <PaidProvider>
          <main className={`${poppins.variable} font-sans`}>
         <Component {...pageProps} />
         </main>
+        </PaidProvider>
         </AuthProvider>
 }
 
