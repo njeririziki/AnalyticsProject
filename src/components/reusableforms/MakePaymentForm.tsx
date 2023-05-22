@@ -36,7 +36,7 @@ const MakePaymentForm = ({endpoint,params}:{endpoint:string,params:any}) => {
               setStat('success');
               setIsPaid(true)
               sessionStorage.setItem("prereg", 'paid');
-             return setTimeout(() => { router.back()},  1000)
+             return setTimeout(() => { router.push('/prelaunch')},  1000)
               
             }else  {
               messageApi.open({
