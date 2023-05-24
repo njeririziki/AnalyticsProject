@@ -1,8 +1,6 @@
 import { Modal, Button, Upload } from "antd";
 import { useState } from "react";
 
-const { Dragger } = Upload; 
-
 type ModalProps={
     title:string,
     open:boolean,
@@ -30,6 +28,7 @@ const ModalContainer = ({title,open,onClose,children}:ModalProps) => {
         open={open}
         onOk={handleOk}
         onCancel={onClose}
+      
         footer={[
           <Button
             key="link"
@@ -39,10 +38,12 @@ const ModalContainer = ({title,open,onClose,children}:ModalProps) => {
             onClick={handleOk}
           >
            Upload files to Lisa
-          </Button>,
+          </Button>
+         
         ]}
         >
-        {children}
+            {children}
+      
         </Modal>
      );
 }

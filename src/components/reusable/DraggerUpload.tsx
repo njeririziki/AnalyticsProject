@@ -1,21 +1,23 @@
-import { Upload,Typography } from "antd";
-import CloudUploadIcon from "../customicons/CloudUploadIcon";
+import { Upload,Typography, Alert } from "antd";
+
 import type { UploadProps } from 'antd';
 import { validateExcelData } from "./ValidateExcellFile";
 import { FC, useState } from "react";
+import { CloudUploadOutlined } from "@ant-design/icons";
 const { Text} = Typography;
 
 const {Dragger}=Upload
 
 const DraggerUpload = ({templateHeader}:{templateHeader:string[]}) => {
   const [status, setStatus] = useState('');
+  const [showAlert, setShowAlert] = useState();
 
   const props: UploadProps = {
     accept:'.xlsx',
     beforeUpload(file) {
         validateExcelData(file,templateHeader)
         .then((res)=> console.log(res))
-        .catch((err)=> console.log(err))
+        .catch((err)=> console.log(`There is a blank space at ${err}`))
     },
     onChange(info) {
       const { status } = info.file;
@@ -35,19 +37,29 @@ const DraggerUpload = ({templateHeader}:{templateHeader:string[]}) => {
   
 
     return (  
-    <Dragger {...props} >
+      <div>
+    <Dragger 
+    // showUploadList={false}
+    {...props} >
 
         <div className="my-8 flex flex-col justify-center items-center">
-        <CloudUploadIcon/>
+       
+        <CloudUploadOutlined style={{ fontSize: '32px', color:'blue'}}/>
         <div className="mt-8 flex items-center space-x-2">
-        <p >
-        Drag and drop filed here or </p>
-      
-          <Text className="text-primary">Browse</Text> 
+        <p>  Drag and drop filed here or </p>
+         <Text className="text-primary">Browse</Text> 
         
         </div>
         </div> 
-        </Dragger>  );
+        </Dragger> 
+          {/* <Alert
+          message="Warning"
+          description="This is a warning notice about copywriting."
+          type="warning"
+          showIcon
+          closable
+        /> */}
+        </div> );
 }
  
 export default DraggerUpload;

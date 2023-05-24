@@ -22,7 +22,7 @@ const HeaderSiderLayout= ({children}:{children:React.ReactNode}) => {
        const url=user?.image? user?.image:'/images/Ellipse 99.png'
        setUrl(url);
      } else{
-      push('/authentication/login')
+      // push('/authentication/login')
      
     }
 

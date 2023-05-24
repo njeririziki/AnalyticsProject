@@ -15,13 +15,14 @@ const MainHeaderLayout = ({children}:{children:React.ReactNode}) => {
   useEffect(() => {
 
     if(isAuthenticated){
-    
+   
       const userJSON= sessionStorage.getItem('user')
       const user:User | null = userJSON? JSON.parse(userJSON):null;
       const url=user?.image? user?.image:'/images/Ellipse 99.png'
       setUrl(url);
     } else{
-      push('/authentication/login')
+      // console.log('is unauthenticated')
+      // push('/authentication/login')
       
     }
   

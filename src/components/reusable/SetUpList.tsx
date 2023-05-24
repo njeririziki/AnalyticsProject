@@ -3,7 +3,10 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import ModalContainer from "./ModalContainer";
 import DraggerUpload from "./DraggerUpload";
-import { contactTemplateHeaders } from "@/utils/templateHeaders";
+import { contactTemplateHeaders, testContactData } from "@/utils/templateHeaders";
+import {DownloadTemplate } from "./CreateTemplate";
+
+
 const { Title,Text, Link } = Typography; 
  
 
@@ -60,6 +63,9 @@ const SetUpList = () => {
         Proceed to Dashboard
        </Button>
        <ModalContainer title={modalText} open={openModal} onClose={()=>setOpenModal(false)}>
+         <DownloadTemplate bookName="contacts"
+         headers={contactTemplateHeaders} data={testContactData} 
+         />
          <DraggerUpload templateHeader={contactTemplateHeaders} />
          </ModalContainer>  
         </div>
