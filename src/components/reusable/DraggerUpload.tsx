@@ -1,33 +1,93 @@
-import { Upload,Typography, Alert } from "antd";
+import { Upload,Typography, Alert, Button, Spin } from "antd";
 
 import type { UploadProps } from 'antd';
 import { validateExcelData } from "./ValidateExcellFile";
-import { FC, useState } from "react";
+import {  FC, useState } from "react";
 import { CloudUploadOutlined } from "@ant-design/icons";
+import usePost from "@/hooks/usePost";
+import { CheckCircleIcon, CheckIcon, XCircleIcon } from "@heroicons/react/24/solid";
 const { Text} = Typography;
 
 const {Dragger}=Upload
 
+type ValidationStatus={
+ 
+}
+
+
 const DraggerUpload = ({templateHeader}:{templateHeader:string[]}) => {
   const [status, setStatus] = useState('');
-  const [showAlert, setShowAlert] = useState();
+  const [validate, setValidate] = useState<{
+    status:string;
+    icon:React.ReactNode;
+    message:string}>()
+  const [data, setData] = useState<any>([])
+  const [showAlert, setShowAlert] = useState('');
+
+  const handleUpload=()=>{
+    setValidate({
+      status:'uploading',
+      icon:<Spin/>,
+      message:'uploading'
+    })
+    usePost('/upload/contacts',{
+      business_id:154,
+      contacts:data
+    })
+    .then(res=>{
+      setValidate({
+        status:'success',
+        icon:<CheckCircleIcon  className="w-12 h-12  text-green-600"/>,
+        message:'Successfully uploaded'
+      })
+      console.log(res)})
+    .catch(err=>{
+      setValidate({
+        status:'error',
+        icon:<XCircleIcon className="w-12 h-12 text-red-600"/>,
+        message:'File not uploaded, please try again'
+      })
+      console.log(err)})
+  }
 
   const props: UploadProps = {
     accept:'.xlsx',
     beforeUpload(file) {
+      setValidate({
+        status:'validating',
+        icon:<Spin/>,
+        message:'validating'
+      })
+      console.log('inside the before upload')
         validateExcelData(file,templateHeader)
-        .then((res)=> console.log(res))
-        .catch((err)=> console.log(`There is a blank space at ${err}`))
+        .then((res)=> {
+          setData(res)
+          console.log(res)
+          setValidate({
+            status:'clean',
+            icon:<CheckIcon className="w-16 h-16 text-primary"/>,
+            message:'Ready to Upload'
+          })
+        })
+        .catch((err)=>{
+          console.log( err)
+          setShowAlert(err)
+          setValidate(undefined)
+        } )
     },
     onChange(info) {
+     
       const { status } = info.file;
-      if (status !== 'uploading') {
+      if (status === 'uploading') {
         console.log(info.file, info.fileList);
+        console.log('onchange uploading')
       }
       if (status === 'done') {
-        
+      //  setValidate(undefined)
+        console.log('onchange done')
       } else if (status === 'error') {
-     
+        console.log('onchange error')
+       
       }
     },
     onDrop(e) {
@@ -37,28 +97,50 @@ const DraggerUpload = ({templateHeader}:{templateHeader:string[]}) => {
   
 
     return (  
-      <div>
-    <Dragger 
-    // showUploadList={false}
-    {...props} >
+      <div className=" w-full flex flex-col items-center space-y-4 ">
+        { showAlert !==''?
+          <Alert
+          className="mb-4 w-full"
+          message="Error"
+          description={showAlert}
+          type="warning"
+          showIcon
+          closable
+        />
+        : <></>
+        }
+          
+    <Dragger {...props}
+    showUploadList={showAlert !==''} 
+    className="w-full h-48"
+    >
 
-        <div className="my-8 flex flex-col justify-center items-center">
+        <div className="flex flex-col justify-center items-center">
        
-        <CloudUploadOutlined style={{ fontSize: '32px', color:'blue'}}/>
-        <div className="mt-8 flex items-center space-x-2">
+       {validate? validate.icon :<CloudUploadOutlined style={{ fontSize: '32px', color:'blue'}}/>}
+       {validate? 
+        <p className="mt-8 font-medium">{validate.message}</p> 
+        :
+         <div className="mt-8 flex items-center space-x-2">
         <p>  Drag and drop filed here or </p>
          <Text className="text-primary">Browse</Text> 
         
         </div>
+            }
+       
         </div> 
         </Dragger> 
-          {/* <Alert
-          message="Warning"
-          description="This is a warning notice about copywriting."
-          type="warning"
-          showIcon
-          closable
-        /> */}
+        <Button
+        className="self-center bg-primary text-white"
+            key="link"
+           disabled={data.length ===0}
+            type="primary"
+           // loading={loading}
+            onClick={handleUpload}
+          >
+           Upload files to Lisa
+          </Button>
+       
         </div> );
 }
  

@@ -6,6 +6,7 @@ const LogInPage = () => {
     return (
     <MainLayout>
       <LogIn/>
+    
       </MainLayout>
       );
 }

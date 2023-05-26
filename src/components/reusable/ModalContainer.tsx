@@ -30,15 +30,15 @@ const ModalContainer = ({title,open,onClose,children}:ModalProps) => {
         onCancel={onClose}
       
         footer={[
-          <Button
-            key="link"
-            href="https://google.com"
-            type="primary"
-           // loading={loading}
-            onClick={handleOk}
-          >
-           Upload files to Lisa
-          </Button>
+          // <Button
+          //   key="link"
+          //   href="https://google.com"
+          //   type="primary"
+          //  // loading={loading}
+          //   onClick={handleOk}
+          // >
+          // Cancel
+          // </Button>
          
         ]}
         >

@@ -1,27 +1,24 @@
 
 const contactTemplateHeaders = [
-    'Timestamp',
-    'First Name',
-    'Last Name',
-    'Email Address',
-    'Admission Number',
-    'Gender',
-    'Phone Number',
-    'Group Number',
-    'Project Link',
+   
+    'name',
+    'email',
+    'phone_number',
+    
   ]
 
  const testContactData = [
     [
-      new Date().toISOString(),
-      'John',
-      'Doe',
+      'John Doe',
       'johndoe@example.com',
-      '123456789',
-      'Male',
       '1234567890',
-      '1',
-      'https://example.com/project',
+    
+    ],
+    [
+      'Jane Doe',
+      'janedoe@example.com',
+      '1234567890',
+    
     ],
     // Add more data rows as needed
   ];
