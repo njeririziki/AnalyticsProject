@@ -17,11 +17,12 @@ const CustomMenu = () => {
 
   return (
     <Menu 
-    className='h-full pt-20 flex flex-col '
+   className="h-full pl-8"
     theme="light"
     mode="inline"
     onClick={handleClick} selectedKeys={[current]} >
-        <div className="justify-self-start">
+      <div  className='h-full pt-20 flex flex-col  items-center '>
+        <div className="self-start">
       <Menu.Item key="mail" >
        Dashboard
       </Menu.Item>
@@ -38,20 +39,19 @@ const CustomMenu = () => {
           <Menu.Item key="setting:4">Option 4</Menu.Item>
         </Menu.ItemGroup>
       </SubMenu>
-      </div>
-      <div className="justify-self-end">
-      <Menu.Item key="alipay" >
+   
+      <Menu.Item key="articles" >
         <a href="https://ant.design" target="_blank" rel="noopener noreferrer">
           Articles
         </a>
       </Menu.Item>
-      <Menu.Item key="alipay" >
+      <Menu.Item key="help" >
         <a href="https://ant.design" target="_blank" rel="noopener noreferrer">
           Help
         </a>
       </Menu.Item>
       </div>
-    
+      </div>
     </Menu>
   );
 };

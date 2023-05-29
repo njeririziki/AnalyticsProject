@@ -38,7 +38,7 @@ const MainHeaderLayout = ({children}:{children:React.ReactNode}) => {
     </div> 
    )}
     return ( 
-     <div className='w-screen h-screen overflow-y-auto bg-background flex justify-center items-center  '>
+     <div className='w-screen min-h-screen overflow-y-auto bg-background flex justify-center items-center  '>
        <HeaderLayout url={url}/>
        {children}
      </div>   

@@ -39,7 +39,7 @@ const HeaderSiderLayout= ({children}:{children:React.ReactNode}) => {
        <HeaderLayout url={url}/>
         <Layout>
       <Sider
-      className='bg-background min-h-screen '
+        className='bg-background h-screen fixed'
         breakpoint="lg"
         collapsedWidth="0"
         onBreakpoint={(broken) => {
@@ -57,7 +57,7 @@ const HeaderSiderLayout= ({children}:{children:React.ReactNode}) => {
             <Breadcrumb.Item>App</Breadcrumb.Item>
           </Breadcrumb>
         <Content >
-          <div className='bg-background mt-8 h-full ' >
+          <div className='bg-background mt-8 h-full overflow-y-auto' >
             {children}
           </div>
         </Content>

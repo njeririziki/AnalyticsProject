@@ -12,7 +12,7 @@ const { Title,Text, Link } = Typography;
 
 
 const list=[
-   { text:'Upload your Contacts',delete:false, disabled:false, active:true,} ,
+   { text:'Upload your Contacts',delete:false, disabled:false, active:true} ,
    { text: 'Upload your catalogue',delete:false, disabled:false, active:false} ,
    { text: 'Upload your Sales data/transactions',delete:false, disabled:false, active:false} ,   
 ]
@@ -25,14 +25,19 @@ const SetUpList = () => {
    const onClickLink=(index:number)=>{
     setOpenModal(true)
     setModalText( list[index].text)
-     list[index]={...list[index],delete:true,disabled:true, active:false }
-     
-     if(index===2){
-        setDisableButton(false)
-     }
-     list[index+1].active=true
-   }
 
+    
+   }
+     const uploadFiles=(index:number)=>{
+      list[index]={...list[index],delete:true,disabled:true, active:false }
+     
+      if(index<2){
+       list[index+1].active=true   
+      }
+     if(index===2){
+       setDisableButton(false)
+     }
+     }
     return ( 
         <div className="  justify-self-center flex flex-col  justify-between">
         <Title level={3}
@@ -66,7 +71,7 @@ const SetUpList = () => {
          <DownloadTemplate bookName="contacts"
          headers={contactTemplateHeaders} data={testContactData} 
          />
-         <DraggerUpload templateHeader={contactTemplateHeaders} />
+         <DraggerUpload templateHeader={contactTemplateHeaders} endpoint=""/>
          </ModalContainer>  
         </div>
      );

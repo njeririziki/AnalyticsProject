@@ -11,7 +11,7 @@ const MainLayout = ({children}:{children:React.ReactNode}) => {
   
   }, [isAuthenticated]);
     return ( 
-     <div className='w-screen h-screen overflow-y-auto bg-background flex justify-center items-center  '>
+     <div className='w-screen min-h-screen overflow-y-auto bg-background flex justify-center items-center  '>
        {children}
      </div>   
      );

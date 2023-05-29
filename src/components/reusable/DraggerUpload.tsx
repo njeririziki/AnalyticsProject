@@ -15,7 +15,7 @@ type ValidationStatus={
 }
 
 
-const DraggerUpload = ({templateHeader}:{templateHeader:string[]}) => {
+const DraggerUpload = ({templateHeader,endpoint}:{templateHeader:string[],endpoint:string}) => {
   const [status, setStatus] = useState('');
   const [validate, setValidate] = useState<{
     status:string;
@@ -30,7 +30,7 @@ const DraggerUpload = ({templateHeader}:{templateHeader:string[]}) => {
       icon:<Spin/>,
       message:'uploading'
     })
-    usePost('/upload/contacts',{
+    usePost(endpoint,{
       business_id:154,
       contacts:data
     })

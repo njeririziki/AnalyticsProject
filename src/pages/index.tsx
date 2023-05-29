@@ -1,8 +1,6 @@
 import Head from 'next/head'
 import LogIn from '@/components/auth/LogIn'
 import MainLayout from '@/components/layouts/default'
-import Splashpage from './splashpage'
-
 
 
 export default function Home() {
@@ -16,7 +14,7 @@ export default function Home() {
       </Head>
 
       <MainLayout >
-     <Splashpage/>
+       <LogIn/>
       </MainLayout>
       
      
