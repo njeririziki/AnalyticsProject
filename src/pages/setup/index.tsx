@@ -1,5 +1,5 @@
 import MainHeaderLayout from "@/components/layouts/MainHeaderLayout";
-import SetUpList from "@/components/reusable/SetUpList";
+import SetUpList from "@/components/uploadData/SetUpList";
 import Image from "next/image";
 
 

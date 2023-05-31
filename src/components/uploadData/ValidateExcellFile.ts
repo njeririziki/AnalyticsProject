@@ -1,6 +1,10 @@
+import { headers } from 'next/dist/client/components/headers';
 import { read, utils, WorkBook, WorkSheet } from 'xlsx';
 
-
+type ResponseTypes={
+  headers:string[];
+  data:any
+}
 export const validateExcelData = (file:File,template:string[]) => {
   console.log('inside the validate')
      return new Promise((resolve,reject)=>{
@@ -13,37 +17,43 @@ export const validateExcelData = (file:File,template:string[]) => {
           // Extract headers
           const headers:any = jsonData.shift(); 
           
-          const blankedRows:string[]=[]
-          if(compareHeaders(template,headers)){
+       
+          // if(compareHeaders(template,headers)){
           // extract data from rows into hashmap
            const formattedData = jsonData.filter((row: any) => row.every((cell: any) => cell !== ''));
-           console.log('is clean')
+         
           //check for blank spaces 
           
-           const {blanks,blankRows,blankCells} = checkForBlanks(formattedData);
-           if(blankRows.length ===0) {
+          // const {blanks,blankRows,blankCells} = checkForBlanks(formattedData);
+          //  if(blankRows.length ===0) {
             const extractedData:any = formattedData.map((row: any) => {
               const rowData: any = {};
               headers.forEach((header: any, index: number) => {
                 rowData[header] = row[index];
               });
               return rowData;
-            });   
-            return resolve(extractedData)
-           } else{
-           blanks.forEach((value,key)=>{
-            const valueAsString = value.join(', ');
-            blankedRows.push(`row ${key} cells ${valueAsString}`)
-           })
-           console.log(blanks.keys())
-           return reject(`There is a blank space at ${blankedRows.join(', ')}`)
-          }
-          } else{
-            console.log(compareHeaders(template,headers))
-            console.log(template) 
-            console.log(headers) 
-           return reject('The headers do not match please use the template')
-          } 
+            });  
+            // reject('There is no data')
+            const response:ResponseTypes={
+              headers:headers,
+              data:extractedData
+            } 
+            
+            return resolve(response)
+          //  } else{
+          //  blanks.forEach((value,key)=>{
+          //   const valueAsString = value.join(', ');
+          //   blankedRows.push(`row ${key} cells ${valueAsString}`)
+          //  })
+          //  console.log(blanks.keys())
+          //  return reject(`There is a blank space at ${blankedRows.join(', ')}`)
+          // }
+          // } else{
+          //   console.log(compareHeaders(template,headers))
+          //   console.log(template) 
+          //   console.log(headers) 
+           
+          //} 
         };
         reader.readAsBinaryString(file);
     

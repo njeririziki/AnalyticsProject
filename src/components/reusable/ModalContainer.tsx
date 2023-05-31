@@ -28,7 +28,7 @@ const ModalContainer = ({title,open,onClose,children}:ModalProps) => {
         open={open}
         onOk={handleOk}
         onCancel={onClose}
-      
+        width='fit-content'
         footer={[
           // <Button
           //   key="link"

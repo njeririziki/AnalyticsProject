@@ -58,50 +58,5 @@ export const barData=[
       "friesColor": "hsl(287, 70%, 50%)",
       "donut": 140,
       "donutColor": "hsl(323, 70%, 50%)"
-    },
-    {
-      "country": "AI",
-      "hot dog": 148,
-      "hot dogColor": "hsl(200, 70%, 50%)",
-      "burger": 29,
-      "burgerColor": "hsl(145, 70%, 50%)",
-      "sandwich": 147,
-      "sandwichColor": "hsl(214, 70%, 50%)",
-      "kebab": 176,
-      "kebabColor": "hsl(26, 70%, 50%)",
-      "fries": 56,
-      "friesColor": "hsl(312, 70%, 50%)",
-      "donut": 106,
-      "donutColor": "hsl(316, 70%, 50%)"
-    },
-    {
-      "country": "AL",
-      "hot dog": 103,
-      "hot dogColor": "hsl(45, 70%, 50%)",
-      "burger": 70,
-      "burgerColor": "hsl(92, 70%, 50%)",
-      "sandwich": 16,
-      "sandwichColor": "hsl(224, 70%, 50%)",
-      "kebab": 174,
-      "kebabColor": "hsl(266, 70%, 50%)",
-      "fries": 96,
-      "friesColor": "hsl(276, 70%, 50%)",
-      "donut": 38,
-      "donutColor": "hsl(340, 70%, 50%)"
-    },
-    {
-      "country": "AM",
-      "hot dog": 197,
-      "hot dogColor": "hsl(29, 70%, 50%)",
-      "burger": 56,
-      "burgerColor": "hsl(183, 70%, 50%)",
-      "sandwich": 101,
-      "sandwichColor": "hsl(295, 70%, 50%)",
-      "kebab": 27,
-      "kebabColor": "hsl(257, 70%, 50%)",
-      "fries": 10,
-      "friesColor": "hsl(111, 70%, 50%)",
-      "donut": 194,
-      "donutColor": "hsl(83, 70%, 50%)"
     }
   ]

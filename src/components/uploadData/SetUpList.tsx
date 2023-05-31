@@ -1,20 +1,18 @@
 import { Button, Typography, Upload } from "antd";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import ModalContainer from "./ModalContainer";
+import ModalContainer from "../reusable/ModalContainer";
 import DraggerUpload from "./DraggerUpload";
 import { contactTemplateHeaders, testContactData } from "@/utils/templateHeaders";
 import {DownloadTemplate } from "./CreateTemplate";
 
 
 const { Title,Text, Link } = Typography; 
- 
-
-
+  
 const list=[
    { text:'Upload your Contacts',delete:false, disabled:false, active:true} ,
    { text: 'Upload your catalogue',delete:false, disabled:false, active:false} ,
-   { text: 'Upload your Sales data/transactions',delete:false, disabled:false, active:false} ,   
+   { text: 'Upload your Sales data/transactions',delete:false, disabled:false, active:false},   
 ]
 const SetUpList = () => {
     const [disableButton, setDisableButton] = useState(true);
@@ -68,10 +66,10 @@ const SetUpList = () => {
         Proceed to Dashboard
        </Button>
        <ModalContainer title={modalText} open={openModal} onClose={()=>setOpenModal(false)}>
+         <DraggerUpload templateHeader={contactTemplateHeaders} endpoint=""/>
          <DownloadTemplate bookName="contacts"
          headers={contactTemplateHeaders} data={testContactData} 
          />
-         <DraggerUpload templateHeader={contactTemplateHeaders} endpoint=""/>
          </ModalContainer>  
         </div>
      );

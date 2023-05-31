@@ -60,8 +60,8 @@ const ResetPassword = () => {
         <Form
           name="login"
           className="flex flex-col justify-center "
-       
-          initialValues={{ remember: true }}
+         
+          initialValues={{ remember: false}}
           onFinish={onFinish}
           requiredMark={false}
         >
@@ -78,7 +78,8 @@ const ResetPassword = () => {
             prefix={
                 <LockOpenIcon className="h-4 w-4" />
               } 
-            placeholder="email" />
+              autoComplete='false'
+            placeholder="otp" />
           </Form.Item> 
           <Form.Item
         name="password"

@@ -6,6 +6,7 @@ import {  FC, useState } from "react";
 import { CloudUploadOutlined } from "@ant-design/icons";
 import usePost from "@/hooks/usePost";
 import { CheckCircleIcon, CheckIcon, XCircleIcon } from "@heroicons/react/24/solid";
+import DataPreview from "./PreviewData";
 const { Text} = Typography;
 
 const {Dragger}=Upload
@@ -14,7 +15,6 @@ type ValidationStatus={
  
 }
 
-
 const DraggerUpload = ({templateHeader,endpoint}:{templateHeader:string[],endpoint:string}) => {
   const [status, setStatus] = useState('');
   const [validate, setValidate] = useState<{
@@ -22,6 +22,7 @@ const DraggerUpload = ({templateHeader,endpoint}:{templateHeader:string[],endpoi
     icon:React.ReactNode;
     message:string}>()
   const [data, setData] = useState<any>([])
+  const [headers, setHeaders] = useState<string[]>();
   const [showAlert, setShowAlert] = useState('');
 
   const handleUpload=()=>{
@@ -60,8 +61,9 @@ const DraggerUpload = ({templateHeader,endpoint}:{templateHeader:string[],endpoi
       })
       console.log('inside the before upload')
         validateExcelData(file,templateHeader)
-        .then((res)=> {
-          setData(res)
+        .then((res:any)=> {
+          setData(res.data)
+          setHeaders(res.headers)
           console.log(res)
           setValidate({
             status:'clean',
@@ -70,7 +72,7 @@ const DraggerUpload = ({templateHeader,endpoint}:{templateHeader:string[],endpoi
           })
         })
         .catch((err)=>{
-          console.log( err)
+          console.log(err)
           setShowAlert(err)
           setValidate(undefined)
         } )
@@ -94,10 +96,23 @@ const DraggerUpload = ({templateHeader,endpoint}:{templateHeader:string[],endpoi
       console.log('Dropped files', e.dataTransfer.files);
     },
   };
-  
-
+  if (headers){
+    return <div className=" w-full  flex flex-col items-center  ">
+         <Button
+        className="self-end bg-primary text-white"
+            key="link"
+           disabled={data.length ===0}
+            type="primary"
+           // loading={loading}
+            onClick={handleUpload}
+          >
+           Upload files to Lisa
+          </Button>
+        <DataPreview headers={headers} data={data}/>
+    </div>
+  } 
     return (  
-      <div className=" w-full flex flex-col items-center space-y-4 ">
+      <div className=" w-96 flex flex-col items-center space-y-4 ">
         { showAlert !==''?
           <Alert
           className="mb-4 w-full"
@@ -116,7 +131,7 @@ const DraggerUpload = ({templateHeader,endpoint}:{templateHeader:string[],endpoi
     >
 
         <div className="flex flex-col justify-center items-center">
-       
+      
        {validate? validate.icon :<CloudUploadOutlined style={{ fontSize: '32px', color:'blue'}}/>}
        {validate? 
         <p className="mt-8 font-medium">{validate.message}</p> 
@@ -130,17 +145,8 @@ const DraggerUpload = ({templateHeader,endpoint}:{templateHeader:string[],endpoi
        
         </div> 
         </Dragger> 
-        <Button
-        className="self-center bg-primary text-white"
-            key="link"
-           disabled={data.length ===0}
-            type="primary"
-           // loading={loading}
-            onClick={handleUpload}
-          >
-           Upload files to Lisa
-          </Button>
-       
+     
+      
         </div> );
 }
  
