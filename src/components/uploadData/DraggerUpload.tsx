@@ -108,11 +108,11 @@ const DraggerUpload = ({templateHeader,endpoint}:{templateHeader:string[],endpoi
           >
            Upload files to Lisa
           </Button>
-        <DataPreview headers={headers} data={data}/>
+        <DataPreview headers={headers} data={data} templateHeaders={templateHeader}/>
     </div>
   } 
     return (  
-      <div className=" w-96 flex flex-col items-center space-y-4 ">
+      <div className=" w-96 mb-4 flex flex-col items-center space-y-4 ">
         { showAlert !==''?
           <Alert
           className="mb-4 w-full"
