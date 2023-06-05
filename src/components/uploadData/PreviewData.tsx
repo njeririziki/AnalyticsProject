@@ -1,4 +1,6 @@
 import { Checkbox, Space, Table } from "antd";
+import { useState } from "react";
+import CustomTable from "../reusable/CustomTable";
 
 const { Column, ColumnGroup } = Table;
 type PreviewProps={
@@ -8,7 +10,8 @@ type PreviewProps={
 }
 
 const DataPreview = ({templateHeaders,headers,data}:PreviewProps) => {
-   
+   const [selectedColumns, setSelectedColumns] = useState<{ [key: string]: string }>({}) 
+  
     const cols= headers.map(item=>{
        return {
             title: item,
@@ -16,25 +19,22 @@ const DataPreview = ({templateHeaders,headers,data}:PreviewProps) => {
             key: item,
           }
     })
+    const handleSelect = (
+      selectedKeys: string[],
+      //confirm: (param?: FilterConfirmProps) => void,
+     // dataIndex: DataIndex,
+    ) => {
+      confirm();
+     
+     // setSearchedColumn(dataIndex);
+    };
     return ( 
-        <div className="space-y-4">
-            <p>Please select the columns that match column</p>
+        <div className="space-y-4 my-4">
+            <p>Please select the columns that match the data</p>
        <Space>
        
        </Space>
-        <Table
-        // title={}
-        dataSource={data} 
-       columns={cols}
-       >
- {/* { headers.map((item):any=> <div>
-          <Checkbox ></Checkbox>
-          <Column title={item} dataIndex={item} key={item} />
-        </div>
-        )
-        } */}
-          
-        </Table>
+       <CustomTable data={data} columns={headers} headers={headers}/>
         </div>
      );
 }
