@@ -10,31 +10,36 @@ import {DownloadTemplate } from "./CreateTemplate";
 const { Title,Text, Link } = Typography; 
   
 const list=[
-   { text:'Upload your Contacts',delete:false, disabled:false, active:true} ,
-   { text: 'Upload your catalogue',delete:false, disabled:false, active:false} ,
-   { text: 'Upload your Sales data/transactions',delete:false, disabled:false, active:false},   
+   { text:'Upload your Contacts',endpoint:'',delete:false, disabled:false, active:true, } ,
+   { text: 'Upload your catalogue',endpoint:'',delete:false, disabled:false, active:false} ,
+   { text: 'Upload your Sales data/transactions',endpoint:'',delete:false, disabled:false, active:false},   
 ]
 const SetUpList = () => {
     const [disableButton, setDisableButton] = useState(true);
     const [openModal, setOpenModal] = useState(false);
     const [modalText, setModalText] = useState('');
+    const [selected, setSelected] = useState<{index:number,endpoint:string}>({index:0,endpoint:'/upload'})
     const router= useRouter()
 
    const onClickLink=(index:number)=>{
     setOpenModal(true)
     setModalText( list[index].text)
-
-    
+    setSelected({
+      index:index,
+      endpoint:list[index].endpoint
+    })
    }
-     const uploadFiles=(index:number)=>{
-      list[index]={...list[index],delete:true,disabled:true, active:false }
+   const uploadFiles=()=>{
+       console.log('upload in setup')
+      list[selected.index]={...list[selected.index],delete:true,disabled:true, active:false }
      
-      if(index<2){
-       list[index+1].active=true   
+      if(selected.index<2){
+       list[selected.index+1].active=true   
       }
-     if(index===2){
+     if(selected.index===2){
        setDisableButton(false)
      }
+     setOpenModal(false);
      }
     return ( 
         <div className="  justify-self-center flex flex-col  justify-between">
@@ -66,9 +71,14 @@ const SetUpList = () => {
         Proceed to Dashboard
        </Button>
        <ModalContainer title={modalText} open={openModal} onClose={()=>setOpenModal(false)}>
-         <DraggerUpload templateHeader={contactTemplateHeaders} endpoint=""/>
+         <DraggerUpload 
+          templateHeader={contactTemplateHeaders}
+          endpoint={selected.endpoint}
+          uploadFunc={uploadFiles}
+          />
          <DownloadTemplate bookName="contacts"
-         headers={contactTemplateHeaders} data={testContactData} 
+         headers={contactTemplateHeaders} 
+         data={testContactData} 
          />
          </ModalContainer>  
         </div>

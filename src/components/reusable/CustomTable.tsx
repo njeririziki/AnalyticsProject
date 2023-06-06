@@ -1,4 +1,5 @@
-import { Checkbox, MenuProps } from "antd";
+import { Checkbox, MenuProps, Select } from "antd";
+import { useEffect, useState } from "react";
 
 
 type TableProps={
@@ -8,21 +9,41 @@ type TableProps={
 }
 
 const CustomTable = ({data,columns,headers}:TableProps) => {
-//  headers.map(item=> {
-//     label: item,
-//     key: item,
-//   }) 
-   
+  const [matchedCols, setMatchedCols] = useState<{[key: string]: string }>()
+ const headersList= headers.map(item=> {
+  return{
+    value: item,
+    label: item,
+  }  
+ 
+  }) 
+
+   const matchColumns= (value: string,col:string) => {
+   const matchedObject:{ [key: string]: string } = {};
+     matchedObject[col]=value;
+    
+    setMatchedCols({
+    ...matchedCols,
+    ...matchedObject
+    })
+  };
     return ( 
-    <table className="border-collapse rounded-sm ">
+    <table className="border-collapse rounded-sm w-fit">
     <thead>
       <tr>
-        { columns.map(col=>{
+        { columns.map((col,i)=>{
           return(
  
-            <th className="py-2 px-4  border border-x-slate-300 ">
-                           <Checkbox >{col}</Checkbox>
-
+            <th className="py-2 px-4  border border-x-slate-300 "
+                 key={i}>
+                          
+                           <Select
+                            defaultValue={col}
+                            style={{ width: 120 }}
+                            onChange={(e)=>matchColumns(e,col)}
+                            options={headersList}
+                          />
+                        
                            </th>
 
         )
@@ -31,13 +52,14 @@ const CustomTable = ({data,columns,headers}:TableProps) => {
       </tr>
     </thead>
     <tbody>
-      {data.map((obj)=>{
-    
-     return (
-     <tr>
-      {Object.values(obj).map(data=> <td className="py-2 px-4 w-auto  border border-gray-400">{data}</td>
-     )
-      }
+      {data.map((obj,i)=>{
+   // for(let i=0,i<10,i++){}
+      return (
+        <tr key={i}>
+         {Object.values(obj).map((data,i)=> 
+         <td key={i} className="py-2 px-4 w-auto  border border-gray-400">{data}</td>
+        )
+        }
        </tr>)
       })}
      
@@ -45,5 +67,7 @@ const CustomTable = ({data,columns,headers}:TableProps) => {
     </table>
  );
 }
+
+
  
 export default CustomTable;

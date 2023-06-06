@@ -26,7 +26,7 @@ export const validateExcelData = (file:File,template:string[]) => {
           
           // const {blanks,blankRows,blankCells} = checkForBlanks(formattedData);
           //  if(blankRows.length ===0) {
-            const extractedData:any = formattedData.map((row: any) => {
+            const extractedData:object[]= formattedData.map((row: any) => {
               const rowData: any = {};
               headers.forEach((header: any, index: number) => {
                 rowData[header] = row[index];

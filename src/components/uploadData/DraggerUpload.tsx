@@ -11,11 +11,13 @@ const { Text} = Typography;
 
 const {Dragger}=Upload
 
-type ValidationStatus={
- 
+type DraggerProps={
+  templateHeader:string[];
+  endpoint:string;
+  uploadFunc:()=>void
 }
 
-const DraggerUpload = ({templateHeader,endpoint}:{templateHeader:string[],endpoint:string}) => {
+const DraggerUpload = ({templateHeader,endpoint,uploadFunc}:DraggerProps) => {
   const [status, setStatus] = useState('');
   const [validate, setValidate] = useState<{
     status:string;
@@ -26,29 +28,32 @@ const DraggerUpload = ({templateHeader,endpoint}:{templateHeader:string[],endpoi
   const [showAlert, setShowAlert] = useState('');
 
   const handleUpload=()=>{
-    setValidate({
-      status:'uploading',
-      icon:<Spin/>,
-      message:'uploading'
-    })
-    usePost(endpoint,{
-      business_id:154,
-      contacts:data
-    })
-    .then(res=>{
-      setValidate({
-        status:'success',
-        icon:<CheckCircleIcon  className="w-12 h-12  text-green-600"/>,
-        message:'Successfully uploaded'
-      })
-      console.log(res)})
-    .catch(err=>{
-      setValidate({
-        status:'error',
-        icon:<XCircleIcon className="w-12 h-12 text-red-600"/>,
-        message:'File not uploaded, please try again'
-      })
-      console.log(err)})
+    
+    console.log('upload in dragger')
+    uploadFunc();
+    // setValidate({
+    //   status:'uploading',
+    //   icon:<Spin/>,
+    //   message:'uploading'
+    // })
+    // usePost(endpoint,{
+    //   business_id:154,
+    //   contacts:data
+    // })
+    // .then(res=>{
+    //   setValidate({
+    //     status:'success',
+    //     icon:<CheckCircleIcon  className="w-12 h-12  text-green-600"/>,
+    //     message:'Successfully uploaded'
+    //   })
+    //   console.log(res)})
+    // .catch(err=>{
+    //   setValidate({
+    //     status:'error',
+    //     icon:<XCircleIcon className="w-12 h-12 text-red-600"/>,
+    //     message:'File not uploaded, please try again'
+    //   })
+    //   console.log(err)})
   }
 
   const props: UploadProps = {
@@ -108,7 +113,9 @@ const DraggerUpload = ({templateHeader,endpoint}:{templateHeader:string[],endpoi
           >
            Upload files to Lisa
           </Button>
-        <DataPreview headers={headers} data={data} templateHeaders={templateHeader}/>
+        <DataPreview headers={headers} data={data} 
+        templateHeaders={templateHeader}
+        />
     </div>
   } 
     return (  

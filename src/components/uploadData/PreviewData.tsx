@@ -34,7 +34,7 @@ const DataPreview = ({templateHeaders,headers,data}:PreviewProps) => {
        <Space>
        
        </Space>
-       <CustomTable data={data} columns={headers} headers={headers}/>
+       <CustomTable data={data} columns={headers} headers={templateHeaders}/>
         </div>
      );
 }
