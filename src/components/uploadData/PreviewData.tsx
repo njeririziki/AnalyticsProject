@@ -34,29 +34,16 @@ const DataPreview = ({templateHeaders,headers,data}:PreviewProps) => {
        <Space>
        
        </Space>
-       <CustomTable data={data} columns={headers} headers={templateHeaders}/>
+       <CustomTable data={data} columns={headers} headers={templateHeaders}
+      //  rename={renameKeysInArray}
+       />
         </div>
      );
 }
  
 export default DataPreview;
 
-//replacing the headers and filering the data
-function renameKeysInArray(actualData:object[], selected:{ [key: string]: string }):object[] {
-  return actualData.map((object:any) => {
-    const renamedObject:{ [key: string]: string } = {};
 
-    for (let key in object) {
-      if (object.hasOwnProperty(key)) {
-        const newKey:string = selected[key] ;
-        if(newKey){
-          renamedObject[newKey] = object[key];
-        }
-      }
-    }
-    return renamedObject;
-  });
-}
 // this function checks the headers and extract selected data versus the original
 
 function matchHeaders(array1: string[], array2: string[]):{} {

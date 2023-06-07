@@ -3,14 +3,22 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import ModalContainer from "../reusable/ModalContainer";
 import DraggerUpload from "./DraggerUpload";
-import { contactTemplateHeaders, testContactData } from "@/utils/templateHeaders";
+import { requiredColumns,contactTemplateHeaders, testContactData } from "@/utils/templateHeaders";
 import {DownloadTemplate } from "./CreateTemplate";
 
-
+type SelectedProps={
+  index:number;
+  endpoint:string;
+  template:string[];
+  requiredColumns:string[];
+  dummyData:object[]
+}
 const { Title,Text, Link } = Typography; 
   
 const list=[
-   { text:'Upload your Contacts',endpoint:'',delete:false, disabled:false, active:true, } ,
+   { text:'Upload your Contacts',endpoint:'',
+   delete:false, disabled:false, active:true,
+   template:contactTemplateHeaders, required:requiredColumns.contacts,dummyData:testContactData } ,
    { text: 'Upload your catalogue',endpoint:'',delete:false, disabled:false, active:false} ,
    { text: 'Upload your Sales data/transactions',endpoint:'',delete:false, disabled:false, active:false},   
 ]
@@ -18,7 +26,13 @@ const SetUpList = () => {
     const [disableButton, setDisableButton] = useState(true);
     const [openModal, setOpenModal] = useState(false);
     const [modalText, setModalText] = useState('');
-    const [selected, setSelected] = useState<{index:number,endpoint:string}>({index:0,endpoint:'/upload'})
+    const [selected, setSelected] = useState<SelectedProps>({
+      index:0,
+      endpoint:list[0].endpoint,
+      template:list[0].template||[],
+      requiredColumns:list[0].required||[],
+      dummyData:list[0].dummyData ||[]
+    })
     const router= useRouter()
 
    const onClickLink=(index:number)=>{
@@ -26,7 +40,10 @@ const SetUpList = () => {
     setModalText( list[index].text)
     setSelected({
       index:index,
-      endpoint:list[index].endpoint
+      endpoint:list[index].endpoint,
+      template:list[index].template||[],
+      requiredColumns:list[index].required||[],
+      dummyData:list[index].dummyData ||[]
     })
    }
    const uploadFiles=()=>{
@@ -72,14 +89,14 @@ const SetUpList = () => {
        </Button>
        <ModalContainer title={modalText} open={openModal} onClose={()=>setOpenModal(false)}>
          <DraggerUpload 
-          templateHeader={contactTemplateHeaders}
+          templateHeader={selected.template}
           endpoint={selected.endpoint}
           uploadFunc={uploadFiles}
           />
-         <DownloadTemplate bookName="contacts"
-         headers={contactTemplateHeaders} 
-         data={testContactData} 
-         />
+         {/* <DownloadTemplate bookName="contacts"
+         headers={selected.template} 
+         data={selected.dummyData} 
+         /> */}
          </ModalContainer>  
         </div>
      );

@@ -1,4 +1,8 @@
-
+const requiredColumns={
+ contacts:['phone_number'],
+ catalogues:[],
+ sales:[]
+}
 const contactTemplateHeaders = [
    
     'name',
@@ -23,4 +27,4 @@ const contactTemplateHeaders = [
     // Add more data rows as needed
   ];
 
-  export{ contactTemplateHeaders, testContactData}
+  export{ requiredColumns,contactTemplateHeaders, testContactData}

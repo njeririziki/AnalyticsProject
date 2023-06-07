@@ -9,7 +9,7 @@ type TableProps={
 }
 
 const CustomTable = ({data,columns,headers}:TableProps) => {
-  const [matchedCols, setMatchedCols] = useState<{[key: string]: string }>()
+  const [matchedCols, setMatchedCols] = useState<{[key: string]: string }>({})
  const headersList= headers.map(item=> {
   return{
     value: item,
@@ -27,14 +27,23 @@ const CustomTable = ({data,columns,headers}:TableProps) => {
     ...matchedObject
     })
   };
+  const readyData=()=>{
+  const cleanedData= renameKeysInArray(data,matchedCols)
+  console.log({cleanedData});
+  const {cleaned,removed}=checkForBlanks(cleanedData)
+  console.log({cleaned});
+  }
+  //
     return ( 
-    <table className="border-collapse rounded-sm w-fit">
-    <thead>
+      <>
+        <button onClick={readyData} className="bg-primary">ready</button>
+    <table className="rounded-sm w-fit">
+    <thead className="bg-background  border-b-slate-300  ">
       <tr>
         { columns.map((col,i)=>{
           return(
  
-            <th className="py-2 px-4  border border-x-slate-300 "
+            <th className="py-2 px-4  border border-r-slate-300 "
                  key={i}>
                           
                            <Select
@@ -43,9 +52,7 @@ const CustomTable = ({data,columns,headers}:TableProps) => {
                             onChange={(e)=>matchColumns(e,col)}
                             options={headersList}
                           />
-                        
-                           </th>
-
+            </th>
         )
      })}
  
@@ -53,21 +60,60 @@ const CustomTable = ({data,columns,headers}:TableProps) => {
     </thead>
     <tbody>
       {data.map((obj,i)=>{
-   // for(let i=0,i<10,i++){}
+     for(i;i<6;i++){
       return (
-        <tr key={i}>
+        <tr key={i} className="border border-b-slate-300 ">
          {Object.values(obj).map((data,i)=> 
-         <td key={i} className="py-2 px-4 w-auto  border border-gray-400">{data}</td>
+         <td key={i} className="py-2 px-4 w-auto ">{data}</td>
         )
         }
        </tr>)
+       }
       })}
      
       </tbody>
+    
     </table>
+    </>
  );
 }
 
 
  
 export default CustomTable;
+
+//replacing the headers and filering the data
+function renameKeysInArray(actualData:object[], selected:{ [key: string]: string }):object[] {
+  return actualData.map((object:any) => {
+    const renamedObject:{ [key: string]: string } = {};
+
+    for (let key in object) {
+      if (object.hasOwnProperty(key)) {
+        const newKey:string = selected[key] ;
+        if(newKey){
+          renamedObject[newKey] = object[key];
+        }
+      }
+    }
+    return renamedObject;
+  });
+}
+
+// this function will ensure that the selected columns have no blanks
+const checkForBlanks=(data:object[])=>{
+  const cleaned:any= []
+  const removed:any=[]
+  // data.map((item:any,i)=>{
+    for(let i=0;i=data.length;i++){
+    if (data[i]){
+      console.log(data[i])
+     cleaned.push(data[i])
+    }
+    // else{
+    //  cleaned.push(data[i])
+    // }
+    }
+  //  })
+   console.log(`cleaned`, cleaned);
+   return {cleaned,removed}
+}
