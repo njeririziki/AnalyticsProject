@@ -4,7 +4,7 @@ import Image from "next/image";
 
 
 const NewUserSetUP = () => {
-
+    
     return ( 
       <MainHeaderLayout>
          <div className="bg-white grid grid-cols-1 md:grid-cols-2 py-12">

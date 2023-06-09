@@ -6,7 +6,7 @@ import {  FC, useState } from "react";
 import { CloudUploadOutlined } from "@ant-design/icons";
 import usePost from "@/hooks/usePost";
 import { CheckCircleIcon, CheckIcon, XCircleIcon } from "@heroicons/react/24/solid";
-import DataPreview from "./PreviewData";
+import DataPreview from "./CustomTable";
 const { Text} = Typography;
 
 const {Dragger}=Upload
@@ -27,9 +27,10 @@ const DraggerUpload = ({templateHeader,endpoint,uploadFunc}:DraggerProps) => {
   const [headers, setHeaders] = useState<string[]>();
   const [showAlert, setShowAlert] = useState('');
 
-  const handleUpload=()=>{
-    
-    console.log('upload in dragger')
+  const handleUpload=(cleanedData:object[])=>{
+    setHeaders([])
+    setData([])
+    console.log('upload in dragger',cleanedData)
     uploadFunc();
     // setValidate({
     //   status:'uploading',
@@ -109,12 +110,12 @@ const DraggerUpload = ({templateHeader,endpoint,uploadFunc}:DraggerProps) => {
            disabled={data.length ===0}
             type="primary"
            // loading={loading}
-            onClick={handleUpload}
+           // onClick={handleUpload}
           >
            Upload files to Lisa
           </Button>
-        <DataPreview headers={headers} data={data} 
-        templateHeaders={templateHeader}
+        <DataPreview columns={headers} data={data} 
+        headers={templateHeader} rename={handleUpload}
         />
     </div>
   } 
