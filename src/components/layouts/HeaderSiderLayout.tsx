@@ -35,11 +35,11 @@ const HeaderSiderLayout= ({children}:{children:React.ReactNode}) => {
     )
    }
   return (
-    <Layout className='bg-background'>
+    <Layout >
        <HeaderLayout url={url}/>
-        <Layout>
+        <Layout className='bg-background'>
       <Sider
-        className='bg-background h-screen fixed'
+        className='bg-background  fixed overflow-clip'
         breakpoint="lg"
         collapsedWidth="0"
         onBreakpoint={(broken) => {
@@ -50,14 +50,10 @@ const HeaderSiderLayout= ({children}:{children:React.ReactNode}) => {
         <CustomMenu />
       </Sider>
       
-        <Layout className='p-8'>
-          <Breadcrumb >
-            <Breadcrumb.Item>Integrations</Breadcrumb.Item>
-            <Breadcrumb.Item>Data</Breadcrumb.Item>
-            <Breadcrumb.Item>App</Breadcrumb.Item>
-          </Breadcrumb>
+        <Layout>
+         
         <Content >
-          <div className='bg-background mt-8 h-full overflow-y-auto' >
+          <div className='bg-background pl-8 h-full overflow-y-auto' >
             {children}
           </div>
         </Content>

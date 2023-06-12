@@ -9,7 +9,7 @@ import {
 const { SubMenu } = Menu;
 
 const CustomMenu = () => {
-  const [current, setCurrent] = useState("mail");
+  const [current, setCurrent] = useState("dashboard");
 
   const handleClick = (e: any) => {
     setCurrent(e.key);
@@ -17,41 +17,39 @@ const CustomMenu = () => {
 
   return (
     <Menu 
-   className="h-full pl-8"
-    theme="light"
+   className="min-h-screen bg-background pl-8 "
+     theme="light"
     mode="inline"
     onClick={handleClick} selectedKeys={[current]} >
-      <div  className='h-full pt-20 flex flex-col  items-center '>
-        <div className="self-start">
-      <Menu.Item key="mail" >
+      <div  className='min-h-screen fixed pt-20  '>
+        
+      <Menu.Item key="dashboard" >
        Dashboard
       </Menu.Item>
-      <Menu.Item key="app">
-        Business
+      <Menu.Item key="marketing">
+      Marketing 
       </Menu.Item>
-      <SubMenu key="SubMenu"  title="Marketing ">
-        <Menu.ItemGroup title="Item 1">
-          <Menu.Item key="setting:1">Option 1</Menu.Item>
-          <Menu.Item key="setting:2">Option 2</Menu.Item>
-        </Menu.ItemGroup>
-        <Menu.ItemGroup title="Item 2">
-          <Menu.Item key="setting:3">Option 3</Menu.Item>
-          <Menu.Item key="setting:4">Option 4</Menu.Item>
-        </Menu.ItemGroup>
+      <SubMenu key="SubMenu"  title="Business manager">
+      
+          <Menu.Item key="catalogue">Catalogue</Menu.Item>
+          <Menu.Item key="transactions">Transactions</Menu.Item>
+          <Menu.Item key="userroles">User Roles</Menu.Item>
+          <Menu.Item key="customers">Customers</Menu.Item>
+       
       </SubMenu>
    
       <Menu.Item key="articles" >
-        <a href="https://ant.design" target="_blank" rel="noopener noreferrer">
+        <a href="https://" target="_blank" rel="noopener noreferrer">
           Articles
         </a>
       </Menu.Item>
       <Menu.Item key="help" >
-        <a href="https://ant.design" target="_blank" rel="noopener noreferrer">
+        <a href="https://" target="_blank" rel="noopener noreferrer">
           Help
         </a>
       </Menu.Item>
       </div>
-      </div>
+      
     </Menu>
   );
 };

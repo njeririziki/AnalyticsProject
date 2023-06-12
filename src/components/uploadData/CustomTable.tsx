@@ -58,16 +58,13 @@ const CustomTable = ({data,columns,headers,rename}:TableProps) => {
       <tr>
         { columns.map((col,i)=>{
           return(
- 
-            <th className="py-2 px-4   "
-                 key={i}>
-                          
-                           <Select
-                            defaultValue={col}
-                           // style={{ width: 120 }}
-                            onChange={(e)=>matchingColumns(e,col)}
-                            options={headersList}
-                          />
+          <th className="py-2 px-4" key={i}>          
+               <Select
+                 defaultValue={col}
+                // style={{ width: 120 }}
+                 onChange={(e)=>matchingColumns(e,col)}
+                 options={headersList}
+                />
             </th>
         )
      })}
@@ -86,9 +83,7 @@ const CustomTable = ({data,columns,headers,rename}:TableProps) => {
        </tr>)
        }
       })}
-     
       </tbody>
-    
     </table>
     </div>
  );
@@ -149,7 +144,7 @@ const checkForBlanksInRequiredCols=(data:object[],requiredCol:string)=>{
    
     }
   //  })
-   console.log(`cleaned`, cleaned);
+  // console.log(`cleaned`, cleaned);
    return {cleaned,removed}
 }
 
