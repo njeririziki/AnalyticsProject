@@ -3,6 +3,7 @@ import { Bar } from '@visx/shape';
 import { Group } from '@visx/group';
 import { scaleBand, scaleLinear }  from '@visx/scale'
 import letterFrequency, { LetterFrequency } from '@visx/mock-data/lib/mocks/letterFrequency';
+import { ParentSize } from '@visx/responsive';
 //const Scale=  import ('@visx/scale') ;
 
 const data = letterFrequency.slice(5);
@@ -48,7 +49,7 @@ export default function Bars({ width, height, events = false }: BarsProps) {
   return width < 10 ? null : (
     <svg width={width} height={height}>
       {/* <GradientTealBlue id="teal" /> */}
-      <rect width={width} height={height} fill="url(#teal)" rx={14} />
+      <rect width={width} height={height} fill="url(#blue)" rx={14} />
       <Group top={verticalMargin / 2}>
         {data.map((d) => {
           const letter = getLetter(d);
@@ -74,3 +75,20 @@ export default function Bars({ width, height, events = false }: BarsProps) {
     </svg>
   );
 }
+
+export let ChartToRender = (
+  <ParentSize>
+    {(parent) => (
+      <Bars
+        width={parent.width}
+        height={parent.height}
+       // parentTop={parent.top}
+       // parentLeft={parent.left}
+        // this is the referrer to the wrapper component
+       // parentRef={parent.ref}
+        // this function can be called inside MyVisxChart to cause a resize of the wrapper component
+      //  resizeParent={parent.resize}
+      />
+    )}
+  </ParentSize>
+);

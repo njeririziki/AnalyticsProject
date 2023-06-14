@@ -16,11 +16,11 @@ type SelectedProps={
 const { Title,Text, Link } = Typography; 
   
 const list=[
-   { text:'Upload your Contacts',endpoint:'',
+   { text:'Upload your Contacts',endpoint:'/upload/contacts',
    delete:false, disabled:false, active:true,
    template:contactTemplateHeaders, required:requiredColumns.contacts,dummyData:testContactData } ,
-   { text: 'Upload your catalogue',endpoint:'',delete:false, disabled:false, active:false} ,
-   { text: 'Upload your Sales data/transactions',endpoint:'',delete:false, disabled:false, active:false},   
+   { text: 'Upload your catalogue',endpoint:'/upload/contacts',delete:false, disabled:false, active:false} ,
+   { text: 'Upload your Sales data/transactions',endpoint:'upload/contacts',delete:false, disabled:false, active:false},   
 ]
 const SetUpList = () => {
     const [disableButton, setDisableButton] = useState(true);

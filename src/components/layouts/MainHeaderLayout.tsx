@@ -31,12 +31,12 @@ const MainHeaderLayout = ({children}:{children:React.ReactNode}) => {
     //  setUrl(url);
     
   }, [isAuthenticated]);
-   if(!isAuthenticated){
-   return (
-   <div className='w-screen h-screen overflow-y-auto bg-background '>   
-    <Skeleton avatar paragraph={{ rows: 4 }} />
-    </div> 
-   )}
+  //  if(!isAuthenticated){
+  //  return (
+  //  <div className='w-screen h-screen overflow-y-auto bg-background '>   
+  //   <Skeleton avatar paragraph={{ rows: 4 }} />
+  //   </div> 
+  //  )}
     return ( 
      <div className='w-screen min-h-screen overflow-y-auto bg-background flex justify-center items-center  '>
        <HeaderLayout url={url}/>

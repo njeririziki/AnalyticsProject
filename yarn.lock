@@ -605,6 +605,16 @@
     lodash "^4.17.21"
     prop-types "^15.6.1"
 
+"@visx/responsive@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@visx/responsive/-/responsive-3.0.0.tgz#e183c54ce04cffe756378872d30ac88c66a137ac"
+  integrity sha512-immnxQwOWlrxbnlCIqJWuDpPfrM6tglgMTN1WsyXyGluLMJqhuuxqxllfXaRPkQFS4fcvs66KCEELdazh96U2w==
+  dependencies:
+    "@types/lodash" "^4.14.172"
+    "@types/react" "*"
+    lodash "^4.17.21"
+    prop-types "^15.6.1"
+
 "@visx/scale@2.18.0":
   version "2.18.0"
   resolved "https://registry.yarnpkg.com/@visx/scale/-/scale-2.18.0.tgz#b78054e68ac8de49f0abeea0c60bb0bd14dec492"

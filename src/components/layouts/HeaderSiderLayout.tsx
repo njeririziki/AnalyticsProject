@@ -27,13 +27,13 @@ const HeaderSiderLayout= ({children}:{children:React.ReactNode}) => {
     }
 
    }, [isAuthenticated]);
-   if(!isAuthenticated){
-    return (
-      <div className='w-screen h-screen overflow-y-auto bg-background '>   
-      <Skeleton avatar paragraph={{ rows: 4 }} />
-      </div> 
-    )
-   }
+  //  if(!isAuthenticated){
+  //   return (
+  //     <div className='w-screen h-screen overflow-y-auto bg-background '>   
+  //     <Skeleton avatar paragraph={{ rows: 4 }} />
+  //     </div> 
+  //   )
+  //  }
   return (
     <Layout >
        <HeaderLayout url={url}/>

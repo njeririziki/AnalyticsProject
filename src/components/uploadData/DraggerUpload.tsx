@@ -28,33 +28,36 @@ const DraggerUpload = ({templateHeader,endpoint,uploadFunc}:DraggerProps) => {
   const [showAlert, setShowAlert] = useState('');
 
   const handleUpload=(cleanedData:object[])=>{
-    setHeaders([])
-    setData([])
-    console.log('upload in dragger',cleanedData)
-    uploadFunc();
+  
     // setValidate({
     //   status:'uploading',
     //   icon:<Spin/>,
     //   message:'uploading'
     // })
-    // usePost(endpoint,{
-    //   business_id:154,
-    //   contacts:data
-    // })
-    // .then(res=>{
-    //   setValidate({
-    //     status:'success',
-    //     icon:<CheckCircleIcon  className="w-12 h-12  text-green-600"/>,
-    //     message:'Successfully uploaded'
-    //   })
-    //   console.log(res)})
-    // .catch(err=>{
-    //   setValidate({
-    //     status:'error',
-    //     icon:<XCircleIcon className="w-12 h-12 text-red-600"/>,
-    //     message:'File not uploaded, please try again'
-    //   })
-    //   console.log(err)})
+    usePost(endpoint,{
+      business_id:154,
+      contacts:cleanedData
+    })
+    .then(res=>{
+      setValidate({
+        status:'success',
+        icon:<CheckCircleIcon  className="w-12 h-12  text-green-600"/>,
+        message:'Successfully uploaded'
+      })
+      console.log(res)
+    
+    setHeaders(undefined)
+    setData([])
+    console.log('upload in dragger',cleanedData)
+    uploadFunc();})
+    .catch(err=>{
+      setValidate({
+        status:'error',
+        icon:<XCircleIcon className="w-12 h-12 text-red-600"/>,
+        message:'File not uploaded, please try again'
+      })
+      console.log(err)})
+    
   }
 
   const props: UploadProps = {
@@ -104,7 +107,7 @@ const DraggerUpload = ({templateHeader,endpoint,uploadFunc}:DraggerProps) => {
   };
   if (headers){
     return <div className=" w-full  flex flex-col items-center  ">
-         <Button
+         {/* <Button
         className="self-end bg-primary text-white"
             key="link"
            disabled={data.length ===0}
@@ -113,7 +116,7 @@ const DraggerUpload = ({templateHeader,endpoint,uploadFunc}:DraggerProps) => {
            // onClick={handleUpload}
           >
            Upload files to Lisa
-          </Button>
+          </Button> */}
         <DataPreview columns={headers} data={data} 
         headers={templateHeader} rename={handleUpload}
         />

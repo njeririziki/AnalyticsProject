@@ -1,5 +1,5 @@
-import { Checkbox, MenuProps, Select, Space } from "antd";
-import { log } from "console";
+import { Alert, Button, Checkbox, Space, message } from "antd";
+import { CheckboxChangeEvent } from "antd/es/checkbox";
 import { useEffect, useState } from "react";
 
 
@@ -12,6 +12,11 @@ type TableProps={
 
 const CustomTable = ({data,columns,headers,rename}:TableProps) => {
   const [matchedCols, setMatchedCols] = useState<{[key: string]: string }>({})
+   
+  const [showNextCol, setShowNextCol] = useState<number>(0)
+  const [readyToUpload, setReadyToUpload] = useState(false);
+  const [showAlert, setShowAlert] = useState(false);
+
  const headersList= headers.map(item=> {
   return{
     value: item,
@@ -20,55 +25,117 @@ const CustomTable = ({data,columns,headers,rename}:TableProps) => {
  
   }) 
 
-  // useEffect(() => {
-
-  // }, [matchedCols])
-  
-   const matchingColumns= (value: string,col:string) => {
+  useEffect(() => {
+    console.log(showNextCol)
+   },[matchedCols])
+   
+   const skipUnrequireCol=()=>{
+    const valToSkip=headers[showNextCol]
+    const required='phone_number'
+    if(valToSkip!==required){
+      setShowNextCol((showNextCol)=>showNextCol+1)
+    }else{
+      // give error
+      setShowAlert(true)
+    }
+   }
+   const matchingColumns= (col:string) => {
+    const last = headersList.length
+    console.log(showNextCol,headers);
+   if(showNextCol<headersList.length ){
+    return setShowNextCol((showNextCol)=>showNextCol+1)
+   }else if(showNextCol===last){
+    const required=checkRequiredColumn(matchedCols,'phone_number');
+    if(required){
+      return setReadyToUpload(true)
+     }else{
+      setShowAlert(true)
+     }
+  }else{
+    setShowNextCol(0)
+  }
+   console.log(col,headers[showNextCol]);
    const matchedObject:{ [key: string]: string } = {};
-     matchedObject[col]=value;
+   matchedObject[col]=headers[showNextCol];
     
+   console.log(matchedObject)
     setMatchedCols({
     ...matchedCols,
     ...matchedObject
     })
   };
   const readyData=()=>{
-    const required=  checkRequiredColumn(matchedCols,'phone_number')
-    if(required){
+     const required=  checkRequiredColumn(matchedCols,'phone_number');
+     console.log(matchedCols);
+     if(required){ }
       const cleanedData= renameKeysInArray(data,matchedCols)
       console.log(cleanedData);
-      checkForBlanksInRequiredCols(cleanedData,'phone_number')
-      rename(cleanedData)
-    }
-    console.log(matchedCols);
+     const {cleaned,removed} = checkForBlanksInRequiredCols(cleanedData,'phone_number')
+     console.log(cleaned);
+// this code shows the rows that were removed
+     console.log(removed.keys());
+     return rename(cleaned)
+   
+  
   }
   
     return ( 
       <div className="space-y-4 my-4">
-            
-      <Space>
-      <button onClick={readyData} className="bg-primary text-white p-2 ">ready to upload</button>
-    
-      <p>Please select the columns that match the data</p>
+            {readyToUpload?
+             <Space className=" w-full flex justify-between " >
+             <p className="font-medium ">You're all setup</p>
+             
+              <Button
+               className="self-end bg-primary text-white"
+                   key="link"
+                   type="primary"
+                  onClick={readyData} 
+                 >
+                 Finish Upload
+                 </Button>
+           
+             </Space>
+             :
+             <Space className=" w-full flex flexjustify-between " >
+              <p className="font-medium ">Please select the  "{headers[showNextCol]}" column</p>
+              <p className="text-primary" onClick={skipUnrequireCol}>I do not have "{headers[showNextCol]} " column</p>
+              </Space>
+              }
       
-      </Space>
-  <table className="rounded-sm w-fit">
+     
+
+     {showAlert ?
+     <Alert message={`the ${headers[showNextCol]} column is a required`} type="warning" />
+    :
+    <></>} 
+    <table className="rounded-sm w-fit">
     <thead className="  border-b-slate-300  ">
+      
       <tr>
-        { columns.map((col,i)=>{
+        { headers.map((col,i)=>{
           return(
           <th className="py-2 px-4" key={i}>          
-               <Select
-                 defaultValue={col}
+               <Checkbox
+                // defaultValue={[col]}
                 // style={{ width: 120 }}
-                 onChange={(e)=>matchingColumns(e,col)}
-                 options={headersList}
-                />
+                 onChange={()=>matchingColumns(col)}
+              // options={headersList}
+                >
+                  {col}
+                </Checkbox>
             </th>
         )
      })}
  
+      </tr>
+      <tr className="border border-slate-300 rounded-md ">
+        {columns.map((item,i)=>{
+          return(
+            <th className="py-2 px-4" key={i}>
+               {item}
+            </th>
+           )
+        })}
       </tr>
     </thead>
     <tbody>
@@ -96,16 +163,9 @@ export default CustomTable;
 //check if the required columns are matched
 const checkRequiredColumn=(selectedColumns:{},requiredColumn:string):boolean=>{
 
- return Object.values(selectedColumns).includes(requiredColumn)
+ return Object.values(selectedColumns).includes(requiredColumn);
  
-//   for (let i = 0; i <values.length; i++) {
-//     if (values[i] === requiredColumn) {
-//       console.log(values[i]);
-//       return true
-//     }
-   
-//   }
-//  return false
+
 }
 
 //replacing the headers and filering the data
@@ -127,23 +187,20 @@ function renameKeysInArray(actualData:object[], selected:{ [key: string]: string
 
 const checkForBlanksInRequiredCols=(data:object[],requiredCol:string)=>{
   const cleaned:object[]= []
-  const removed:any=[]
-  const blanks= new Map();
-  // data.map((item:any,i)=>{
-    for(let i=0;i<data.length;i++){
-      data.map((obj)=>{
-        if (obj){
-          console.log(data[i])
-         cleaned.push(data[i])
+ // const :any=[]
+  const removed= new Map();
+ 
+  //  for(let i=0;i<data.length;i++){ }
+      data.map((obj:any,i)=>{
+        if (obj[requiredCol]){
+           return cleaned.push(obj)
         }
         else{
-         removed.push(data[i])
-        // blanks.set(i+1,data[i])
+        // removed.push(data[i])
+        return removed.set(i+1,requiredCol)
         }
       })
-   
-    }
-  //  })
+
   // console.log(`cleaned`, cleaned);
    return {cleaned,removed}
 }
