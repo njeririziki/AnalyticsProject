@@ -57,6 +57,7 @@ const SetUpList = () => {
        setDisableButton(false)
      }
      setOpenModal(false);
+     setDisableButton(false)
      }
     return ( 
         <div className="  justify-self-center flex flex-col  justify-between">

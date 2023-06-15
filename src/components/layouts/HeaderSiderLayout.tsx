@@ -23,7 +23,8 @@ const HeaderSiderLayout= ({children}:{children:React.ReactNode}) => {
        setUrl(url);
      } else{
       // push('/authentication/login')
-     
+      const url='/images/Ellipse 99.png'
+       setUrl(url);
     }
 
    }, [isAuthenticated]);
@@ -39,7 +40,8 @@ const HeaderSiderLayout= ({children}:{children:React.ReactNode}) => {
        <HeaderLayout url={url}/>
         <Layout className='bg-background'>
       <Sider
-        className='bg-background  fixed overflow-clip'
+         style={{backgroundColor:'#F5F5F5'}}
+      //  className='bg-background  fixed overflow-clip'
         breakpoint="lg"
         collapsedWidth="0"
         onBreakpoint={(broken) => {

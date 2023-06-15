@@ -1,5 +1,6 @@
 import { Alert, Button, Checkbox, Space, message } from "antd";
 import { CheckboxChangeEvent } from "antd/es/checkbox";
+import { log } from "console";
 import { useEffect, useState } from "react";
 
 
@@ -40,17 +41,14 @@ const CustomTable = ({data,columns,headers,rename}:TableProps) => {
     }
    }
    const matchingColumns= (col:string) => {
-    const last = headersList.length
-    console.log(showNextCol,headers);
-   if(showNextCol<headersList.length ){
+    const last = headersList.length-1
+    console.log(last,showNextCol,headers);
+   if(showNextCol<last ){
     return setShowNextCol((showNextCol)=>showNextCol+1)
    }else if(showNextCol===last){
-    const required=checkRequiredColumn(matchedCols,'phone_number');
-    if(required){
-      return setReadyToUpload(true)
-     }else{
-      setShowAlert(true)
-     }
+    console.log(`last col`, last,showNextCol);
+    setReadyToUpload(true)
+    
   }else{
     setShowNextCol(0)
   }
@@ -65,18 +63,17 @@ const CustomTable = ({data,columns,headers,rename}:TableProps) => {
     })
   };
   const readyData=()=>{
-     const required=  checkRequiredColumn(matchedCols,'phone_number');
-     console.log(matchedCols);
-     if(required){ }
-      const cleanedData= renameKeysInArray(data,matchedCols)
-      console.log(cleanedData);
-     const {cleaned,removed} = checkForBlanksInRequiredCols(cleanedData,'phone_number')
-     console.log(cleaned);
-// this code shows the rows that were removed
-     console.log(removed.keys());
-     return rename(cleaned)
-   
-  
+     const required=checkRequiredColumn(matchedCols,'phone_number');
+
+     const cleanedData= renameKeysInArray(data,matchedCols)
+      
+     if(required){ 
+      const {cleaned,removed} = checkForBlanksInRequiredCols(cleanedData,'phone_number')
+      return rename(cleaned)
+     }else{
+        setShowAlert(true)
+       }
+
   }
   
     return ( 
@@ -96,9 +93,9 @@ const CustomTable = ({data,columns,headers,rename}:TableProps) => {
            
              </Space>
              :
-             <Space className=" w-full flex flexjustify-between " >
+             <Space className=" w-full space-x-8 " >
               <p className="font-medium ">Please select the  "{headers[showNextCol]}" column</p>
-              <p className="text-primary" onClick={skipUnrequireCol}>I do not have "{headers[showNextCol]} " column</p>
+              <p className="text-primary text-xs self-end" onClick={skipUnrequireCol}>I do not have "{headers[showNextCol]} " column</p>
               </Space>
               }
       
@@ -121,7 +118,7 @@ const CustomTable = ({data,columns,headers,rename}:TableProps) => {
                  onChange={()=>matchingColumns(col)}
               // options={headersList}
                 >
-                  {col}
+                
                 </Checkbox>
             </th>
         )

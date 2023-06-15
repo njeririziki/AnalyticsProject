@@ -48,9 +48,11 @@ export default function Bars({ width, height, events = false }: BarsProps) {
 
   return width < 10 ? null : (
     <svg width={width} height={height}>
+       
       {/* <GradientTealBlue id="teal" /> */}
       <rect width={width} height={height} fill="url(#blue)" rx={14} />
       <Group top={verticalMargin / 2}>
+        
         {data.map((d) => {
           const letter = getLetter(d);
           const barWidth = xScale.bandwidth();
@@ -64,7 +66,7 @@ export default function Bars({ width, height, events = false }: BarsProps) {
               y={barY}
               width={barWidth}
               height={barHeight}
-              fill="rgba(23, 233, 217, .5)"
+              fill="#2774E9"
               onClick={() => {
                 if (events) alert(`clicked: ${JSON.stringify(Object.values(d))}`);
               }}

@@ -1,39 +1,8 @@
 import { ResponsivePie } from '@nivo/pie'
-const data = [
-    {
-      "id": "hack",
-      "label": "hack",
-      "value": 455,
-      "color": "hsl(163, 70%, 50%)"
-    },
-    {
-      "id": "sass",
-      "label": "sass",
-      "value": 244,
-      "color": "hsl(107, 70%, 50%)"
-    },
-    {
-      "id": "stylus",
-      "label": "stylus",
-      "value": 131,
-      "color": "hsl(296, 70%, 50%)"
-    },
-    {
-      "id": "rust",
-      "label": "rust",
-      "value": 507,
-      "color": "hsl(312, 70%, 50%)"
-    },
-    {
-      "id": "erlang",
-      "label": "erlang",
-      "value": 6,
-      "color": "hsl(56, 70%, 50%)"
-    }
-  ]
 
   
- const DonutChart = () => (
+
+ const DonutChart = ({data}:{data:object[]}) => (
     <div style={{height:'370px', width:'350px', backgroundColor:'#ffffff'}}>
     <ResponsivePie
      data={data}
@@ -41,8 +10,8 @@ const data = [
      innerRadius={0.6}
      padAngle={0.5}
      cornerRadius={3}
-     borderWidth={1}
-     borderColor={{ from: 'color', modifiers: [ [ 'darker', 0.2 ] ] }}
+     //borderWidth={1}
+    // borderColor={{ from: 'color', modifiers: [ [ 'darker', 0.2 ] ] }}
      arcLinkLabelsSkipAngle={10}
      arcLinkLabelsTextColor="#333333"
      arcLinkLabelsThickness={2}

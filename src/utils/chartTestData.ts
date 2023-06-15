@@ -1,4 +1,4 @@
-export const barData=[
+ const barData=[
     {
       "country": "AD",
       "hot dog": 47,
@@ -60,3 +60,47 @@ export const barData=[
       "donutColor": "hsl(323, 70%, 50%)"
     }
   ]
+
+  const donutExpenseData=[
+    {
+       id:'payroll',
+        label: 'payroll ',
+        value: 30,
+        color: "#0a9396"
+    },
+    {
+       id:'rent',
+        label: 'rent',
+        value: 60,
+        color: "#0077b6"
+    },
+    {
+       id:'transport',
+        label: 'transport ',
+        value: 10,
+        color: '#90e0ef'
+    }
+  ]
+ 
+  const donutRevenueData=[
+    {
+       id:'Paid',
+        label: 'Paid ',
+        value: 30,
+        color: '#38b000'
+    },
+    {
+       id:'Invoiced',
+        label: ' Invoiced',
+        value: 60,
+        color: '#70e000'
+    },
+    {
+       id:'Pending',
+        label: 'Pending ',
+        value: 10,
+        color: '#c62828'
+    }
+  ]
+  
+  export {barData,donutExpenseData,donutRevenueData}

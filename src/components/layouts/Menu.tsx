@@ -16,13 +16,15 @@ const CustomMenu = () => {
   };
 
   return (
+    <div className="min-h-screen bg-background  pt-20 fixed 
+     border border-r-slate-300 flex flex-col justify-between">
+
     <Menu 
-   className="min-h-screen bg-background pl-8 "
+    className="bg-background"
      theme="light"
     mode="inline"
     onClick={handleClick} selectedKeys={[current]} >
-      <div  className='min-h-screen fixed pt-20  '>
-        
+      
       <Menu.Item key="dashboard" >
        Dashboard
       </Menu.Item>
@@ -37,8 +39,10 @@ const CustomMenu = () => {
           <Menu.Item key="customers">Customers</Menu.Item>
        
       </SubMenu>
-   
-      <Menu.Item key="articles" >
+
+    </Menu>
+    <Menu className="bg-background">
+    <Menu.Item key="articles" >
         <a href="https://" target="_blank" rel="noopener noreferrer">
           Articles
         </a>
@@ -48,9 +52,9 @@ const CustomMenu = () => {
           Help
         </a>
       </Menu.Item>
-      </div>
-      
     </Menu>
+    </div>
+    
   );
 };
 

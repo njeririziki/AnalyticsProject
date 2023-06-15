@@ -29,33 +29,42 @@ const DraggerUpload = ({templateHeader,endpoint,uploadFunc}:DraggerProps) => {
 
   const handleUpload=(cleanedData:object[])=>{
   
-    // setValidate({
-    //   status:'uploading',
-    //   icon:<Spin/>,
-    //   message:'uploading'
-    // })
+    setValidate({
+      status:'uploading',
+      icon:<Spin/>,
+      message:'uploading'
+    })
     usePost(endpoint,{
       business_id:154,
       contacts:cleanedData
     })
     .then(res=>{
-      setValidate({
-        status:'success',
-        icon:<CheckCircleIcon  className="w-12 h-12  text-green-600"/>,
-        message:'Successfully uploaded'
-      })
+      
+        setValidate({
+          status:'success',
+          icon:<CheckCircleIcon  className="w-12 h-12  text-green-600"/>,
+          message:'Successfully uploaded'
+        })
+      
       console.log(res)
     
     setHeaders(undefined)
-    setData([])
-    console.log('upload in dragger',cleanedData)
-    uploadFunc();})
+    setData([]) 
+    setTimeout(() => {    
+      setValidate(undefined) ;
+      uploadFunc() 
+    }, 1000);
+ 
+  })
     .catch(err=>{
-      setValidate({
-        status:'error',
-        icon:<XCircleIcon className="w-12 h-12 text-red-600"/>,
-        message:'File not uploaded, please try again'
-      })
+    
+        setValidate({
+          status:'error',
+          icon:<XCircleIcon className="w-12 h-12 text-red-600"/>,
+          message:'File not uploaded, please try again'
+        })
+      
+      setTimeout(() => { setValidate(undefined)}, 1000);
       console.log(err)})
     
   }

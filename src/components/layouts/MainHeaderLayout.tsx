@@ -23,6 +23,8 @@ const MainHeaderLayout = ({children}:{children:React.ReactNode}) => {
     } else{
       // console.log('is unauthenticated')
       // push('/authentication/login')
+      const url='/images/Ellipse 99.png'
+       setUrl(url);
       
     }
   

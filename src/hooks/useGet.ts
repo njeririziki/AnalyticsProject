@@ -1,6 +1,6 @@
 import axiosInstance from "@/utils/AxiosInstance";
 
-const useGet = (endpoint:string,values: any) => {
+const useGet = (endpoint:string) => {
 
         return new Promise<any>(async(resolve, reject) => {
           try {
