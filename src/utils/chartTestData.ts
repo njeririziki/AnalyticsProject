@@ -66,19 +66,19 @@
        id:'payroll',
         label: 'payroll ',
         value: 30,
-        color: "#0a9396"
+       // color: "hsl(312, 70%, 50%)"
     },
     {
        id:'rent',
         label: 'rent',
         value: 60,
-        color: "#0077b6"
+       // color: "#0077b6"
     },
     {
-       id:'transport',
-        label: 'transport ',
+       id:'taxes',
+        label: 'taxes ',
         value: 10,
-        color: '#90e0ef'
+     //   color: '#90e0ef'
     }
   ]
  
@@ -87,19 +87,19 @@
        id:'Paid',
         label: 'Paid ',
         value: 30,
-        color: '#38b000'
+       // "color": "hsl(312, 70%, 50%)"
     },
     {
        id:'Invoiced',
         label: ' Invoiced',
         value: 60,
-        color: '#70e000'
+        //color: '#70e000'
     },
     {
        id:'Pending',
         label: 'Pending ',
         value: 10,
-        color: '#c62828'
+     //   color: '#c62828'
     }
   ]
   

@@ -42,16 +42,7 @@ const CustomTable = ({data,columns,headers,rename}:TableProps) => {
    }
    const matchingColumns= (col:string) => {
     const last = headersList.length-1
-    console.log(last,showNextCol,headers);
-   if(showNextCol<last ){
-    return setShowNextCol((showNextCol)=>showNextCol+1)
-   }else if(showNextCol===last){
-    console.log(`last col`, last,showNextCol);
-    setReadyToUpload(true)
-    
-  }else{
-    setShowNextCol(0)
-  }
+   // console.log()
    console.log(col,headers[showNextCol]);
    const matchedObject:{ [key: string]: string } = {};
    matchedObject[col]=headers[showNextCol];
@@ -61,6 +52,13 @@ const CustomTable = ({data,columns,headers,rename}:TableProps) => {
     ...matchedCols,
     ...matchedObject
     })
+    if(showNextCol<last ){
+      return setShowNextCol((showNextCol)=>showNextCol+1)
+     }else if(showNextCol===last){
+      return setReadyToUpload(true)
+      }else{
+      return +setShowNextCol(0)
+    }
   };
   const readyData=()=>{
      const required=checkRequiredColumn(matchedCols,'phone_number');
@@ -93,7 +91,7 @@ const CustomTable = ({data,columns,headers,rename}:TableProps) => {
            
              </Space>
              :
-             <Space className=" w-full space-x-8 " >
+             <Space className=" w-full flex justify-between space-x-8 " >
               <p className="font-medium ">Please select the  "{headers[showNextCol]}" column</p>
               <p className="text-primary text-xs self-end" onClick={skipUnrequireCol}>I do not have "{headers[showNextCol]} " column</p>
               </Space>
@@ -105,11 +103,11 @@ const CustomTable = ({data,columns,headers,rename}:TableProps) => {
      <Alert message={`the ${headers[showNextCol]} column is a required`} type="warning" />
     :
     <></>} 
-    <table className="rounded-sm w-fit">
+    <table className="rounded-sm w-fit overflow-scroll">
     <thead className="  border-b-slate-300  ">
       
       <tr>
-        { headers.map((col,i)=>{
+        { columns.map((col,i)=>{
           return(
           <th className="py-2 px-4" key={i}>          
                <Checkbox

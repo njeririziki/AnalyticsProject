@@ -1,6 +1,6 @@
 import HeaderSiderLayout from "@/components/layouts/HeaderSiderLayout";
 import Bars, { ChartToRender } from "@/components/graphs/Bars";
-import DonutChart from "@/components/graphs/BarGraphs";
+import DonutChart from "@/components/graphs/DonutGraphs";
 import InsightSection from "@/components/reusable/Insights";
 import { Breadcrumb, Tabs, TabsProps } from "antd";
 import { donutExpenseData,donutRevenueData } from "@/utils/chartTestData";
@@ -17,8 +17,8 @@ const MoniesTab=()=>{
         <p className="text-gray-500 mt-4">Quantities sold over time (demand)</p>
      <Bars  width={600} height={350}/>
      <div className="flex space-x-4">
-     <DonutChart data={donutExpenseData}/>
-     <DonutChart data={donutRevenueData}/>
+     <DonutChart data={donutExpenseData} title="Expenses"/>
+     <DonutChart data={donutRevenueData} title="Revenue"/>
      </div>
      
     </div>

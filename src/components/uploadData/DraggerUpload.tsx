@@ -57,7 +57,8 @@ const DraggerUpload = ({templateHeader,endpoint,uploadFunc}:DraggerProps) => {
  
   })
     .catch(err=>{
-    
+      setHeaders(undefined)
+      setData([]) 
         setValidate({
           status:'error',
           icon:<XCircleIcon className="w-12 h-12 text-red-600"/>,

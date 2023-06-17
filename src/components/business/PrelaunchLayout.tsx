@@ -57,7 +57,7 @@ const PrelaunchLayout = () => {
             </div> 
              <button  className=" bg-gray-400 py-4 px-8 rounded-none
               text-lg font-medium  text-primary " 
-             // onClick={() => router.push('/about')}
+             onClick={() => router.push('/setup')}
                >
               Take me to Lisa
              </button>

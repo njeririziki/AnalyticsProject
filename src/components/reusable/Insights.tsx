@@ -5,15 +5,15 @@ import { useEffect, useState } from "react";
 const data = [
     {
       title: 'Payment',
-      color:'primary'
+      color:'primary' //#6fffe9'
     },
     {
       title: 'Revenue changes',
-      color:'success'
+      color:'green'//'#70e000'
     },
     {
       title: 'Expenses',
-      color:'warning'
+      color: 'yellow-500'//'#fee440'
     }
   ];
 const InsightSection = () => {
@@ -65,8 +65,9 @@ const InsightSection = () => {
                 renderItem={(item, index) => (
                 <List.Item>
                     <List.Item.Meta
-                    avatar={<Avatar shape="square" className={`bg-${item.color}`} />}
-                    title={<a href="https://ant.design">{item.title}</a>}
+                    avatar={<Avatar shape="square" className={`bg-${item.color} `} 
+                    />}
+                    title={item.title}
                    description={insight[index]}
                     />
                 </List.Item>
