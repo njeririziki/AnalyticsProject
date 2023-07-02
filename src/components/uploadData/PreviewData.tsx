@@ -5,7 +5,7 @@ import CustomTable from "./CustomTable";
 const { Column, ColumnGroup } = Table;
 type PreviewProps={
     templateHeaders:string[]
-    headers:string[];
+    headers:string[]
     data:any
 }
 

@@ -1,9 +1,17 @@
 import { ResponsivePie } from '@nivo/pie'
 
+type DonutProps={
+    data:object[]
+    title:string
+    width:string
+    height:string
+}
   
 
- const DonutChart = ({data,title}:{data:object[],title:string}) => (
-    <div style={{height:'370px', width:'350px', backgroundColor:'#ffffff'}}>
+ const DonutChart = ({data,title,width,height}:DonutProps) => (
+    <div // className={`w-[${width}] h-[${height}]`} 
+     style={{height:`${height}`, width:`${width}`, backgroundColor:'#ffffff'}}
+    >
         <p className='mx-4 mt-2'>{title}</p>
     <ResponsivePie
      data={data}
@@ -11,7 +19,8 @@ import { ResponsivePie } from '@nivo/pie'
      innerRadius={0.8}
      padAngle={0.5}
      cornerRadius={3}
-     //borderWidth={1}
+     colors={{ scheme: 'paired' }}
+     //borderWidth={1}  
     // borderColor={{ from: 'color', modifiers: [ [ 'darker', 0.2 ] ] }}
     enableArcLabels={false}
      arcLinkLabelsSkipAngle={10}
