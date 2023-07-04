@@ -27,10 +27,10 @@ const CustomMenu = () => {
     onClick={handleClick} selectedKeys={[current]} >
       
       <Menu.Item key="dashboard" >
-       Dashboard
+      <Link href="/dashboard"> Dashboard </Link>
       </Menu.Item>
       <Menu.Item key="marketing">
-      Marketing 
+      <Link href="/marketing">  Marketing </Link>
       </Menu.Item>
       <SubMenu key="SubMenu"  title="Business manager">
       

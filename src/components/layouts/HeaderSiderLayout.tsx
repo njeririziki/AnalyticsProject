@@ -55,7 +55,7 @@ const HeaderSiderLayout= ({children}:{children:React.ReactNode}) => {
         <Layout>
          
         <Content >
-          <div className='bg-background  pl-8 h-screen overflow-y-auto' >
+          <div className='bg-background  pl-4 h-screen overflow-y-auto' >
             {children}
           </div>
         </Content>
