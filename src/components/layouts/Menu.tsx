@@ -5,6 +5,7 @@ import {
   AppstoreOutlined,
   SettingOutlined,
 } from "@ant-design/icons";
+import Link from "next/link";
 
 const { SubMenu } = Menu;
 
@@ -33,10 +34,15 @@ const CustomMenu = () => {
       </Menu.Item>
       <SubMenu key="SubMenu"  title="Business manager">
       
-          <Menu.Item key="catalogue">Catalogue</Menu.Item>
-          <Menu.Item key="transactions">Transactions</Menu.Item>
+          <Menu.Item key="catalogue">
+          <Link href="/business/catalogue">Catalogue</Link></Menu.Item>
+          <Menu.Item key="transactions">
+          <Link href="/business/transactions">Transactions</Link>
+            </Menu.Item>
           <Menu.Item key="userroles">User Roles</Menu.Item>
-          <Menu.Item key="customers">Customers</Menu.Item>
+          <Menu.Item key="customers">
+          <Link href="/business/customers"> Customers</Link>
+           </Menu.Item>
        
       </SubMenu>
 

@@ -1,4 +1,4 @@
-import Bars, { ChartToRender } from "@/components/graphs/Bars";
+import Bars from "@/components/graphs/Bars";
 import DonutChart from "@/components/graphs/DonutGraphs";
 import { donutExpenseData,donutRevenueData } from "@/utils/chartTestData";
 import ParentSize from '@visx/responsive/lib/components/ParentSize';
@@ -18,11 +18,11 @@ const ProductsTab=()=>{
         </div >
         <div className="w-5/6 h-[400px]">
         <p className="text-gray-500 mt-4">Quantities sold over time (demand)</p>
-        <ParentSize>
+        {/* <ParentSize>
           {({ width, height }) => (
             <Bars width={width} height={height} />
                )}
-              </ParentSize>
+              </ParentSize> */}
         </div>
        
             {/* <Bars  width={600} height={350}/> */}
@@ -33,7 +33,7 @@ const ProductsTab=()=>{
             text='697K'
             description=" This tell you how quickly your products are selling. 
             We will let you know when this changes.
-            "/>
+            "/> 
             <HalfProgress percent={65} title='Customer'
             text='697K'
             description=" This tell you how quickly your products are selling. 
