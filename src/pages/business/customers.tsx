@@ -3,12 +3,57 @@ import SearchableTable from "@/components/reusable/Table";
 import useGet from "@/hooks/useGet";
 import { useState, useEffect, useContext } from "react";
 import { AuthContext } from '@/context/AuthContext';
+import { ColumnsType } from "antd/es/table";
+
+
+
+type DataType= {
+     key: string;
+     name: string;
+     phone: string;
+     email: string;
+   
+   }
+   
+  // type DataIndex = keyof DataType;
+   
+
+   const columns: ColumnsType<DataType> = [
+     {
+       title: 'Name',
+       dataIndex: 'name',
+       key: 'name',
+       //width: '30%',
+      // ...getColumnSearchProps('name'),
+     },
+     {
+       title: 'phone',
+       dataIndex: 'phone',
+       key: 'phone',
+     //   width: '20%',
+       //...getColumnSearchProps('age'),
+     },
+     {
+       title: 'Email',
+       dataIndex: 'email',
+       key: 'email',
+      //   getColumnSearchProps('costPrice'),
+      // sorter: (a:number, b:number) => a.costPrice.length - b.address.length,
+      //sortDirections: ['descend', 'ascend'],
+     }
+   ];
+   
 
 
 const CustomersPage = () => {
      const {currentUser}=useContext(AuthContext)
   
-     const [clientList, setClientList] = useState<object[]>()
+     const [clientList, setClientList] = useState<DataType[]>([{
+             key:'',
+              name:'',
+               phone:'',
+               email:''
+          }])
      const user_id=16 // currentUser?.id
 
      useEffect(() => {
@@ -18,6 +63,7 @@ const CustomersPage = () => {
               console.log(res.jsonData);
               const data=res.jsonData.map((item:any)=>{
               return{
+               key:item.id,
                name:item.name,
                phone:item.phone,
                email:item.email} 
@@ -36,10 +82,9 @@ const CustomersPage = () => {
              <div  className="w-5/6  pt-8 h-full ">
              <h2 className="font-semibold text-lg text-black" > Products </h2>
              <div className='pt-8'>
-             <SearchableTable/>
+             <SearchableTable data={clientList} columns={columns} />
              </div>
-              
-               
+                     
              </div>
             
         </HeaderSiderLayout>

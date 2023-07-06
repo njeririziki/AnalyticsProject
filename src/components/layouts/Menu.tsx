@@ -13,6 +13,7 @@ const CustomMenu = () => {
   const [current, setCurrent] = useState("dashboard");
 
   const handleClick = (e: any) => {
+    console.log(e.key)
     setCurrent(e.key);
   };
 

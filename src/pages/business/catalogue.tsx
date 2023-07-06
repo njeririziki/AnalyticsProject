@@ -2,28 +2,73 @@ import HeaderSiderLayout from "@/components/layouts/HeaderSiderLayout";
 import SearchableTable from "@/components/reusable/Table";
 import { AuthContext } from "@/context/AuthContext";
 import useGet from "@/hooks/useGet";
+import { ColumnsType } from "antd/es/table";
 import { useContext, useEffect, useState } from "react";
 
-// "id": 2021,
-// "product_name": "samsung s23 ultra",
-// "buying_price": 200000,
-// "selling_price": 120000,
-// "whole_sale_buying_price": 100000,
-// "whole_sale_selling_price": 150000,
-// "category_id": 1,
-// "created_at": "2023-03-30T18:18:44.000000Z",
-// "updated_at": "2023-07-03T15:35:46.000000Z",
-// "business_id": 614,
-// "image": "This/should/be/a/path",
-// "stock": "139232",
-// "color": "blue",
-// "brand": "samsung",
-// "brand_type": "electronics"
+
+type DataType= {
+     key: string;
+     name: string;
+     retailPrice: number;
+     stock: number;
+     costPrice: number;
+     value:number
+   }
+   
+  // type DataIndex = keyof DataType;
+   
+
+   const columns: ColumnsType<DataType> = [
+     {
+       title: 'Name',
+       dataIndex: 'name',
+       key: 'name',
+       //width: '30%',
+      // ...getColumnSearchProps('name'),
+     },
+     {
+       title: 'Retail Price',
+       dataIndex: 'retailPrice',
+       key: 'retailPrice',
+     //   width: '20%',
+       //...getColumnSearchProps('age'),
+     },
+     {
+       title: 'Cost Price',
+       dataIndex: 'costPrice',
+       key: 'costPrice',
+    //   ...getColumnSearchProps('costPrice'),
+      // sorter: (a:number, b:number) => a.costPrice.length - b.address.length,
+      //sortDirections: ['descend', 'ascend'],
+     },
+     {
+          title: 'Stock',
+          dataIndex: 'stock',
+          key: 'stock',
+        //   width: '20%',
+          //...getColumnSearchProps('age'),
+        },
+        {
+          title: 'Value',
+          dataIndex: 'value',
+          key: 'value',
+        //   width: '20%',
+          //...getColumnSearchProps('age'),
+        },
+   ];
+   
 
 const CataloguePage = () => {
      const {currentUser}=useContext(AuthContext)
 
-     const [productList, setProductList] = useState<object[]>()
+     const [productList, setProductList] = useState<DataType[]>([{
+              key:'',
+              name:'',
+               stock:0,
+               retailPrice:0,
+               costPrice:0,
+               value:0
+     }])
      const user_id=16 // currentUser?.id
 
      useEffect(() => {
@@ -32,12 +77,13 @@ const CataloguePage = () => {
             .then((res)=>{
                console.log(res.jsonData);
                const data=res.jsonData.map((item:any)=>{
-               return{
-               productname:item.product_name,
+               return{   
+               //key:item.id,
+               name:item.product_name,
                stock:item.stock,
-               buyingPrice:item.buying_price,
-               sellingPrice:item.selling_price,
-               brand:item.brand_type
+               retailPrice:item.selling_price,
+               costPrice:item.buying_price,
+               value:Number(item.selling_price-item.buying_price)
                } 
                })
          return setProductList(data)
@@ -54,7 +100,7 @@ const CataloguePage = () => {
              <div  className="w-5/6  pt-8 h-full ">
              <h2 className="font-semibold text-lg text-black" > Products </h2>
              <div className='pt-8'>
-             <SearchableTable/>
+             <SearchableTable data={productList} columns={columns}/>
              </div>
               
                

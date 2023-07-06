@@ -45,7 +45,7 @@ import { AuthContext } from "@/context/AuthContext";
           debts: data.debts,
           expenses: data.expenses,
           stock: data.weekly_cost_of_goods_sold,
-          profit: data. cummilative_weekly_profit,
+          profit: data.cummilative_weekly_profit,
           units: data.units,
           discounts: data.discounts
         }
@@ -58,7 +58,12 @@ import { AuthContext } from "@/context/AuthContext";
     }
  
   }, [])
-
+if(overviewDetails){
+  return(
+    <div className="w-full px-8">
+     <h2 className="font-semibold ">You have no data yet. </h2>
+     </div>)
+}
     return(
       <div className="w-full ">
         <div className="flex space-x-4  ">
@@ -86,13 +91,19 @@ import { AuthContext } from "@/context/AuthContext";
               <div className=" w-5/6 flex space-x-4">
             
               <div className="  flex flex-col space-y-4">
-              <OverviewCard 
+              {/* <OverviewCard 
               percent={100} 
               title='Overview'
               text='697K'
               description=" This tell you how quickly your products are selling. 
               We will let you know when this changes.
-              "/>
+              "/> */}
+                <ConversionRate percent={13} title='Conversion rate'
+                  text='697K'
+                 description=" This tell you how quickly your products are selling. 
+                  We will let you know when this changes.
+                  "/>
+           
                <HalfProgress percent={65} title='Customer'
               text='697K'
               description=" This tell you how quickly your products are selling. 

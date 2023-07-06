@@ -5,9 +5,17 @@ import ParentSize from '@visx/responsive/lib/components/ParentSize';
 import HalfProgress from "@/components/cards/HalfProgress";
 import ConversionRate from "@/components/cards/ConversionRate";
 import OverviewCard from "@/components/cards/OverviewCard";
+import { useState } from "react";
 
 
 const ProductsTab=()=>{
+  const [overviewDetails, setOverviewDetails] = useState<any>(true);
+  if(overviewDetails){
+    return(
+      <div className="w-full px-8">
+       <h2 className="font-semibold ">You have no data yet. </h2>
+       </div>)
+  }
     return(
       <div className="w-full ">
       <div className="flex space-x-4  ">

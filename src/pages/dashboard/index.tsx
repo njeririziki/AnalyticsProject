@@ -5,8 +5,6 @@ import CustomersTab from "./CustomerTab";
 import MoniesTab from "./MoneyTab";
 import ProductsTab from "./Product";
 
-
-
  
 const items: TabsProps['items'] = [
   {
