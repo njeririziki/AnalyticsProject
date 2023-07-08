@@ -54,7 +54,7 @@ const CustomersPage = () => {
                phone:'',
                email:''
           }])
-     const user_id=16 // currentUser?.id
+     const user_id=currentUser?.id // currentUser?.id
 
      useEffect(() => {
           try {

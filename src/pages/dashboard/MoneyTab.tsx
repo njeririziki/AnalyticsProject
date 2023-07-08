@@ -12,6 +12,11 @@ import { AuthContext } from "@/context/AuthContext";
 
 
 //overview
+//transactions/16
+// "sales": null,
+// "discount": null,
+// "profit": null,
+// "units": null
 
 
 //transactions/614/monthly
@@ -31,7 +36,7 @@ import { AuthContext } from "@/context/AuthContext";
   const [overviewDetails, setOverviewDetails] = useState<any>();
   const [donutStuff, setDonutStuff] = useState<any>();
   const [barStuff, setBarStuff] = useState<any>()
-  const user_id=16;
+  const user_id=currentUser?.id;
 
   useEffect(() => {
     try {

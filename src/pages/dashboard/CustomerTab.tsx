@@ -5,10 +5,34 @@ import ParentSize from '@visx/responsive/lib/components/ParentSize';
 import HalfProgress from "@/components/cards/HalfProgress";
 import ConversionRate from "@/components/cards/ConversionRate";
 import OverviewCard from "@/components/cards/OverviewCard";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import useGet from "@/hooks/useGet";
+import { AuthContext } from "@/context/AuthContext";
+
+// "sales": null,
+// "discount": null,
+// "profit": null,
+// "units": null
 
 const CustomersTab=()=>{
+  const {currentUser}=useContext(AuthContext)
   const [overviewDetails, setOverviewDetails] = useState<any>(true);
+  const user_id=currentUser?.id // currentUser?.id
+
+  useEffect(() => {
+       try {
+          useGet(`/transactions/${user_id}`)
+         .then((res)=>{
+           console.log(res.jsonData);
+           
+       }).catch(err=>{
+      
+      })
+       } catch (error) {
+         
+       }
+    
+     }, [])
 
   if(overviewDetails){
     return(

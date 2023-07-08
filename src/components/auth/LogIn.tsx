@@ -26,7 +26,7 @@ const LogIn:React.FC= ()=> {
             content: res,
           });
           
-          return router.push('/prelaunch/')
+          return router.push('/dashboard');
    
       }).catch(err=> {
           messageApi.open({
@@ -83,10 +83,12 @@ const LogIn:React.FC= ()=> {
         </Link>
       </Form.Item>
 
-      <Form.Item className="self-center w-full">
+      <Form.Item className="self-center d-flex  w-full">
       {contextHolder}
       {isLoading?
-        <Spin className="self-center  "/>
+        <div  className="text-center">
+           <Spin/>
+      </div>
       :
         <Button  htmlType="submit" className="bg-primary text-white w-full">
           Log in

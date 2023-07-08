@@ -5,11 +5,39 @@ import ParentSize from '@visx/responsive/lib/components/ParentSize';
 import HalfProgress from "@/components/cards/HalfProgress";
 import ConversionRate from "@/components/cards/ConversionRate";
 import OverviewCard from "@/components/cards/OverviewCard";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { AuthContext } from "@/context/AuthContext";
+import useGet from "@/hooks/useGet";
 
 
 const ProductsTab=()=>{
   const [overviewDetails, setOverviewDetails] = useState<any>(true);
+
+  const {currentUser}=useContext(AuthContext)
+
+  const user_id=currentUser?.id // currentUser?.id
+
+  useEffect(() => {
+       try {
+          useGet(`/list-products/${user_id}`)
+         .then((res)=>{
+           console.log(res.jsonData);
+           const data=res.jsonData.map((item:any)=>{
+           return{
+            key:item.id,
+            name:item.name,
+            phone:item.phone,
+            email:item.email} 
+           })
+   
+       }).catch(err=>{
+      
+      })
+       } catch (error) {
+         
+       }
+    
+     }, [])
   if(overviewDetails){
     return(
       <div className="w-full px-8">

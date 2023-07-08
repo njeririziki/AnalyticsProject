@@ -7,7 +7,7 @@ const BusinessDash = () => {
              <div  className="w-5/6  pt-8 h-full ">
              <h2 className="font-semibold text-lg text-black" > Products </h2>
              <div className='pt-8'>
-             <SearchableTable/>
+             {/* <SearchableTable /> */}
              </div>
               
                

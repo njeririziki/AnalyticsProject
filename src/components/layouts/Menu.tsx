@@ -1,22 +1,31 @@
 import { useState } from "react";
-import { Menu } from "antd";
+import { Menu, MenuProps } from "antd";
 import {
   MailOutlined,
   AppstoreOutlined,
   SettingOutlined,
+  Loading3QuartersOutlined,
 } from "@ant-design/icons";
 import Link from "next/link";
+import { useRouter } from "next/router";
+
+
 
 const { SubMenu } = Menu;
 
 const CustomMenu = () => {
   const [current, setCurrent] = useState("dashboard");
+  const {push}=useRouter()
+
 
   const handleClick = (e: any) => {
     console.log(e.key)
     setCurrent(e.key);
   };
-
+ const Logout=()=>{
+   sessionStorage.clear()
+   push('/authentication/login')
+ }
   return (
     <div className="min-h-screen bg-background  pt-20 fixed 
      border border-r-slate-300 flex flex-col justify-between">
@@ -58,6 +67,9 @@ const CustomMenu = () => {
         <a href="https://" target="_blank" rel="noopener noreferrer">
           Help
         </a>
+      </Menu.Item>
+      <Menu.Item key="logout" onClick={Logout}>
+        Logout
       </Menu.Item>
     </Menu>
     </div>

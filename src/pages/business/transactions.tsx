@@ -69,7 +69,7 @@ const TransactionsPage = () => {
      const {currentUser}=useContext(AuthContext)
      const [transactionsList, setTransactionsList] = useState<object[]>()
 
-     const user_id=16 // currentUser?.id
+     const user_id=currentUser?.id // currentUser?.id
 
      useEffect(() => {
           try {
