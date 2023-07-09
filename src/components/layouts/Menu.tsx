@@ -14,7 +14,7 @@ import { useRouter } from "next/router";
 const { SubMenu } = Menu;
 
 const CustomMenu = () => {
-  const [current, setCurrent] = useState("dashboard");
+  const [current, setCurrent] = useState('');
   const {push}=useRouter()
 
 
@@ -33,8 +33,12 @@ const CustomMenu = () => {
     <Menu 
     className="bg-background"
      theme="light"
-    mode="inline"
-    onClick={handleClick} selectedKeys={[current]} >
+     mode="inline"
+    defaultSelectedKeys={['dashboard']}
+    defaultOpenKeys={['SubMenu']}
+    onClick={handleClick}
+    selectedKeys={[current]}
+   >
       
       <Menu.Item key="dashboard" >
       <Link href="/dashboard"> Dashboard </Link>

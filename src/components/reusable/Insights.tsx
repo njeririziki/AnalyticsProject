@@ -23,7 +23,7 @@ const InsightSection = () => {
      usePost('insights/get/paymentmethod',{
       businesses:[4]
      }).then((res)=>{
-      console.log(`res`, res);
+    
       setInsight([
           res.expense_insight,
           res.payment_method_insight,
