@@ -52,7 +52,7 @@ const LogIn:React.FC= ()=> {
     >
       <Form.Item className="self-center">
       
-        <h1 className="text-primary text-xl font-bold">lisa</h1>
+        <h1 className="text-primary text-xl font-bold">Cyvil</h1>
       </Form.Item>
       <Form.Item
         name="email"

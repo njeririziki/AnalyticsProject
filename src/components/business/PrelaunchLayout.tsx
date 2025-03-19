@@ -15,7 +15,7 @@ const PrelaunchLayout = () => {
           <div className="bg-white  h-screen flex flex-col justify-center ">
           <div  className="w-4/5 h-3/5 self-center flex flex-col justify-between ">
           <h5 className="text-3xl text-black font-medium leading-relaxed">
-           <span className="font-bold  ">Congratulations!</span> You are now signed up for lisa beta!
+           <span className="font-bold  ">Congratulations!</span> You are now signed up for Cyvil beta!
           </h5>
          
           <div className="gap-y-8">
@@ -51,7 +51,7 @@ const PrelaunchLayout = () => {
            items-center justify-between">
             <div>
           <h5 className="text-xl mb-8  font-medium italic  ">
-            Lisa goes live in ...
+            Cyvil goes live in ...
           </h5>
           <CountDownTimer targetDate="08/12/2023"/>
             </div> 
@@ -59,7 +59,7 @@ const PrelaunchLayout = () => {
               text-lg font-medium  text-primary " 
              onClick={() => router.push('/setup')}
                >
-              Take me to Lisa
+              Take me to Cyvil
              </button>
           </div>
           </div>
