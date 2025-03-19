@@ -1,10 +1,10 @@
 import MainHeaderLayout from "@/components/layouts/MainHeaderLayout";
-import SetUpList from "@/components/reusable/SetUpList";
+import SetUpList from "@/components/uploadData/SetUpList";
 import Image from "next/image";
 
 
 const NewUserSetUP = () => {
-
+    
     return ( 
       <MainHeaderLayout>
          <div className="bg-white grid grid-cols-1 md:grid-cols-2 py-12">

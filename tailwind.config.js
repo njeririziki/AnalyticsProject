@@ -12,7 +12,9 @@ module.exports = {
         colors:{
           primary:'#2774E9',
           'background':'#F5F5F5',
-          'line-color':'#E0E0E0'
+          'line-color':'#E0E0E0',
+          'success':'#38b000',
+          'warning':'#fec89a'
    
          },
          fontFamily:{
@@ -21,6 +23,6 @@ module.exports = {
        },
   },
   plugins: [],
-  // darkMode: 'class',
+   darkMode: 'class',
 }
 

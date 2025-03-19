@@ -1,8 +1,6 @@
 import { Modal, Button, Upload } from "antd";
 import { useState } from "react";
 
-const { Dragger } = Upload; 
-
 type ModalProps={
     title:string,
     open:boolean,
@@ -30,19 +28,22 @@ const ModalContainer = ({title,open,onClose,children}:ModalProps) => {
         open={open}
         onOk={handleOk}
         onCancel={onClose}
+        width='fit-content'
         footer={[
-          <Button
-            key="link"
-            href="https://google.com"
-            type="primary"
-           // loading={loading}
-            onClick={handleOk}
-          >
-           Upload files to Cyvil
-          </Button>,
+          // <Button
+          //   key="link"
+          //   href="https://google.com"
+          //   type="primary"
+          //  // loading={loading}
+          //   onClick={handleOk}
+          // >
+          // Cancel
+          // </Button>
+         
         ]}
         >
-        {children}
+            {children}
+      
         </Modal>
      );
 }

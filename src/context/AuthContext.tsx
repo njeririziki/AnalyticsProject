@@ -5,7 +5,7 @@ type AuthContextType = {
     currentUser: User | null
    // token: string
     isAuthenticated: boolean
-    authenticateUser: (res: { token: string; user: User }) => void
+    authenticateUser: () => void
     unauthenticateUser: () => void
   }
 
@@ -17,19 +17,21 @@ type AuthContextType = {
     const [token, setToken] = useState (null);
    
      useEffect(() => {
-
+     
       const tk=sessionStorage.getItem('token')
-      console.log(tk)
+      const userJSON= sessionStorage.getItem('user')
+      const user:User | null = userJSON? JSON.parse(userJSON):null;
+      
       if(tk){
         setIsAuthenticated(true)
         setToken(token)
+        setCurrentUser(user)
       }
     
-     }, []);
+     }, [isAuthenticated]);
 
        const authenticateUser = () => {
-
-        setIsAuthenticated(true)
+      return setIsAuthenticated(true)
        // setCurrentUser(user)
        // setToken( token)
       }

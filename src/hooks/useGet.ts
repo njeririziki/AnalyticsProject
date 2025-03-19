@@ -1,10 +1,10 @@
 import axiosInstance from "@/utils/AxiosInstance";
 
-const useGet = (endpoint:string,values: any) => {
+const useGet = (endpoint:string) => {
 
         return new Promise<any>(async(resolve, reject) => {
           try {
-              await axiosInstance.get(endpoint, values)
+              await axiosInstance.get(endpoint)
               .then(res=>{
                console.log(res)
                   if(res.data.success){

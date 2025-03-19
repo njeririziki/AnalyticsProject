@@ -1,7 +1,6 @@
 import { ChangeEventHandler, useState } from "react";
 import { useRouter } from 'next/router'
 import { EnvelopeIcon,LockClosedIcon,PhoneIcon,UserIcon } from '@heroicons/react/24/solid'
-import Image from 'next/image'
 import { validateConfirmPassword} from "@/utils/validators";
 import { Button, Spin, Form, Input,message } from 'antd';
 import Link from "next/link";
@@ -105,12 +104,14 @@ const SignUp:React.FC= ()=> {
       <Form.Item
         name="phone"
         rules={[ { required: true, message: 'Please input your phone number!' },
-        { type: 'number', min: 12, message:'Phone number should start with 254' }]}
+        { type:'string' , min: 12, message:'Phone number should start with 254' },
+        {max: 12, message:'Phone number should be only 12 digits' }]}
       >
         <Input 
           prefix={
             <PhoneIcon className="h-4 w-4" />
           } 
+          max={12}
         placeholder="254712345678" />
       </Form.Item>
       <Form.Item

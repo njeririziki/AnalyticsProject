@@ -1,54 +1,147 @@
-import React,{FC, useState} from 'react'
+import React,{FC, useContext, useEffect, useState} from 'react'
 import { useRouter } from 'next/router'
 import { Button, message, Form, Input, Spin } from 'antd';
-import { PhoneIcon} from '@heroicons/react/24/solid'
+import { PhoneIcon,CheckCircleIcon,XCircleIcon} from '@heroicons/react/24/solid'
 import { Typography } from 'antd';
-import usePost from '@/hooks/usePost';
+import axiosInstance from '@/utils/AxiosInstance';
+import { setTimeout } from 'timers';
+import { PaidContext } from '@/context/PaidContext';
+import { set } from 'react-hook-form';
 
-const MakePaymentForm = () => {
+
+const MakePaymentForm = ({endpoint,params}:{endpoint:string,params:any}) => {
     const [isLoading, setIsLoading] = useState(false);
+    const [stat, setStat] = useState<string>();
+    const [checkId, setCheckId] = useState<string>()
     const [messageApi, contextHolder] = message.useMessage();
+    const {setIsPaid} = useContext(PaidContext)
+
     const router = useRouter()
 
+
+    const checkStatus=async()=>{
+     // console.log(payload)
+      try {
+        await axiosInstance.post('/check/mpesa/transaction/status',{
+          checkoutrequestid:checkId
+        })
+        .then(res=>{
+        
+          if(res.data?.ResultCode ){
+            if(res.data?.ResultCode==='0'){
+              messageApi.open({
+                type: 'success',
+                content: 'Transaction successfull check your email  ',
+              });
+              setStat('success');
+              setIsPaid(true)
+              sessionStorage.setItem("prereg", 'paid');
+             return setTimeout(() => { router.push('/prelaunch')},  1000)
+              
+            }else  {
+              messageApi.open({
+                type: 'error',
+                content: 'Transaction failed please try again',
+              });
+
+             setStat('error')
+             return setTimeout(() => { setIsLoading(false)}, 1000)
+            }
+          }
+           
+        })
+        .catch(err=>{
+          console.log(err)
+          //setStat('error')
+        })
+       
+      } catch (error) {
+        console.log(error)
+      }
+    }
+
+    useEffect(() => {
+     let subscribe:any;
+      if(checkId){
+        subscribe= setInterval( ()=>{checkStatus()}, 3000);
+        setTimeout(() => {
+          clearInterval(subscribe);
+          return setStat('error')
+        }, 12000);
+      }
+      return () => {
+        clearInterval(subscribe)
+      }
+    }, [checkId])
+    
     const onFinish=async(values:any)=>{
       setIsLoading(true)
-      // try {
-      //   await usePost('/',values)
-      //   .then((res)=>{
-      //       console.log(res);
-      //       messageApi.open({
-      //         type: 'success',
-      //         content: res.message,
-      //       });
-      //       router.push('/prelaunch/')
-      
-      //   return setIsLoading(false)
-      // }).catch(err=>{
-       
-      //  messageApi.open({
-      //    type: 'error',
-      //    content: err,
-      //  });
-      // })
-       
-      //  } catch (error) {
-        
-      //   return  messageApi.open({
-      //      type: 'error',
-      //      content: 'Transaction failed'+ error,
-      //    });
-      //  }
+   
+     // setStat('loading')
+      const payload={
+         ...values,
+        ...params
+      }
+ 
+      try {
+        await axiosInstance.post(endpoint,payload)
+        .then((res)=>{
+          
+             const mpesa=res.data.mpesaWalletTopup;
+
+                if(mpesa?.CheckoutRequestID){
+                  return setCheckId(mpesa?.CheckoutRequestID)
+                }else {
+                  messageApi.open({
+                    type: 'error',
+                    content: mpesa.errorMessage, 
+                  });
+                }
+           }).catch(err=>{     
+              messageApi.open({
+                type: 'error',
+                content: err,
+              });
+              }) 
+       } catch (error) {
+        return  messageApi.open({
+           type: 'error',
+           content: 'Transaction failed'+ error,
+         });
+       }
     }
     if(isLoading){
-        return(
-          <div className="bg-white  space-y-8 shadow-xl py-4 px-12  ">
-             <Typography.Title level={5}>Waiting to verify ...</Typography.Title>
-           <div className='self-center h-40 flex justify-center items-center '>
-           <Spin/>
-           </div>
-          
-          </div>
-        )
+      switch (stat){
+        case 'success':
+          return(
+            <div className="bg-white  space-y-8 shadow-xl py-4 px-12  ">
+               <Typography.Title level={5}>Transaction Successfull</Typography.Title>
+             <div className='self-center h-40 flex justify-center items-center '>
+             <CheckCircleIcon className='text-green-600 w-20 h-20'/>
+             </div>
+            </div>
+          )
+          case 'error':
+            return(
+              <div className="bg-white  space-y-8 shadow-xl py-4 px-12  ">
+                 <Typography.Title level={5}>Transaction Failed</Typography.Title>
+               <div className='self-center h-40 flex justify-center items-center '>
+               <XCircleIcon className='text-red-600 w-20 h-20'/>
+               </div>
+              </div>
+            )
+           
+            default:
+            return(
+              <div className="bg-white  space-y-8 shadow-xl py-4 px-12  ">
+                 <Typography.Title level={5}>Waiting to verify ...</Typography.Title>
+               <div className='self-center h-40 flex justify-center items-center '>
+               <Spin/>
+               </div>
+              </div>
+            )
+      }
+       
     }
     return (  
         <div className="bg-white  shadow-xl py-4 px-12  ">
@@ -67,29 +160,29 @@ const MakePaymentForm = () => {
           <Form.Item
              name="phone"
             rules={[ { required: true, message: 'Please input your mpesa number!' },
-            { type: 'number', min: 12, message:'Phone number should start with 254' }]}
+            { type:'string' , min: 12, message:'Phone number should start with 254' },
+            {max: 12, message:'Phone number should be only 12 digits' }
+                ]}
                >
             <Input 
           prefix={
             <PhoneIcon className="h-4 w-4" />
           } 
+          max={12}
         placeholder="254712345678" />
       </Form.Item>
          <Form.Item>
-
          </Form.Item>
-         
           <Form.Item className=' self-center'>
-          
+          {contextHolder}
              <Button  htmlType="submit" className="bg-primary text-white ">
               Pay now
-             </Button>
-               
+             </Button>    
           </Form.Item>
           <Form.Item className=' self-center'>
           <Button  onClick={()=>router.push('/prelaunch/')} className=" text-black ">
               Cancel
-             </Button>
+          </Button>
           </Form.Item>
          </Form>
         </div>

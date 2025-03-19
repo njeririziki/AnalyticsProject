@@ -1,4 +1,5 @@
-import { AppProps } from 'next/app';
+import { NextComponentType } from 'next';
+//import { AppProps } from 'next/app';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
@@ -6,19 +7,21 @@ import { useEffect } from 'react';
 //     authenticated: boolean;
 //   }
 
-const withAuth = ({ Component}: AppProps) => {
+ const withAuth = <T extends React.ComponentType<any>>(Component: T)=> {
   const Auth = (props: any) => {
     const router = useRouter();
 
     useEffect(() => {
         const authenticated =sessionStorage.getItem('token')
-      if (!authenticated) {
-        router.push('/login');
+     
+      if (!authenticated && router.pathname !== '/authentication/login') {
+        router.push('/authentication/login');
       }
-    }, []);
+    }, [router]);
 
-    // return <Component {...props} />;
+   // return <Component {...props} />;
   };
 
   return Auth;
 };
+export default withAuth;
