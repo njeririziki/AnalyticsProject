@@ -32,7 +32,7 @@ export default function App({ Component, pageProps }: AppProps) {
   return <AuthProvider>
            <PaidProvider>
            <Head>
-           <title>Lisa</title>
+           <title>Cyvil</title>
           </Head>
          <main className={`${poppins.variable} font-sans`}>
         <Component {...pageProps} />

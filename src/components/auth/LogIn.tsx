@@ -15,30 +15,34 @@ const LogIn:React.FC= ()=> {
   
 
   const onFinish = async (values: any) => {
-  
-    setIsLoading(true)
-    try {
-     await login( values)
-      .then(res=>{
-       
-         messageApi.open({
-            type:'success',
-            content: res,
-          });
-          
-          return router.push('/dashboard');
-   
-      }).catch(err=> {
-          messageApi.open({
-            type: 'error',
-            content: err,
-          });
-        })
+    console.log('clicked login');
     
-    } catch (error) {
-      console.error('Login failed', error);
-    }
+    setIsLoading(true)
+    // try {
+    //  await login( values)
+    //   .then(res=>{
+       
+    //      messageApi.open({
+    //         type:'success',
+    //         content: res,
+    //       });
+          
+    //       return router.push('/dashboard');
+   
+    //   }).catch(err=> {
+    //       messageApi.open({
+    //         type: 'error',
+    //         content: err,
+    //       });
+    //     })
+    
+    // } catch (error) {
+    //   console.error('Login failed', error);
+    // }
+
     setIsLoading(false)
+    return router.push('/dashboard');
+   
   };
 
   return (

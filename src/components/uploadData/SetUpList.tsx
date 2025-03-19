@@ -80,7 +80,7 @@ const SetUpList = () => {
             </Text>
             <Text 
             className="text-black">
-            5. Download lisa for android
+            5. Download Cyvil for android
             </Text>
         
         </div>

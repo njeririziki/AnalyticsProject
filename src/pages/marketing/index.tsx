@@ -6,9 +6,9 @@ const MarketingDash = () => {
     return ( 
         <HeaderSiderLayout>
              <div  className="w-5/6  pt-8 h-full ">
-             <h2 className="font-semibold text-lg text-black" > Marketting</h2>
+             <h2 className="font-semibold text-lg text-black" > Marketing</h2>
              <div className='pt-8 pl-8'>
-             <h3> This feature is coming soon </h3>
+             <h3 className="font-semibold  text-black"> This feature is coming soon </h3>
              </div>
               
                

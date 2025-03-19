@@ -5,7 +5,7 @@ const Splashpage = () => {
    // const {push}= useRouter()
     return (
         <div className='w-screen h-screen flex  flex-col justify-between text-black items-center'>
-            <h1  className=" mt-8 text-primary text-2xl font-bold">lisa</h1>
+            <h1  className=" mt-8 text-primary text-2xl font-bold">Cyvil</h1>
 
              <div className='self-center flex flex-col  space-y-12 '>
                <h1 className='font-bold text-8xl'>Simply

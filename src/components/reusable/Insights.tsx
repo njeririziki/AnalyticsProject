@@ -50,7 +50,7 @@ const InsightSection = () => {
                       onClick={() => router.push('/prelaunch/prepay')}>renew now</p>
                 </div>
             
-            <p className="text-sm mt-4 text-gray-500">Renew your Lisa subscription today and stay
+            <p className="text-sm mt-4 text-gray-500">Renew your Cyvil subscription today and stay
              productive with the newest app versions and security updates.
              </p>
             </div>
@@ -76,8 +76,8 @@ const InsightSection = () => {
             </div>
 
             <div className="w-full mt-8  p-6  text-black bg-gray-100 rounded-md space-y-4">
-            <h2 className="text-lg font-semibold">Do more with Lisa</h2>
-            <p className="text-sm mt-4 text-gray-600">Upload your data to lisa today and stay
+            <h2 className="text-lg font-semibold">Do more with Cyvil</h2>
+            <p className="text-sm mt-4 text-gray-600">Upload your data to Cyvil today and stay
              productive with the newest app versions and security updates.
              </p>
              <button className="bg-primary py-2 px-4 text-white rounded"

@@ -20,7 +20,7 @@ const PrelaunchLayout = () => {
          
           <div className="gap-y-8">
           {isPaid?<p></p> :
-           <p className="text-orange-500 mb-4 italic ">Here is your offer, expires 12th May 2023</p>}
+           <p className="text-orange-500 mb-4 italic ">Here is your offer, expires 12th May 2025</p>}
            <div className="  bg-background text-black w-full p-4 px-8 flex justify-between items-center">
              <div className="flex flex-col gap-y-4">
              <p className="font-medium text-sm"> 

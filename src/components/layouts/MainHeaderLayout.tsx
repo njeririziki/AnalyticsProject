@@ -22,18 +22,20 @@ const MainHeaderLayout = ({children}:{children:React.ReactNode}) => {
        const url=user?.image? user?.image:'/images/Ellipse 99.png'
        setUrl(url);
        } else{
-      console.log('is unauthenticated')
-      push('/authentication/login')
+      // console.log('is unauthenticated')
+      // push('/authentication/login')
+      const url='/images/Ellipse 99.png'
+      setUrl(url);
     }
     
   }, []);
-   if(url===''){
-   return (
-    <div className='w-screen h-screen overflow-y-auto bg-background 
-    h-1/2 d-flex justify-center'>   
-    <Skeleton avatar paragraph={{ rows: 4 }} />
-    </div> 
-   )}
+  //  if(url===''){
+  //  return (
+  //   <div className='w-screen h-screen overflow-y-auto bg-background 
+  //   h-1/2 d-flex justify-center'>   
+  //   <Skeleton avatar paragraph={{ rows: 4 }} />
+  //   </div> 
+  //  )}
     return ( 
      <div className='w-screen min-h-screen overflow-y-auto bg-background flex justify-center items-center  '>
        <HeaderLayout url={url}/>

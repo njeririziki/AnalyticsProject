@@ -125,7 +125,7 @@ const DraggerUpload = ({templateHeader,endpoint,uploadFunc}:DraggerProps) => {
            // loading={loading}
            // onClick={handleUpload}
           >
-           Upload files to Lisa
+           Upload files to Cyvil
           </Button> */}
         <DataPreview columns={headers} data={data} 
         headers={templateHeader} rename={handleUpload}
