@@ -75,9 +75,9 @@ const SignUp:React.FC= ()=> {
       requiredMark={false}
     >
       <Form.Item className="self-center">
-        {/* <Image src="/images/logo192.png" alt='lisa-logo' 
+        {/* <Image src="/images/logo192.png" alt='Cyvil-logo' 
         width={50} height={50}/> */}
-            <h1 className="text-primary text-2xl font-bold">lisa</h1>
+            <h1 className="text-primary text-2xl font-bold">Cyvil</h1>
      
       </Form.Item>
       <Form.Item 

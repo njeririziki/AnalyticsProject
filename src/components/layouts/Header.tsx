@@ -6,7 +6,7 @@ const HeaderLayout = ({url}:{url:string}) => {
         <nav className="bg-transparent flex flex-wrap justify-between py-8 px-8
         fixed w-full z-10 top-0   overflow-clip">
           <div>
-          <h1 className="text-primary text-xl font-bold">lisa</h1>
+          <h1 className="text-primary text-xl font-bold">Cyvil</h1>
           </div>
           <Avatar src={<img src={url} alt="avatar" />} />
     
