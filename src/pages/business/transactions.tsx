@@ -22,13 +22,37 @@ interface DataType {
      status: string;
    }
    
+const transactionsDummyData: DataType[] = [
+  {
+    key: '1',
+    transactionId: '123456',
+    amount: 1205,
+    createdBy: 'John Doe',
+    paidvia: 'mobile money',
+    status: 'completed'
+  },
+  { key: '2',
+    transactionId: '654321',
+    amount: 1500,
+    createdBy: 'Jane Smith',
+    paidvia: 'cash',
+    status: 'pending'
+  },
+  { key: '3',
+    transactionId: '789012',  
+    amount: 2000,
+    createdBy: 'Alice Johnson',
+    paidvia: 'credit card',
+    status: 'failed'
+  },
+]
   // type DataIndex = keyof DataType;
 
    const columns: ColumnsType<DataType> = [
      {
        title: ' Transaction Id',
-       dataIndex: ' transactionId',
-       key: ' transactionId',
+       dataIndex: 'transactionId',
+       key: 'transactionId',
        //width: '30%',
       // ...getColumnSearchProps('name'),
      },
@@ -105,7 +129,7 @@ const TransactionsPage = () => {
              <div  className="w-5/6  pt-8 h-full ">
              <h2 className="font-semibold text-lg text-black" > Transactions</h2>
              <div className='pt-8'>
-             <SearchableTable data={transactionsList} columns={columns}/>
+             <SearchableTable data={transactionsDummyData} columns={columns}/>
              </div>
                 
              </div>

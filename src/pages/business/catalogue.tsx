@@ -15,6 +15,32 @@ type DataType= {
      value:number
    }
    
+const productDummyData: DataType[] = [
+  {
+    key: '1',
+    name: 'Cashew Nuts',
+    retailPrice: 100,
+    stock: 50,
+    costPrice: 80,
+    value:20
+  },
+  { key: '2',
+    name: 'Sesame Seeds',
+    retailPrice: 200,
+    stock: 30,
+    costPrice: 150,
+    value:50
+  },
+  { key: '3',
+    name: 'Almonds',  
+    retailPrice: 300,
+    stock: 20,
+    costPrice: 250,
+    value:50
+  },
+]
+
+
   // type DataIndex = keyof DataType;
    
 
@@ -100,7 +126,7 @@ const CataloguePage = () => {
              <div  className="w-5/6  pt-8 h-full ">
              <h2 className="font-semibold text-lg text-black" > Products </h2>
              <div className='pt-8'>
-             <SearchableTable data={productList} columns={columns}/>
+             <SearchableTable data={productDummyData} columns={columns}/>
              </div>
               
                

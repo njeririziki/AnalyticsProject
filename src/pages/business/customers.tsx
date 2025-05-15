@@ -15,6 +15,31 @@ type DataType= {
    
    }
    
+const userDummyData: DataType[] = [
+  {
+    key: '1',
+    name: 'John Brown',
+    phone: '1234567890',
+    email: 'johnbrown@email.com'
+  },
+  { key: '2',
+    name: 'Jim Green',
+    phone: '0987654321',
+    email: 'greenjim@email.com'
+  },
+  { key: '3',
+    name: 'Joe Black',  
+    phone: '1122334455',
+    email: 'blackjoe@email.com'
+  },
+  {
+    key: '4', 
+    name: 'John Doe',
+    phone: '1234567890',
+    email: 'doejohn@email.com'
+  },
+]
+        
   // type DataIndex = keyof DataType;
    
 
@@ -82,7 +107,7 @@ const CustomersPage = () => {
              <div  className="w-5/6  pt-8 h-full ">
              <h2 className="font-semibold text-lg text-black" >Customers </h2>
              <div className='pt-8'>
-             <SearchableTable data={clientList} columns={columns} />
+             <SearchableTable data={userDummyData} columns={columns} />
              </div>
                      
              </div>
