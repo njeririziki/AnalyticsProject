@@ -8,6 +8,8 @@ import OverviewCard from "@/components/cards/OverviewCard";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "@/context/AuthContext";
 import useGet from "@/hooks/useGet";
+import { log } from "console";
+//import {supabase} from "@/utils/supabaseClient";
 
 
 const ProductsTab=()=>{
@@ -18,6 +20,8 @@ const ProductsTab=()=>{
   const user_id=currentUser?.id // currentUser?.id
 
   useEffect(() => {
+  
+    
        try {
           useGet(`/list-products/${user_id}`)
          .then((res)=>{
@@ -38,12 +42,13 @@ const ProductsTab=()=>{
        }
     
      }, [])
-  if(overviewDetails){
-    return(
-      <div className="w-full px-8">
-       <h2 className="font-semibold ">You have no data yet. </h2>
-       </div>)
-  }
+  // if(overviewDetails){
+  //   return(
+  //     <div className="w-full px-8">
+  //       <h2 className="font-semibold ">You have no data yet. </h2>
+        
+  //      </div>)
+  // }
     return(
       <div className="w-full ">
       <div className="flex space-x-4  ">
