@@ -1,4 +1,4 @@
-import { supabase } from "@utils/supabaseClient";
+import { supabase } from "../utils/supabaseClient";
 import { useState, useEffect } from "react";
 
 const useSupabaseAuth = () => {

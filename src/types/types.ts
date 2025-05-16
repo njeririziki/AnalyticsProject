@@ -48,6 +48,18 @@ export interface Business {
   currency: string;
 }
 
+export interface Customer{
+  id: number;
+  customer_name: string;
+  phone: string;
+  email: string;
+  business_id: number;
+  created_at: Date;
+  updated_at: Date;
+
+}
+
+
 export interface Catalogue {
   id: number;
   name: string;
