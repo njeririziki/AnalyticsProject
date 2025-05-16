@@ -19,37 +19,42 @@ const AddBusinessForm = () => {
     const router = useRouter()
     const [isLoading, setIsLoading] = useState(false);
 
+  
+  
+
   const onFinish = async (values: any) => {
 
    console.log('clicked add business',values);
    
     setIsLoading(true)
-    // try {
-    //   const { data, error } = await supabase.from('Business').insert({ values });
-    
-    //   console.log('clicked add business', data);
-    
-    //   if (error) {
-    //     messageApi.open({
-    //       type: 'error',
-    //       content: error.message,
-    //     });
-    //   } else {
-    //     messageApi.open({
-    //       type: 'success',
-    //       content: 'Business added successfully',
-    //     });
 
-    //     router.push('/prelaunch')
-    //   }
-    // } catch (error) {
-    //   messageApi.open({
-    //     type: 'error',
-    //     content: 'add business failed' + error,
-    //   });
-    // } finally {
-    //   setIsLoading(false)
-    // }
+    try {
+      const { data, error } = await supabase.from('Business').insert([values]);
+    
+     
+      console.log('clicked add business', error);
+      console.log('clicked add business', data);
+      if (error) {
+        messageApi.open({
+          type: 'error',
+          content: error.message,
+        });
+      } else {
+        messageApi.open({
+          type: 'success',
+          content: 'Business added successfully',
+        });
+
+        router.push('/setup')
+      }
+    } catch (error) {
+      messageApi.open({
+        type: 'error',
+        content: 'add business failed' + error,
+      });
+    } finally {
+      setIsLoading(false)
+    }
   
   };
 
@@ -126,9 +131,9 @@ const AddBusinessForm = () => {
         <Select
          
           options={[
-            { value: 'restaurant', label: 'restaurant' },
-            { value: 'services', label: 'services' },
-            { value: 'goods', label: 'goods' },
+            { value: 'RESTAURANT', label: 'restaurant' },
+            { value: 'SERVICES', label: 'services' },
+            { value: 'GOODS', label: 'goods' },
             
           ]}
           />

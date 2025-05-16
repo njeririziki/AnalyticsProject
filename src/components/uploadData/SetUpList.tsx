@@ -84,7 +84,7 @@ const SetUpList = () => {
             </Text>
         
         </div>
-       <Button  className="bg-primary text-white" disabled={disableButton}
+       <Button  className="bg-primary text-white" //disabled={disableButton}
         onClick={()=>router.push('/dashboard/')}>
         Proceed to Dashboard
        </Button>
