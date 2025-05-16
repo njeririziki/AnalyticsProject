@@ -4,8 +4,11 @@ import { Tabs, TabsProps } from "antd";
 import CustomersTab from "./CustomerTab";
 import MoniesTab from "./MoneyTab";
 import ProductsTab from "./Product";
+import { useEffect,useState } from "react";
+import { supabase } from "@/utils/supabaseClient";
+ import { Business } from "@/types/types";
 
- 
+
 const items: TabsProps['items'] = [
   {
     key: '1',
@@ -25,12 +28,32 @@ const items: TabsProps['items'] = [
 ];
 
 const HomePage = () => {
+
+  const [business, setBusiness] = useState<Business>({} as Business)
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const { data, error } = await supabase
+        .from('Business')
+        .select('*')
+        .eq('id', 1)
+        .single();
+  
+      if (error) {
+       return  console.error('Error fetching business data:', error);
+      }
+        setBusiness(data ? data : {});
+        console.log({ data, error });
+    };
+
+    fetchData();
+  }, []);
   
   return ( 
     <HeaderSiderLayout>
     <div  className="w-full  flex justify-between">
     <div className="w-full py-8 space-y-4">
-      <h2 className="font-semibold text-lg text-black" >Hello </h2>
+      <h2 className="font-semibold text-lg text-black" > Hello {business.business_name} </h2>
       <Tabs defaultActiveKey="1" items={items}/>
      </div>
 

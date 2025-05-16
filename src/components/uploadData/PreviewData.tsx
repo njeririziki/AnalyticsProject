@@ -10,7 +10,7 @@ type PreviewProps={
 }
 
 const DataPreview = ({templateHeaders,headers,data}:PreviewProps) => {
-   const [selectedColumns, setSelectedColumns] = useState<{ [key: string]: string }>({}) 
+   //const [selectedColumns, setSelectedColumns] = useState<{ [key: string]: string }>({}) 
   
     const cols= headers.map(item=>{
        return {

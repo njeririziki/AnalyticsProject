@@ -4,135 +4,81 @@ import { AuthContext } from "@/context/AuthContext";
 import useGet from "@/hooks/useGet";
 import { ColumnsType } from "antd/es/table";
 import { useContext, useEffect, useState } from "react";
+import { supabase } from "@/utils/supabaseClient";
+import { set } from "react-hook-form";
 
+type DataType = {
+  id: number;
+  name: string;
+  retail_price: number;
+  stock: number;
+  cost_price: number;
+  value: number;
+  created_at: Date;
+};
 
-type DataType= {
-     key: string;
-     name: string;
-     retailPrice: number;
-     stock: number;
-     costPrice: number;
-     value:number
-   }
-   
-const productDummyData: DataType[] = [
+const columns: ColumnsType<DataType> = [
   {
-    key: '1',
-    name: 'Cashew Nuts',
-    retailPrice: 100,
-    stock: 50,
-    costPrice: 80,
-    value:20
-  },
-  { key: '2',
-    name: 'Sesame Seeds',
-    retailPrice: 200,
-    stock: 30,
-    costPrice: 150,
-    value:50
-  },
-  { key: '3',
-    name: 'Almonds',  
-    retailPrice: 300,
-    stock: 20,
-    costPrice: 250,
-    value:50
-  },
-]
+    title: "Name",
+    dataIndex: "name",
+    key: "name",
 
+  },
+  {
+    title: "Retail Price",
+    dataIndex: "retail_price",
+    key: "retail_price",
+    //   width: '20%',
+    //...getColumnSearchProps('age'),
+  },
+  {
+    title: "Cost Price",
+    dataIndex: "cost_price",
+    key: "cost_price",
 
-  // type DataIndex = keyof DataType;
-   
+  },
+  {
+    title: "Stock",
+    dataIndex: "stock",
+    key: "stock",
 
-   const columns: ColumnsType<DataType> = [
-     {
-       title: 'Name',
-       dataIndex: 'name',
-       key: 'name',
-       //width: '30%',
-      // ...getColumnSearchProps('name'),
-     },
-     {
-       title: 'Retail Price',
-       dataIndex: 'retailPrice',
-       key: 'retailPrice',
-     //   width: '20%',
-       //...getColumnSearchProps('age'),
-     },
-     {
-       title: 'Cost Price',
-       dataIndex: 'costPrice',
-       key: 'costPrice',
-    //   ...getColumnSearchProps('costPrice'),
-      // sorter: (a:number, b:number) => a.costPrice.length - b.address.length,
-      //sortDirections: ['descend', 'ascend'],
-     },
-     {
-          title: 'Stock',
-          dataIndex: 'stock',
-          key: 'stock',
-        //   width: '20%',
-          //...getColumnSearchProps('age'),
-        },
-        {
-          title: 'Value',
-          dataIndex: 'value',
-          key: 'value',
-        //   width: '20%',
-          //...getColumnSearchProps('age'),
-        },
-   ];
-   
+  },
+  {
+    title: "Value",
+    dataIndex: "value",
+    key: "value",
+    
+  },
+];
 
 const CataloguePage = () => {
-     const {currentUser}=useContext(AuthContext)
+  const { currentUser } = useContext(AuthContext);
 
-     const [productList, setProductList] = useState<DataType[]>([{
-              key:'',
-              name:'',
-               stock:0,
-               retailPrice:0,
-               costPrice:0,
-               value:0
-     }])
-     const user_id=currentUser?.id // currentUser?.id
+  const [productList, setProductList] = useState<DataType[]>([]);
+  const user_id = currentUser?.id; // currentUser?.id
 
-     useEffect(() => {
-          try {
-             useGet(`/list-products/${user_id}`)
-            .then((res)=>{
-               console.log(res.jsonData);
-               const data=res.jsonData.map((item:any)=>{
-               return{   
-               //key:item.id,
-               name:item.product_name,
-               stock:item.stock,
-               retailPrice:item.selling_price,
-               costPrice:item.buying_price,
-               value:Number(item.selling_price-item.buying_price)
-               } 
-               })
-         return setProductList(data)
-          }).catch(err=>{
-         
-         })
-          } catch (error) {
-            
-          }
-       
-        }, [])
-    return ( 
-        <HeaderSiderLayout>
-             <div  className="w-5/6  pt-8 h-full ">
-             <h2 className="font-semibold text-lg text-black" > Products </h2>
-             <div className='pt-8'>
-             <SearchableTable data={productDummyData} columns={columns}/>
-             </div>
-              
-               
-             </div>
-            
-        </HeaderSiderLayout>
-     );
-} 
+  useEffect(() => {
+    const fetchData = async () => {
+      const { data, error } = await supabase.from("Catalogue").select("*");
+      console.log({ data, error });
+      setProductList(data ?? []);
+      if (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  return (
+    <HeaderSiderLayout>
+      <div className="w-5/6  pt-8 h-full ">
+        <h2 className="font-semibold text-lg text-black"> Products </h2>
+        <div className="pt-8">
+          <SearchableTable data={productList} columns={columns} />
+        </div>
+      </div>
+    </HeaderSiderLayout>
+  );
+};
 export default CataloguePage;
