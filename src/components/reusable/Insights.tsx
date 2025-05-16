@@ -74,7 +74,7 @@ const InsightSection = () => {
                 />
             </div>
 
-            <div className="w-full mt-8  p-6  text-black bg-gray-100 rounded-md space-y-4">
+            <div className="w-full mt-8    text-black bg-gray-100 rounded-md space-y-4">
             <h2 className="text-lg font-semibold">Do more with Cyvil</h2>
             <p className="text-sm mt-4 text-gray-600">Upload your data to Cyvil today and stay
              productive with the newest app versions and security updates.

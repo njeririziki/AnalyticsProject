@@ -3,6 +3,7 @@ import { Button, message,Select,Spin, Form, Input } from 'antd';
 import usePost from '@/hooks/usePost';
 import { Typography } from 'antd';
 import { useState } from 'react';
+import { supabase } from '@/utils/supabaseClient';
 
 interface User {
   id:number;
@@ -19,47 +20,37 @@ const AddBusinessForm = () => {
     const [isLoading, setIsLoading] = useState(false);
 
   const onFinish = async (values: any) => {
+
+   console.log('clicked add business',values);
    
     setIsLoading(true)
-    const userJSON= sessionStorage.getItem('user')
-    const user:User | null = userJSON? JSON.parse(userJSON):null;
-    const payload = user? {
-      ...values, 
-      email:user?.email,
-      user_id:user?.id,
-      owner_id:user?.id,
-      owner:user?.name,
-      phone:user?.phone,
-      currency:'KSH',
-      level_of_business:'Retail'
-    }:values;
-    console.log('Received values of form: ', payload);
+    // try {
+    //   const { data, error } = await supabase.from('Business').insert({ values });
     
-    try {
-     await usePost(`/business`, payload)
-     .then(res=>{
-      console.log(res);
-      messageApi.open({
-        type: 'success',
-        content: res.message,
-      });
-      sessionStorage.setItem('business',JSON.stringify(res.jsonData));
-      return router.push('/prelaunch/')
-      }).catch(err=>{
-        // err is data object decode errors
-        messageApi.open({
-          type: 'error',
-          content: err.message,
-        });
-      })
+    //   console.log('clicked add business', data);
     
-    } catch (error) {
-      messageApi.open({
-        type: 'error',
-        content: 'add business failed' + error,
-      });
-    }
-    setIsLoading(true)
+    //   if (error) {
+    //     messageApi.open({
+    //       type: 'error',
+    //       content: error.message,
+    //     });
+    //   } else {
+    //     messageApi.open({
+    //       type: 'success',
+    //       content: 'Business added successfully',
+    //     });
+
+    //     router.push('/prelaunch')
+    //   }
+    // } catch (error) {
+    //   messageApi.open({
+    //     type: 'error',
+    //     content: 'add business failed' + error,
+    //   });
+    // } finally {
+    //   setIsLoading(false)
+    // }
+  
   };
 
   return ( 
@@ -97,16 +88,16 @@ const AddBusinessForm = () => {
           placeholder="owner"
         />
       </Form.Item> */}
-      {/* <Form.Item
-        name="phone_number"
-        label='phone number'
-        rules={[{ required: true, message: 'Please input your phone number!' }]}
+      <Form.Item
+        name="email"
+        label='Email'
+        rules={[{ required: true, message: 'Please input your Email!' }]}
       >
         <Input
           type='text'
-          placeholder="phone number"
+          placeholder="Email"
         />
-      </Form.Item> */}
+      </Form.Item>
       {/* registration_number */}
       <Form.Item
         name="registration_number"
@@ -177,4 +168,46 @@ const AddBusinessForm = () => {
 
 
 export default AddBusinessForm;
+
+
+
+
+// const userJSON= sessionStorage.getItem('user')
+// const user:User | null = userJSON? JSON.parse(userJSON):null;
+// const payload = user? {
+//   ...values, 
+//   email:user?.email,
+//   user_id:user?.id,
+//   owner_id:user?.id,
+//   owner:user?.name,
+//   phone:user?.phone,
+//   currency:'KSH',
+//   level_of_business:'Retail'
+// }:values;
+// console.log('Received values of form: ', payload);
+
+// try {
+//  await usePost(`/business`, payload)
+//  .then(res=>{
+//   console.log(res);
+//   messageApi.open({
+//     type: 'success',
+//     content: res.message,
+//   });
+//   sessionStorage.setItem('business',JSON.stringify(res.jsonData));
+//   return router.push('/prelaunch/')
+//   }).catch(err=>{
+//     // err is data object decode errors
+//     messageApi.open({
+//       type: 'error',
+//       content: err.message,
+//     });
+//   })
+
+// } catch (error) {
+//   messageApi.open({
+//     type: 'error',
+//     content: 'add business failed' + error,
+//   });
+// }
 
