@@ -11,7 +11,7 @@ const handler = async (_request: Request): Promise<Response> => {
     });
   }
 try{
-  //  const { subject, html } = await _request.json();
+   const { subject, html } = await _request.json();
 
   const res = await fetch('https://api.resend.com/emails', {
     method: 'POST',
@@ -22,9 +22,8 @@ try{
     body: JSON.stringify({
       from: 'Sharon<team@resend.dev>',
       to: 'rizikinjeri@gmail.com',
-       subject:'Jim Green Thank you for your continued support',
-       html:'<p>Hey Jim Green <br /> I am Sharon from Cyvil. <br/> Thank you for choosing our store. Let us know how your experince was shopping with us . <br /> <br /> Best regards, <br /> <br />Cyvil</p>',
-      
+      subject,
+      html
     }),
   })
 
