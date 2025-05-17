@@ -18,27 +18,14 @@ const LogIn:React.FC= ()=> {
     console.log('clicked login');
     
     setIsLoading(true)
-    // try {
-    //  await login( values)
-    //   .then(res=>{
-       
-    //      messageApi.open({
-    //         type:'success',
-    //         content: res,
-    //       });
-          
-    //       return router.push('/dashboard');
-   
-    //   }).catch(err=> {
-    //       messageApi.open({
-    //         type: 'error',
-    //         content: err,
-    //       });
-    //     })
-    
-    // } catch (error) {
-    //   console.error('Login failed', error);
-    // }
+  try {
+    await login({ email:values.email, passoword:values.password });
+    messageApi.success('Logged in successfully!');
+  } catch (error: any) {
+    messageApi.error(error?.message || 'Login failed. Please try again.');
+    setIsLoading(false);
+    return;
+  }
 
     setIsLoading(false)
     return router.push('/dashboard');

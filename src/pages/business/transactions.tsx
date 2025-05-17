@@ -102,7 +102,7 @@ const TransactionsPage = () => {
 
      useEffect(() => {
           try {
-             useGet(`/transactions/${user_id}/daily`)
+             useGet(`transactions`,1)
             .then((res)=>{
               console.log(res);
               const data=res.jsonData.map((item:any)=>{

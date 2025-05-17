@@ -5,7 +5,7 @@ import useGet from "@/hooks/useGet";
 import { ColumnsType } from "antd/es/table";
 import { useContext, useEffect, useState } from "react";
 import { supabase } from "@/utils/supabaseClient";
-import { set } from "react-hook-form";
+
 
 type DataType = {
   id: number;
@@ -55,11 +55,11 @@ const CataloguePage = () => {
   const { currentUser } = useContext(AuthContext);
 
   const [productList, setProductList] = useState<DataType[]>([]);
-  const user_id = currentUser?.id; // currentUser?.id
+  const business_id = currentUser?.id; 
 
   useEffect(() => {
     const fetchData = async () => {
-      const { data, error } = await supabase.from("Catalogue").select("*");
+      const { data, error } = await supabase.from("Catalogue").select("*").eq('business_id',business_id);
       console.log({ data, error });
       setProductList(data ?? []);
       if (error) {

@@ -1,11 +1,11 @@
 import React, { useEffect, useState} from 'react';
 import { List,message } from 'antd';
 import { SendOutlined } from '@ant-design/icons';
-import { supabase } from '@/utils/supabaseClient';
 import { Customer } from '@/types/types';
 import CustomerEmailtemplate from '../templates/CustomerEmailTemplate';
 import { render } from "@react-email/render";
 import axios from 'axios';
+import useGet from '@/hooks/useGet';
 
 const CustomerLeadsList: React.FC = () => {
   const [data, setData] = useState<Customer[]>([]);
@@ -13,21 +13,14 @@ const CustomerLeadsList: React.FC = () => {
    
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const { data, error } = await supabase
-          .from('Customer')
-          .select('*')
-          .eq('business_id', 1);
-        if (error) throw error;
-        
-        setData(data ?? []);
-      } catch (err) {
-        console.error('Error fetching data:', err);
+    try {
+      useGet('Customer', 1)
+        .then((data) => setData(data ?? [])
+        ).catch((error) =>console.error('Error fetching data:', error))
+      } catch (err) { 
          setData([]);
       }
-    };
-    fetchData();
+   
   }, []);
 
   const handleSendEmail = async ({  subject }: {  subject: string;  }) => {

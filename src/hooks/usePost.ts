@@ -1,25 +1,19 @@
-import axiosInstance from "@/utils/AxiosInstance";
+import { supabase } from '@/utils/supabaseClient';
 
-const usePost = (endpoint:string,values: any) => {
+const usePost = (db: string, values: any) => {
+  return new Promise<any>(async (resolve, reject) => {
+    try {
+      const { data, error } = await supabase.from(db).insert(values);
 
-        return new Promise<any>(async(resolve, reject) => {
-          try {
-              await axiosInstance.post(endpoint, values)
-              .then(res=>{
-               console.log(res)
-                  if(res.data.success){
-                     console.log(res.data);
-                    resolve(res.data)
-                 }
-                 reject(res.data)
-                
-               }).catch(err=>console.log(err))
-             
-             } catch (error) {
-               alert(error +'Please try again');
-             }
-         })
+      if (error) {
+        reject(error);
+      } else {
+        resolve(data);
+      }
+    } catch (error) {
+      alert(error + " Please try again");
+    }
+  });
+};
 
-}
- 
 export default usePost;

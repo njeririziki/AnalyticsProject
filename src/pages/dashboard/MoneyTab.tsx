@@ -11,31 +11,11 @@ import usePost from "@/hooks/usePost";
 import { AuthContext } from "@/context/AuthContext";
 
 
-//overview
-//transactions/16
-// "sales": null,
-// "discount": null,
-// "profit": null,
-// "units": null
-
-
-//transactions/614/monthly
-// "sales": 1205,
-//             "discount": 75,
-//             "profit": 245,
-//             "units": "4",
-//             "month": "July",
-//             "month_format": "23-07",
-//             "month_start": "2023-07-01",
-//             "created_at": "2023-07-03 13:30:45",
-//             "month_end": "2023-07-31"
-
  const MoniesTab=()=>{
 
   const {currentUser}=useContext(AuthContext)
   const [overviewDetails, setOverviewDetails] = useState<any>();
-  const [donutStuff, setDonutStuff] = useState<any>();
-  const [barStuff, setBarStuff] = useState<any>()
+
   const user_id=currentUser?.id;
 
   useEffect(() => {
