@@ -16,35 +16,7 @@ type DataType= {
    
    }
    
-const userDummyData= [
-  {
-    
-    customer_name: 'John Brown',
-    phone: '1234567890',
-    email: 'johnbrown@email.com',
-    business_id: 1,
-  },
-  { 
-    customer_name: 'Jim Green',
-    phone: '0987654321',
-    email: 'greenjim@email.com',
-    business_id: 1,
-  },
-  { 
-    customer_name: 'Joe Black',  
-    phone: '1122334455',
-    email: 'blackjoe@email.com',
-    business_id: 1,
-  },
-  {
-     
-    customer_name: 'John Doe',
-    phone: '1234567890',
-    email: 'doejohn@email.com',
-    business_id: 1,
-  },
-]
-        
+ 
   // type DataIndex = keyof DataType;
    
 

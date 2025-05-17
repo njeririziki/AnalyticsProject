@@ -1,39 +1,57 @@
-import "jsr:@supabase/functions-js/edge-runtime.d.ts";
-
-const RESEND_API_KEY = Deno.env.get('NEXT_PUBLIC_RESEND_API_KEY')!
+const RESEND_API_KEY = Deno.env.get('RESEND_API_KEY')
 
 
-Deno.serve(async (req) => {
+const handler = async (_request: Request): Promise<Response> => {
 
-
-  const { to, subject, html } = await req.json()
-
-  const body = await req.json();
-
-  // Accept either a single email or an array of emails
-  const emails = Array.isArray(body)
-    ? body
-    : [body];
+  if (_request.method === "POST") {
   
-  const results = await Promise.all(
-    emails.map(async (email) => {
-      const { to, subject, html } = email;
-      const res = await fetch('https://api.resend.com/emails', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${RESEND_API_KEY}`,
-        },
-        body: JSON.stringify({
-          from: 'Sharon<team@info.cyvil.com>',
-          to,
-          subject,
-          html,
-        }),
-      })
-    }) )
+    return new Response(null, {
+      status: 204,
+      headers: corsHeaders,
+    });
+  }
+try{
+  //  const { subject, html } = await _request.json();
 
-  return new Response(JSON.stringify(results), {
-    headers: { 'Content-Type': 'application/json' },
+  const res = await fetch('https://api.resend.com/emails', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${RESEND_API_KEY}`,
+    },
+    body: JSON.stringify({
+      from: 'Sharon<team@resend.dev>',
+      to: 'rizikinjeri@gmail.com',
+       subject:'Jim Green Thank you for your continued support',
+       html:'<p>Hey Jim Green <br /> I am Sharon from Cyvil. <br/> Thank you for choosing our store. Let us know how your experince was shopping with us . <br /> <br /> Best regards, <br /> <br />Cyvil</p>',
+      
+    }),
   })
-})
+
+  const data = await res.json()
+
+
+  
+  return new Response(JSON.stringify(data), {
+    status: 200,
+    headers: {
+      ...corsHeaders,
+      "Content-Type": "application/json",
+    },
+  });
+} catch (err) {
+  return new Response(
+    JSON.stringify({ error: err.message }),
+    { status: 500, headers: corsHeaders }
+  );
+}
+}
+
+
+const corsHeaders = {
+  "Access-Control-Allow-Origin": "*", 
+  "Access-Control-Allow-Methods": "POST, OPTIONS",
+  "Access-Control-Allow-Headers": "Content-Type, Authorization",
+};
+
+Deno.serve(handler)

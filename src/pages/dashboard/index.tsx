@@ -43,7 +43,7 @@ const HomePage = () => {
        return  console.error('Error fetching business data:', error);
       }
         setBusiness(data ? data : {});
-        console.log({ data, error });
+      
     };
 
     fetchData();

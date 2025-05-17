@@ -1,14 +1,16 @@
 import React, { useEffect, useState} from 'react';
-import { List } from 'antd';
+import { List,message } from 'antd';
 import { SendOutlined } from '@ant-design/icons';
 import { supabase } from '@/utils/supabaseClient';
 import { Customer } from '@/types/types';
 import CustomerEmailtemplate from '../templates/CustomerEmailTemplate';
-
+import { render } from "@react-email/render";
+import axios from 'axios';
 
 const CustomerLeadsList: React.FC = () => {
-
   const [data, setData] = useState<Customer[]>([]);
+  const [messageApi, contextHolder] = message.useMessage();
+   
 
   useEffect(() => {
     const fetchData = async () => {
@@ -18,9 +20,7 @@ const CustomerLeadsList: React.FC = () => {
           .select('*')
           .eq('business_id', 1);
         if (error) throw error;
-        console.log('Fetched data:', data);
         
-
         setData(data ?? []);
       } catch (err) {
         console.error('Error fetching data:', err);
@@ -30,28 +30,47 @@ const CustomerLeadsList: React.FC = () => {
     fetchData();
   }, []);
 
-  const handleSendEmails = async ({ to, subject, html }: { to: string; subject: string; html: React.ReactElement }) => {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_LOCAL_EMAIL_URL}/resend-email`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
+  const handleSendEmail = async ({  subject }: {  subject: string;  }) => {
+    try {
+      const res = await axios.post(`${process.env.NEXT_PUBLIC_LOCAL_EMAIL_URL}/resend-email`, {
+        subject,
+        html: render(<CustomerEmailtemplate />)
       },
-      body: JSON.stringify({ to, subject, html }),
-    });
-    const data = await res.json();
-    return data;
+        {
+          headers: {
+            Authorization: `Bearer ${process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY}`,
+            "Content-Type": "application/json",
+          },
+        });
+      console.log(res.data);
+      if (res.status === 200) {
+        messageApi.open({
+          type: 'success',
+          content: 'Business added successfully',
+        });
+      } else {
+        messageApi.open({
+          type: 'error',
+          content: res.data.error.message,
+        });
+      }
+    } catch (error) {
+      messageApi.open({
+        type: 'error',
+        content: "Send mail failed"+error,
+      });  
+    }
   };
   return (
+    <>
     <List
       itemLayout="horizontal"
       dataSource={data}
       renderItem={(item, index) => (
         <List.Item
           actions={[<SendOutlined onClick={() =>
-            handleSendEmails({
-              to: item.email,
-              subject: `${item.customer_name} Thank you for your continued support`,
-              html:<CustomerEmailtemplate/>
+            handleSendEmail({
+              subject: `${item.customer_name} Thank you for your continued support`,           
             })} />]}
         >
           <List.Item.Meta
@@ -60,7 +79,9 @@ const CustomerLeadsList: React.FC = () => {
           />
         </List.Item>
       )}
-    />
+      />
+      {contextHolder}
+      </>
   );
 };
 export default CustomerLeadsList;

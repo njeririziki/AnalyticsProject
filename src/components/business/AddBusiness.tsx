@@ -32,8 +32,6 @@ const AddBusinessForm = () => {
       const { data, error } = await supabase.from('Business').insert([values]);
     
      
-      console.log('clicked add business', error);
-      console.log('clicked add business', data);
       if (error) {
         messageApi.open({
           type: 'error',

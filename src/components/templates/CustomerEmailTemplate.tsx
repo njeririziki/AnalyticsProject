@@ -14,7 +14,7 @@ const CustomerEmailtemplate = () => {
         handpicked for you:
         <br />
         <br />
-        <div className="  bg-gray-200 p-2 rounded-md">
+        <div className="  bg-gray-100 p-2 rounded-md">
           [ Item 1 ]<br />
           [ Item 2 ]<br />
           [ Item 3 ]<br />
@@ -27,7 +27,7 @@ const CustomerEmailtemplate = () => {
         serving you soon.
         <br /> <br />
         Best regards, <br /> <br />
-        Lisa
+        Cyvil
       </p>
        </div>
 
