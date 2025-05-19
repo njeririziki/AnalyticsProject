@@ -41,10 +41,10 @@ const MarketingInsightSection = () => {
     };
   }, []);
     return (
-        <div className="w-1/3 min-h-screen space-y-8 bg-white ">
+        <div className="w-1/3 min-h-screen space-y-8 bg-white p-8 ">
          
             
-            <div className="w-full p-4 border text-black border-gray-300 rounded-md">
+            <div className="mt-12 w-full p-4 border text-black border-gray-300 rounded-md">
                 <div className="w-full flex flex-row justify-between ">
                     <h3 className=" font-semibold text-lg">Scheduled Messages</h3>
                     {/* <p className="text-primary cursor-pointer"
@@ -56,18 +56,14 @@ const MarketingInsightSection = () => {
                     
              </p>
             </div>
-            <div className="text-black p-4">
-            {/* <div className="w-full flex flex-row justify-between ">  
-                <h2 className="font-semibold">Insights</h2>
-                <p className="text-sm text-orange-600">clear insights</p>
-                </div> */}
+            <div className="text-black ">
+            
                 <List
                 itemLayout="horizontal"
                 dataSource={data}
                 renderItem={(item, index) => (
                 <List.Item>
-                    <List.Item.Meta
-                  //  avatar={<Avatar shape="square" className={`bg-${item.color} `} />}
+                    <List.Item.Meta          
                     title={<h3 className="font-semibold">{item.title}</h3>}
                             description={
                                 <h2 className="font-semibold text-xl text-black">
@@ -79,7 +75,7 @@ const MarketingInsightSection = () => {
                 />
             </div>
 
-            <div className="w-full mt-8   text-black bg-gray-100 rounded-md space-y-4">
+            <div className="w-full p-4 text-black bg-gray-100 rounded-md space-y-4">
             <h2 className="text-lg font-semibold">Do more with Cyvil</h2>
             <p className="text-sm mt-4 text-gray-600">Upload your data to Cyvil today and stay
              productive with the newest app versions and security updates.
