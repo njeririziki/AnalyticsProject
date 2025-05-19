@@ -41,7 +41,7 @@ const MarketingInsightSection = () => {
     };
   }, []);
     return (
-        <div className=" min-h-screen space-y-8 bg-white ">
+        <div className="w-1/3 min-h-screen space-y-8 bg-white ">
          
             
             <div className="w-full p-4 border text-black border-gray-300 rounded-md">

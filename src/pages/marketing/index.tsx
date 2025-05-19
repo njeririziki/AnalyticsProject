@@ -1,6 +1,10 @@
 import CustomTabs from '@/components/ReusableComps/CustomTabs';
 import HeaderSiderLayout from '../../components/layouts/HeaderSiderLayout'
 import MarketingInsightSection from '@/components/reusable/MarketingInsights';
+import CustomerEmailtemplate from '@/components/templates/CustomerEmailTemplate';
+
+
+
 
 const MarketingDash = () => {
     return ( 
