@@ -20,7 +20,7 @@ const data = [
   },
 ];
 
-const UserList: React.FC = () => (
+const CustomerLeadsList: React.FC = () => (
   <List
     itemLayout="horizontal"
     dataSource={data}
@@ -36,4 +36,4 @@ const UserList: React.FC = () => (
   />
 );
 
-export default UserList;
+export default CustomerLeadsList;

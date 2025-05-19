@@ -9,10 +9,7 @@ import { useContext, useEffect, useState } from "react";
 import useGet from "@/hooks/useGet";
 import { AuthContext } from "@/context/AuthContext";
 
-// "sales": null,
-// "discount": null,
-// "profit": null,
-// "units": null
+
 
 const CustomersTab=()=>{
   const {currentUser}=useContext(AuthContext)
@@ -34,12 +31,12 @@ const CustomersTab=()=>{
     
      }, [])
 
-  if(overviewDetails){
-    return(
-      <div className="w-full px-8">
-       <h2 className="font-semibold ">You have no data yet. </h2>
-       </div>)
-  }
+  // if(overviewDetails){
+  //   return(
+  //     <div className="w-full px-8">
+  //      <h2 className="font-semibold ">You have no data yet. </h2>
+  //      </div>)
+  // }
     return(
       <div className="w-full ">
       <div className="flex space-x-4  ">
@@ -49,7 +46,7 @@ const CustomersTab=()=>{
       
         </div >
         <div className="w-5/6 h-[400px]">
-        <p className="text-gray-500 mt-4">Quantities sold over time (demand)</p>
+        <p className="text-gray-500 mt-4">Customer Retention</p>
         <ParentSize>
           {({ width, height }) => (
             <Bars width={width} height={height} />
@@ -62,22 +59,21 @@ const CustomersTab=()=>{
           
             <div className="h-full  flex flex-col space-y-4">
             <HalfProgress percent={65} title='Customer'
-            text='697K'
-            description=" This tell you how quickly your products are selling. 
-            We will let you know when this changes.
+            text='31'
+            description=" This the average number of customer you gain per month. This will be updated periodically
             "/>
             <ConversionRate percent={13} title='Conversion rate'
-            text='697K'
-            description=" This tell you how quickly your products are selling. 
+            text='65%'
+            description=" This tell you how many customers you gain from marketing. 
             We will let you know when this changes.
             "/>
            
             </div>
             <div className="bg-white p-8 h-full mr-4">
             <h4 className="font-semibold ">Pie</h4>
-            <p>This tell you how quickly your products are selling. <br/> 
+            <p>This gives you a clear picture or how many customers you gain, loose and retain. <br/> 
             We will let you know when this changes.</p>
-            <DonutChart data={donutRevenueData} title="Revenue"
+            <DonutChart data={donutRevenueData} title="Customers"
               width="370px" height="400px"/>
                  
             </div>

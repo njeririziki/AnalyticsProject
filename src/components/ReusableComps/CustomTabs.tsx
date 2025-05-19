@@ -1,7 +1,7 @@
 import React from 'react';
 import { Tabs } from 'antd';
 import type { TabsProps } from 'antd';
-import UserList from '../lists/UserList';
+import CustomerLeadList from '../lists/CustomerLeadList';
 
 const onChange = (key: string) => {
   console.log(key);
@@ -11,7 +11,7 @@ const items: TabsProps['items'] = [
   {
     key: '1',
     label: 'New Leads (4)',
-    children: <UserList />,
+    children: <CustomerLeadList />,
   },
   {
     key: '2',
