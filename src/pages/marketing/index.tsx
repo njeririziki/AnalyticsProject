@@ -33,14 +33,13 @@ const MarketingDash = () => {
         <h2 className="font-semibold text-lg text-black"> Marketing</h2>
         <div className=" w-full h-full flex flex-row  pt-8 ">
           <div className="w-full h-full bg-white border-2 border-gray-200 rounded-lg  flex flex-row mr-8 gap-4">
-            {/* <div className="w-full h-full bg-white border-r border-gray-200 pl-4 flex flex-col justify-between" > */}
-               <div className="w-1/2 border-r border-gray-200 px-4 ">
+            <div className="w-1/2 border-r border-gray-200 px-4 ">
                 <Tabs defaultActiveKey="1" items={items} />
                 </div>
             
             <div className="w-1/2 p-4 ">
               
-              <h4 className="p-4 font-semibold text-lg text-black">
+              <h4 className="font-semibold text-lg text-black">
                 {" "}
                 Email Template
               </h4>
