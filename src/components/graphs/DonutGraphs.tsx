@@ -1,14 +1,15 @@
 import { ResponsivePie } from '@nivo/pie'
 
 type DonutProps={
-    data:object[]
+    data: object[]
+    colorSch?:string
     title:string
     width:string
     height:string
 }
   
 
- const DonutChart = ({data,title,width,height}:DonutProps) => (
+ const DonutChart = ({data,title,colorSch,width,height}:DonutProps) => (
     <div // className={`w-[${width}] h-[${height}]`} 
      style={{height:`${height}`, width:`${width}`, backgroundColor:'#ffffff'}}
     >
@@ -19,7 +20,7 @@ type DonutProps={
      innerRadius={0.8}
      padAngle={0.5}
      cornerRadius={3}
-     colors={{ scheme: 'paired' }}
+     colors={colorSch ? {scheme: 'nivo'}:{ scheme: 'paired' }}
      //borderWidth={1}  
     // borderColor={{ from: 'color', modifiers: [ [ 'darker', 0.2 ] ] }}
     enableArcLabels={false}

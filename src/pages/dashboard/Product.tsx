@@ -1,6 +1,6 @@
 import Bars from "@/components/graphs/Bars";
 import DonutChart from "@/components/graphs/DonutGraphs";
-import { donutExpenseData,donutRevenueData } from "@/utils/chartTestData";
+import { donutExpenseData,productsDonutData } from "@/utils/chartTestData";
 import ParentSize from '@visx/responsive/lib/components/ParentSize';
 import HalfProgress from "@/components/cards/HalfProgress";
 import ConversionRate from "@/components/cards/ConversionRate";
@@ -61,36 +61,36 @@ const ProductsTab=()=>{
         <p className="text-gray-500 mt-4">Quantities sold over time (demand)</p>
         <ParentSize>
           {({ width, height }) => (
-            <Bars width={width} height={height} />
+            <Bars width={width} height={height}  color='#F5C45E' />
                )}
               </ParentSize>
         </div>
        
             {/* <Bars  width={600} height={350}/> */}
             <div className="  w-5/6  flex space-x-4">
-          
+            <div className="bg-white p-8 h-full mr-4">
+            <h4 className="font-semibold ">Pie</h4>
+            <p>This tell you how quickly your products are selling. <br/> 
+            We will let you know when this changes.</p>
+            <DonutChart data={productsDonutData} title="Revenue"
+             colorSch='nivo'  width="370px" height="400px"/>
+                 
+            </div>
             <div className="h-full  flex flex-col space-y-4">
-            <ConversionRate percent={13} title='Conversion rate'
-            text='697K'
+            <ConversionRate percent={47} title='Conversion rate' color={'oklch(75% 0.183 55.934)'}
+            text='47%'
             description=" This tell you how quickly your products are selling. 
             We will let you know when this changes.
             "/> 
-            <HalfProgress percent={65} title='Customer'
-            text='697K'
+            <HalfProgress color={{ '0%': '#FCEF91', '100%': '#EA2F14' }} percent={90} title='Sales'
+            text='82%'
             description=" This tell you how quickly your products are selling. 
             We will let you know when this changes.
             "/>
            
            
             </div>
-            <div className="bg-white p-8 h-full mr-4">
-            <h4 className="font-semibold ">Pie</h4>
-            <p>This tell you how quickly your products are selling. <br/> 
-            We will let you know when this changes.</p>
-            <DonutChart data={donutRevenueData} title="Revenue"
-              width="370px" height="400px"/>
-                 
-            </div>
+            
             </div>
     </div>
      

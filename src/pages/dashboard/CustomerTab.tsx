@@ -1,6 +1,6 @@
 import Bars from "@/components/graphs/Bars";
 import DonutChart from "@/components/graphs/DonutGraphs";
-import { donutExpenseData,donutRevenueData } from "@/utils/chartTestData";
+import { customerDonutData } from "@/utils/chartTestData";
 import ParentSize from '@visx/responsive/lib/components/ParentSize';
 import HalfProgress from "@/components/cards/HalfProgress";
 import ConversionRate from "@/components/cards/ConversionRate";
@@ -49,7 +49,7 @@ const CustomersTab=()=>{
         <p className="text-gray-500 mt-4">Customer Retention</p>
         <ParentSize>
           {({ width, height }) => (
-            <Bars width={width} height={height} />
+            <Bars width={width} height={height}  color='#129990'/>
                )}
               </ParentSize>
         </div>
@@ -58,11 +58,11 @@ const CustomersTab=()=>{
             <div className="  w-5/6  flex space-x-4">
           
             <div className="h-full  flex flex-col space-y-4">
-            <HalfProgress percent={65} title='Customer'
-            text='31'
+            <HalfProgress color={{ '0%': '#FFFBDE', '100%': '#096B68' }} percent={95} title='Customer'
+            text='95'
             description=" This the average number of customer you gain per month. This will be updated periodically
             "/>
-            <ConversionRate percent={13} title='Conversion rate'
+            <ConversionRate percent={67} title='Conversion rate' color={'#90D1CA'}
             text='65%'
             description=" This tell you how many customers you gain from marketing. 
             We will let you know when this changes.
@@ -73,7 +73,7 @@ const CustomersTab=()=>{
             <h4 className="font-semibold ">Pie</h4>
             <p>This gives you a clear picture or how many customers you gain, loose and retain. <br/> 
             We will let you know when this changes.</p>
-            <DonutChart data={donutRevenueData} title="Customers"
+            <DonutChart data={customerDonutData} title="Customers"
               width="370px" height="400px"/>
                  
             </div>

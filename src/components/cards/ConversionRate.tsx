@@ -1,12 +1,13 @@
 import { Progress } from "antd"
 
-type ConversionRateProps={
+type ConversionRateProps = {
+    color?:string
     percent:number
     title:string
     description:string
     text:string
 }
-const ConversionRate = ({percent,title,description,text}:ConversionRateProps) => {
+const ConversionRate = ({color,percent,title,description,text}:ConversionRateProps) => {
     return ( 
         <div className="w-full bg-white">
              <div className=" bg-white p-8 ">
@@ -15,7 +16,7 @@ const ConversionRate = ({percent,title,description,text}:ConversionRateProps) =>
              <Progress 
              type="line" percent={percent} 
              strokeLinecap="butt"
-             strokeColor='#26F1D9'
+                    strokeColor={color ?? '#26F1D9'}
              size={[200, 30]}
              showInfo={false}
              />

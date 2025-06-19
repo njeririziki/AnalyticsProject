@@ -14,12 +14,13 @@ const getLetter = (d: LetterFrequency) => d.letter;
 const getLetterFrequency = (d: LetterFrequency) => Number(d.frequency) * 100;
 
 export type BarsProps = {
+  color?:string
   width: number;
   height: number;
   events?: boolean;
 };
 //const { scaleBand, scaleLinear } =Scale
-export default function Bars({ width, height, events = false }: BarsProps) {
+export default function Bars({color, width, height, events = false }: BarsProps) {
   // bounds
   
   const xMax = width;
@@ -50,7 +51,7 @@ export default function Bars({ width, height, events = false }: BarsProps) {
     <svg width={width} height={height}>
        
       {/* <GradientTealBlue id="teal" /> */}
-      <rect width={width} height={height} fill="url(#blue)" rx={14} />
+      <rect width={width} height={height} fill="url(#green)" rx={14} />
       <Group top={verticalMargin / 2}>
         
         {data.map((d) => {
@@ -66,7 +67,7 @@ export default function Bars({ width, height, events = false }: BarsProps) {
               y={barY}
               width={barWidth}
               height={barHeight}
-              fill="#2774E9"
+              fill={color ?? "#2774E9"}
               onClick={() => {
                 if (events) alert(`clicked: ${JSON.stringify(Object.values(d))}`);
               }}
