@@ -1,4 +1,5 @@
 import HeaderSiderLayout from "@/components/layouts/HeaderSiderLayout";
+import CatalogueInsightSection from "@/components/reusable/CatalogueInsightsSection";
 import SearchableTable from "@/components/reusable/Table";
 import { AuthContext } from "@/context/AuthContext";
 import useGet from "@/hooks/useGet";
@@ -125,15 +126,38 @@ const TransactionsPage = () => {
        
         }, [])
     return ( 
-        <HeaderSiderLayout>
+      <HeaderSiderLayout>
+           <div  className="w-full  flex justify-between gap-8">
              <div  className="w-5/6  pt-8 h-full ">
              <h2 className="font-semibold text-lg text-black" > Transactions</h2>
              <div className='pt-8'>
              <SearchableTable data={transactionsDummyData} columns={columns}/>
              </div>
                 
+          </div>
+          
+          <CatalogueInsightSection>
+          <div className="text-black flex flex-col gap-4">
+              <h2 className="text-lg font-semibold"> Payments</h2>
+              <div className="flex justify-between">
+              <h2 className="text-lg"> Total payed</h2> 
+              <h2 className="text-lg font-bold"> $34,533</h2>         
+              </div>
+              <div className="text-black w-full p-4 border border-gray-300 rounded-md">
+              <h2 className="text-md font-semibold text-gray-700"> Avg. Daily Transactions</h2>          
+              <p className="text-lg font-bold mt-4 "> 741</p>           
+              </div>
+              <div className="text-black w-full p-4 border border-gray-300 rounded-md">
+              <h2 className="text-md font-semibold text-gray-700"> Busiest Day</h2>          
+              <p className="text-lg font-bold mt-4 "> 28th</p>           
+              </div>
+              <div className="text-black w-full p-4 border border-gray-300 rounded-md">
+              <h2 className="text-md font-semibold text-gray-700">Total transactions </h2>          
+              <p className="text-lg font-bold mt-4 "> 63,737</p>           
+              </div>
+           </div>
+          </CatalogueInsightSection>
              </div>
-            
         </HeaderSiderLayout>
      );
 } 

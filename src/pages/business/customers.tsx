@@ -4,6 +4,7 @@ import useGet from "@/hooks/useGet";
 import { useState, useEffect, useContext } from "react";
 import { AuthContext } from '@/context/AuthContext';
 import { ColumnsType } from "antd/es/table";
+import CatalogueInsightSection from "@/components/reusable/CatalogueInsightsSection";
 
 
 
@@ -103,7 +104,8 @@ const CustomersPage = () => {
        
         }, [])
     return ( 
-        <HeaderSiderLayout>
+      <HeaderSiderLayout>
+         <div  className="w-full  flex justify-between gap-8">
              <div  className="w-5/6  pt-8 h-full ">
              <h2 className="font-semibold text-lg text-black" >Customers </h2>
              <div className='pt-8'>
@@ -112,6 +114,25 @@ const CustomersPage = () => {
                      
              </div>
             
+          <CatalogueInsightSection>
+          <div className="text-black flex flex-col gap-4">
+            <h2 className="text-lg font-semibold">Customer Retention</h2>
+         
+              <div className="text-black w-full p-4 border border-gray-300 rounded-md">
+              <h2 className="text-md font-semibold text-gray-700"> New (Curr Month) </h2>          
+              <p className="text-lg font-bold mt-4 "> 741</p>           
+              </div>
+              <div className="text-black w-full p-4 border border-gray-300 rounded-md">
+              <h2 className="text-md font-semibold text-gray-700"> Retained</h2>          
+              <p className="text-lg font-bold mt-4 "> 986</p>           
+              </div>
+              <div className="text-black w-full p-4 border border-gray-300 rounded-md">
+              <h2 className="text-md font-semibold text-gray-700">Total Number  </h2>          
+              <p className="text-lg font-bold mt-4 "> 1,282</p>           
+              </div>
+            </div>
+          </CatalogueInsightSection>
+             </div>
         </HeaderSiderLayout>
      );
 } 

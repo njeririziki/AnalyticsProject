@@ -1,4 +1,5 @@
 import HeaderSiderLayout from "@/components/layouts/HeaderSiderLayout";
+import CatalogueInsightSection from "@/components/reusable/CatalogueInsightsSection";
 import SearchableTable from "@/components/reusable/Table";
 import { AuthContext } from "@/context/AuthContext";
 import useGet from "@/hooks/useGet";
@@ -122,7 +123,8 @@ const CataloguePage = () => {
        
         }, [])
     return ( 
-        <HeaderSiderLayout>
+      <HeaderSiderLayout>
+          <div  className="w-full  flex justify-between gap-8">
              <div  className="w-5/6  pt-8 h-full ">
              <h2 className="font-semibold text-lg text-black" > Products </h2>
              <div className='pt-8'>
@@ -130,8 +132,26 @@ const CataloguePage = () => {
              </div>
               
                
+          </div>
+          <CatalogueInsightSection >
+          <div className="text-black flex flex-col gap-4">
+            <h2 className="text-lg font-semibold"> Inventory</h2>
+           
+              <div className="text-black w-full p-4 border border-gray-300 rounded-md">
+              <h2 className="text-md font-semibold text-gray-700"> Available Units</h2>          
+              <p className="text-lg font-bold mt-4 "> 5061</p>           
+              </div>
+              <div className="text-black w-full p-4 border border-gray-300 rounded-md">
+              <h2 className="text-md font-semibold text-gray-700"> Sold Units</h2>          
+              <p className="text-lg font-bold mt-4 "> 43096</p>           
+              </div>
+              <div className="text-black w-full p-4 border border-gray-300 rounded-md">
+              <h2 className="text-md font-semibold text-gray-700"> Net Worth(Cost)</h2>          
+              <p className="text-lg font-bold mt-4 "> $5000</p>           
+              </div>
+            </div>
+          </CatalogueInsightSection>
              </div>
-            
         </HeaderSiderLayout>
      );
 } 

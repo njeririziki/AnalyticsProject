@@ -5,7 +5,8 @@ type HalfProgressProps = {
     percent:number
     title:string
     description:string
-    text:string
+    text: string
+  
 }
 const HalfProgress = ({color,percent,title,description,text}:HalfProgressProps) => {
     return ( 
